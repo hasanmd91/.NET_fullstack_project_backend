@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecom.Business", "Ecom.Business\Ecom.Business.csproj", "{937DF4EC-947E-4494-AAE3-6E8E9857EED5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecom.Service", "Ecom.Service\Ecom.Service.csproj", "{937DF4EC-947E-4494-AAE3-6E8E9857EED5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecom.Controller", "Ecom.Controller\Ecom.Controller.csproj", "{20EB36DE-7667-4532-ACAD-9C095CE8C192}"
 EndProject
