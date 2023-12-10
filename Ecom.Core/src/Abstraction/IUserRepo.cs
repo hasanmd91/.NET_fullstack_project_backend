@@ -8,7 +8,7 @@ namespace Ecom.Core.src.Abstraction
         User CreateOne(User user);
         IEnumerable<User> GetAll(GetAllParams options);
         User GetOne(Guid id);
-        User UpdateOne(User user);
+        User UpdateOne(Guid id, User user);
         bool DeleteOne(Guid id);
     }
 }

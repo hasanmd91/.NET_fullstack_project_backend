@@ -4,6 +4,7 @@ namespace Ecom.Service.src.DTO
 {
     public class UserReadDTO
     {
+        public Guid id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
@@ -12,6 +13,7 @@ namespace Ecom.Service.src.DTO
         public string Street { get; set; }
         public string Zip { get; set; }
         public string City { get; set; }
+        public Role Role { get; set; }
 
     }
 
@@ -40,7 +42,6 @@ namespace Ecom.Service.src.DTO
         public string Street { get; set; }
         public string Zip { get; set; }
         public string City { get; set; }
-
     }
 
 }

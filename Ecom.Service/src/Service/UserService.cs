@@ -43,9 +43,9 @@ namespace Ecom.Service.src.Service
 
         }
 
-        public UserReadDTO UpdateOne(UserUpdateDTO userUpdateDTO)
+        public UserReadDTO UpdateOne(Guid userId, UserUpdateDTO userUpdateDTO)
         {
-            var result = _userRepo.UpdateOne(_mapper.Map<UserUpdateDTO, User>(userUpdateDTO));
+            var result = _userRepo.UpdateOne(userId, _mapper.Map<UserUpdateDTO, User>(userUpdateDTO));
             return _mapper.Map<User, UserReadDTO>(result);
 
         }

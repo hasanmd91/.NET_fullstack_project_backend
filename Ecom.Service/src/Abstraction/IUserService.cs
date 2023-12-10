@@ -9,7 +9,7 @@ namespace Ecom.Service.src.Abstraction
         IEnumerable<UserReadDTO> GetAll(GetAllParams options);
         UserReadDTO GetOne(Guid id);
         UserReadDTO CreateOne(UserCreateDTO userCreateDTO);
-        UserReadDTO UpdateOne(UserUpdateDTO userUpdateDTO);
+        UserReadDTO UpdateOne(Guid userId, UserUpdateDTO userUpdateDTO);
         bool DeleteOne(Guid id);
 
     }
