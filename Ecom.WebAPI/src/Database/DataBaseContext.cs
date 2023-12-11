@@ -10,6 +10,10 @@ namespace Ecom.WebAPI.src.Database
         IConfiguration _config;
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Category> Category { get; set; }
+        public DbSet<Product> Product { get; set; }
+        public DbSet<Review> Review { get; set; }
+        public DbSet<Order> Order { get; set; }
 
         public DataBaseContext(DbContextOptions options, IConfiguration config) : base(options)
         {
