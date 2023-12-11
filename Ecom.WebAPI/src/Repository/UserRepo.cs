@@ -27,7 +27,7 @@ namespace Ecom.WebAPI.src.Repository
 
         public bool DeleteOne(Guid userId)
         {
-            var user = _users.FirstOrDefault(u => u.id == userId);
+            var user = _users.FirstOrDefault(u => u.Id == userId);
             _users.Remove(user);
             return true;
 
@@ -40,13 +40,13 @@ namespace Ecom.WebAPI.src.Repository
 
         public User GetOne(Guid userId)
         {
-            var user = _users.FirstOrDefault(u => u.id == userId);
+            var user = _users.FirstOrDefault(u => u.Id == userId);
             return user;
         }
 
         public User UpdateOne(Guid userId, User updatedUser)
         {
-            var existingUser = _users.FirstOrDefault(u => u.id == userId);
+            var existingUser = _users.FirstOrDefault(u => u.Id == userId);
 
             if (existingUser is not null)
             {

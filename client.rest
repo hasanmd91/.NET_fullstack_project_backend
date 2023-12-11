@@ -1,9 +1,8 @@
-###
+### Get Method 
 GET  http://localhost:5137/api/user/ HTTP/1.1
 content-type: application/json
 
-
-###
+### Post Method
 POST http://localhost:5137/api/user/ HTTP/1.1
 Content-Type: application/json
 
@@ -18,14 +17,12 @@ Content-Type: application/json
     "city": "vantaa"
 }
 
-###
-
-
+### Delete method 
 DELETE   http://localhost:5137/api/user/21064d57-6839-46e6-b073-6813cae2004a HTTP/1.1
 content-type: application/json
 
 
-###
+### Update method 
 PUT  http://localhost:5137/api/user/1f081c08-1e0d-4461-b2af-5046d3869130 HTTP/1.1
 Content-Type: application/json
 
