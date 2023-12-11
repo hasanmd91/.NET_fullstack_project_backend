@@ -3,6 +3,7 @@ using Ecom.Service.src.Abstraction;
 using Ecom.Service.src.Service;
 using Ecom.Service.src.Shared;
 using Ecom.WebAPI.src.Database;
+using Ecom.WebAPI.src.Middleware;
 using Ecom.WebAPI.src.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,7 @@ builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<ExceptionHandeler>();
 
 
 // declare services
@@ -25,6 +27,8 @@ builder.Services.AddDbContext<DataBaseContext>(options => options.UseNpgsql());
 
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandeler>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -1,6 +1,7 @@
 using Ecom.Core.src.Abstraction;
 using Ecom.Core.src.Entity;
 using Ecom.Core.src.parameters;
+using Ecom.Service.src.Shared;
 using Ecom.WebAPI.src.Database;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,16 +21,34 @@ namespace Ecom.WebAPI.src.Repository
         }
         public User CreateOne(User user)
         {
-            _users.Add(user);
-            _database.SaveChanges();
-            return user;
+            try
+            {
+                _users.Add(user);
+                _database.SaveChanges();
+                return user;
+            }
+            catch (Exception)
+            {
+
+                throw CustomException.BadRequestException();
+            }
+
         }
 
         public bool DeleteOne(Guid userId)
         {
             var user = _users.FirstOrDefault(u => u.Id == userId);
-            _users.Remove(user);
-            return true;
+
+            if (user is not null)
+            {
+                _users.Remove(user);
+                _database.SaveChanges();
+                return true;
+            }
+            else
+            {
+                throw CustomException.NotFoundException();
+            }
 
         }
 
@@ -41,7 +60,15 @@ namespace Ecom.WebAPI.src.Repository
         public User GetOne(Guid userId)
         {
             var user = _users.FirstOrDefault(u => u.Id == userId);
-            return user;
+            if (user is not null)
+            {
+                return user;
+            }
+            else
+            {
+                throw CustomException.NotFoundException();
+            }
+
         }
 
         public User UpdateOne(Guid userId, User updatedUser)
@@ -60,8 +87,13 @@ namespace Ecom.WebAPI.src.Repository
                 existingUser.City = updatedUser.City ?? existingUser.City;
 
                 _database.SaveChanges();
+                return existingUser;
             }
-            return existingUser;
+            else
+            {
+                throw CustomException.NotFoundException();
+            }
+
 
         }
     }
