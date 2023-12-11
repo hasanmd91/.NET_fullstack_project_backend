@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Ecom.WebAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class createDatabase : Migration
+    public partial class createdatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,8 +22,8 @@ namespace Ecom.WebAPI.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     name = table.Column<string>(type: "text", nullable: true),
                     image = table.Column<string>(type: "text", nullable: true),
-                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    updated_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    created_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    updated_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -44,8 +44,8 @@ namespace Ecom.WebAPI.Migrations
                     address = table.Column<string>(type: "text", nullable: true),
                     zip = table.Column<string>(type: "text", nullable: true),
                     city = table.Column<string>(type: "text", nullable: true),
-                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    updated_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    created_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    updated_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -63,8 +63,8 @@ namespace Ecom.WebAPI.Migrations
                     image = table.Column<string>(type: "text", nullable: true),
                     quantity = table.Column<int>(type: "integer", nullable: false),
                     category_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    updated_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    created_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    updated_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -81,11 +81,11 @@ namespace Ecom.WebAPI.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    order_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    order_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     total_amount = table.Column<decimal>(type: "numeric", nullable: false),
                     user_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    updated_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    created_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    updated_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -103,12 +103,12 @@ namespace Ecom.WebAPI.Migrations
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     content = table.Column<string>(type: "text", nullable: true),
-                    review_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    review_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     range = table.Column<int>(type: "integer", nullable: false),
                     product_id = table.Column<Guid>(type: "uuid", nullable: true),
                     user_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    updated_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    created_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    updated_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -15,6 +15,13 @@ namespace Ecom.WebAPI.src.Database
         public DbSet<Review> Review { get; set; }
         public DbSet<Order> Order { get; set; }
 
+        static DataBaseContext()
+        {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+        }
+
+
         public DataBaseContext(DbContextOptions options, IConfiguration config) : base(options)
         {
             _config = config;
@@ -27,7 +34,7 @@ namespace Ecom.WebAPI.src.Database
             var dataSourceBuilder = new NpgsqlDataSourceBuilder(_config.GetConnectionString("LocalDb"));
             dataSourceBuilder.MapEnum<Role>();
             var dataSource = dataSourceBuilder.Build();
-            optionsBuilder.UseNpgsql(dataSource).UseSnakeCaseNamingConvention();
+            optionsBuilder.UseNpgsql(dataSource).UseSnakeCaseNamingConvention().AddInterceptors(new TimeStampInterceptor());
             base.OnConfiguring(optionsBuilder);
         }
 

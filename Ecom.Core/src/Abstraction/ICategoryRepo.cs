@@ -3,7 +3,7 @@ using Ecom.Core.src.parameters;
 
 namespace Ecom.Core.src.Abstraction
 {
-    public interface ICategory
+    public interface ICategoryRepo
     {
 
         Category CreateOne(Category Category);

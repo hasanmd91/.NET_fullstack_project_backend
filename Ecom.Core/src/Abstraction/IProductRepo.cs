@@ -3,7 +3,7 @@ using Ecom.Core.src.parameters;
 
 namespace Ecom.Core.src.Abstraction
 {
-    public interface IProduct
+    public interface IProductRepo
     {
 
         Product CreateOne(Product product);

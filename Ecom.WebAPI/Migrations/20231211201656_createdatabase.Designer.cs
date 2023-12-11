@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Ecom.WebAPI.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20231211144047_createDatabase")]
-    partial class createDatabase
+    [Migration("20231211201656_createdatabase")]
+    partial class createdatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,7 +35,7 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnName("id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("created_date");
 
                     b.Property<string>("Image")
@@ -47,7 +47,7 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnName("name");
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("updated_date");
 
                     b.HasKey("Id")
@@ -64,11 +64,11 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnName("id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("created_date");
 
                     b.Property<DateTime>("OrderDate")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("order_date");
 
                     b.Property<decimal>("TotalAmount")
@@ -76,7 +76,7 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnName("total_amount");
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("updated_date");
 
                     b.Property<Guid?>("UserId")
@@ -104,7 +104,7 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnName("category_id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("created_date");
 
                     b.Property<string>("Description")
@@ -128,7 +128,7 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnName("title");
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("updated_date");
 
                     b.HasKey("Id")
@@ -152,7 +152,7 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnName("content");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("created_date");
 
                     b.Property<Guid?>("ProductId")
@@ -164,11 +164,11 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnName("range");
 
                     b.Property<DateTime>("ReviewDate")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("review_date");
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("updated_date");
 
                     b.Property<Guid?>("UserId")
@@ -207,7 +207,7 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnName("city");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("created_date");
 
                     b.Property<string>("Email")
@@ -231,7 +231,7 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnName("role");
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("updated_date");
 
                     b.Property<string>("Zip")
