@@ -44,9 +44,25 @@ namespace Ecom.WebAPI.src.Repository
             return user;
         }
 
-        public User UpdateOne(Guid id, User user)
+        public User UpdateOne(Guid userId, User updatedUser)
         {
-            throw new NotImplementedException();
+            var existingUser = _users.FirstOrDefault(u => u.id == userId);
+
+            if (existingUser is not null)
+            {
+                existingUser.FirstName = updatedUser.FirstName ?? existingUser.FirstName;
+                existingUser.LastName = updatedUser.LastName ?? existingUser.LastName;
+                existingUser.Email = updatedUser.Email ?? existingUser.Email;
+                existingUser.Password = updatedUser.Password ?? existingUser.Password;
+                existingUser.Avatar = updatedUser.Avatar ?? existingUser.Avatar;
+                existingUser.Address = updatedUser.Address ?? existingUser.Address;
+                existingUser.Zip = updatedUser.Zip ?? existingUser.Zip;
+                existingUser.City = updatedUser.City ?? existingUser.City;
+
+                _database.SaveChanges();
+            }
+            return existingUser;
+
         }
     }
 

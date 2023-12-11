@@ -10,7 +10,7 @@ namespace Ecom.Service.src.DTO
         public string Email { get; set; }
         public string Password { get; set; }
         public string Avatar { get; set; }
-        public string Street { get; set; }
+        public string Address { get; set; }
         public string Zip { get; set; }
         public string City { get; set; }
         public Role Role { get; set; }
@@ -25,7 +25,7 @@ namespace Ecom.Service.src.DTO
         public string Email { get; set; }
         public string Password { get; set; }
         public string Avatar { get; set; }
-        public string Street { get; set; }
+        public string Address { get; set; }
         public string Zip { get; set; }
         public string City { get; set; }
 
@@ -39,7 +39,7 @@ namespace Ecom.Service.src.DTO
         public string Email { get; set; }
         public string Password { get; set; }
         public string Avatar { get; set; }
-        public string Street { get; set; }
+        public string Address { get; set; }
         public string Zip { get; set; }
         public string City { get; set; }
     }

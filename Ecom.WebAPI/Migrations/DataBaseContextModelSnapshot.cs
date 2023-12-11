@@ -31,6 +31,11 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("address");
+
                     b.Property<string>("Avatar")
                         .IsRequired()
                         .HasColumnType("text")
@@ -68,11 +73,6 @@ namespace Ecom.WebAPI.Migrations
                     b.Property<Role>("Role")
                         .HasColumnType("role")
                         .HasColumnName("role");
-
-                    b.Property<string>("Street")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("street");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("timestamp with time zone")

@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Ecom.WebAPI.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20231210220822_createDatabase")]
+    [Migration("20231211004010_createDatabase")]
     partial class createDatabase
     {
         /// <inheritdoc />
@@ -33,6 +33,11 @@ namespace Ecom.WebAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
                         .HasColumnName("id");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("address");
 
                     b.Property<string>("Avatar")
                         .IsRequired()
@@ -71,11 +76,6 @@ namespace Ecom.WebAPI.Migrations
                     b.Property<Role>("Role")
                         .HasColumnType("role")
                         .HasColumnName("role");
-
-                    b.Property<string>("Street")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("street");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("timestamp with time zone")
