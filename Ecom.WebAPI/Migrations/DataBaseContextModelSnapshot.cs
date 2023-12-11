@@ -266,39 +266,31 @@ namespace Ecom.WebAPI.Migrations
 
             modelBuilder.Entity("Ecom.Core.src.Entity.Order", b =>
                 {
-                    b.HasOne("Ecom.Core.src.Entity.User", "User")
+                    b.HasOne("Ecom.Core.src.Entity.User", null)
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .HasConstraintName("fk_order_users_user_id");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Ecom.Core.src.Entity.Product", b =>
                 {
-                    b.HasOne("Ecom.Core.src.Entity.Category", "Category")
+                    b.HasOne("Ecom.Core.src.Entity.Category", null)
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .HasConstraintName("fk_product_category_category_id");
-
-                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("Ecom.Core.src.Entity.Review", b =>
                 {
-                    b.HasOne("Ecom.Core.src.Entity.Product", "Product")
+                    b.HasOne("Ecom.Core.src.Entity.Product", null)
                         .WithMany("Reviews")
                         .HasForeignKey("ProductId")
                         .HasConstraintName("fk_review_product_product_id");
 
-                    b.HasOne("Ecom.Core.src.Entity.User", "User")
+                    b.HasOne("Ecom.Core.src.Entity.User", null)
                         .WithMany("Reviews")
                         .HasForeignKey("UserId")
                         .HasConstraintName("fk_review_users_user_id");
-
-                    b.Navigation("Product");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("OrderProduct", b =>

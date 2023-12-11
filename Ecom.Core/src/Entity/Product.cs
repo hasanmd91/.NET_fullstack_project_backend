@@ -7,7 +7,6 @@ namespace Ecom.Core.src.Entity
         public decimal Price { get; set; }
         public string Image { get; set; }
         public int Quantity { get; set; }
-        public Category Category { get; set; }
         public IEnumerable<Review> Reviews { get; set; }
         public IEnumerable<Order> Orders { get; set; }
 
