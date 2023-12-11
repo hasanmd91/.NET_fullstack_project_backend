@@ -31,6 +31,7 @@ namespace Ecom.WebAPI.src.Database
         {
             modelBuilder.HasPostgresEnum<Role>();
             modelBuilder.Entity<User>(entity => entity.Property(e => e.Role).HasColumnType("role"));
+            modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
 
             base.OnModelCreating(modelBuilder);
         }
