@@ -48,6 +48,11 @@ namespace Ecom.WebAPI.src.Repository
             return user;
         }
 
+        public User GetOneByEmail(User user)
+        {
+            var foundUser = _users.FirstOrDefault(u => u.Email == user.Email);
+            return foundUser;
+        }
 
         public User UpdateOne(Guid userId, User updatedUser)
         {
@@ -65,6 +70,8 @@ namespace Ecom.WebAPI.src.Repository
 
             return existingUser;
         }
+
+
     }
 
 }

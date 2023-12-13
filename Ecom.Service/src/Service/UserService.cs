@@ -21,7 +21,7 @@ namespace Ecom.Service.src.Service
 
         public UserReadDTO CreateOne(UserCreateDTO userCreateDTO)
         {
-            var result = _userRepo.CreateOne(_mapper.Map<UserCreateDTO, User>(userCreateDTO)) ?? throw CustomException.NotFoundException("user not found.");
+            var result = _userRepo.CreateOne(_mapper.Map<UserCreateDTO, User>(userCreateDTO)) ?? throw CustomException.NotFoundException();
             return _mapper.Map<User, UserReadDTO>(result);
         }
 
@@ -31,7 +31,7 @@ namespace Ecom.Service.src.Service
 
             if (!result)
             {
-                throw CustomException.NotFoundException("user not found.");
+                throw CustomException.NotFoundException();
             }
 
             return result;
@@ -47,14 +47,21 @@ namespace Ecom.Service.src.Service
 
         public UserReadDTO GetOne(Guid id)
         {
-            var result = _userRepo.GetOne(id) ?? throw CustomException.NotFoundException("user not found.");
+            var result = _userRepo.GetOne(id) ?? throw CustomException.NotFoundException();
+            return _mapper.Map<User, UserReadDTO>(result);
+
+        }
+
+        public UserReadDTO GetOneByEmail(LoginDTO loginDTO)
+        {
+            var result = _userRepo.GetOneByEmail(_mapper.Map<LoginDTO, User>(loginDTO)) ?? throw CustomException.UnauthorizedException();
             return _mapper.Map<User, UserReadDTO>(result);
 
         }
 
         public UserReadDTO UpdateOne(Guid userId, UserUpdateDTO userUpdateDTO)
         {
-            var result = _userRepo.UpdateOne(userId, _mapper.Map<UserUpdateDTO, User>(userUpdateDTO)) ?? throw CustomException.NotFoundException("user not found.");
+            var result = _userRepo.UpdateOne(userId, _mapper.Map<UserUpdateDTO, User>(userUpdateDTO)) ?? throw CustomException.NotFoundException();
             return _mapper.Map<User, UserReadDTO>(result);
 
         }

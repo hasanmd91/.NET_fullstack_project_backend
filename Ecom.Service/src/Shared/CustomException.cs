@@ -12,7 +12,7 @@ namespace Ecom.Service.src.Shared
 
         }
 
-        public static CustomException NotFoundException(string msg = "Not Found")
+        public static CustomException NotFoundException(string msg = "User Not Found")
         {
             return new CustomException(404, msg);
         }

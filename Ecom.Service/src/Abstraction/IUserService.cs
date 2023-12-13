@@ -10,6 +10,7 @@ namespace Ecom.Service.src.Abstraction
         UserReadDTO CreateOne(UserCreateDTO userCreateDTO);
         UserReadDTO UpdateOne(Guid userId, UserUpdateDTO userUpdateDTO);
         bool DeleteOneById(Guid id);
+        UserReadDTO GetOneByEmail(LoginDTO loginDTO);
 
     }
 }
