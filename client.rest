@@ -9,7 +9,7 @@ Content-Type: application/json
 {
     "firstName": "hasa",
     "lastName": "edge",
-    "email": "haasaaduun@email.com",
+    "email": "haasaasaduun@email.com",
     "password": "nokia6300",
     "avatar": "https://yt3.googleusercontent.com",
     "address": "otavantie 20 a 15",
@@ -18,7 +18,7 @@ Content-Type: application/json
 }
 
 ### Delete method 
-DELETE   http://localhost:5137/api/user/254b6ab4-2cff-4878-85ab-6a2ca95d9b65 HTTP/1.1
+DELETE   http://localhost:5137/api/user/fe9e66fa-fc0e-470c-882b-44f4661ee63b HTTP/1.1
 content-type: application/json
 
 
@@ -27,12 +27,12 @@ PUT  http://localhost:5137/api/user/254b6ab4-2cff-4878-85ab-6a2ca95d9b65 HTTP/1.
 Content-Type: application/json
 
 {
-    "firstName": "bassssan",
+    "firstName": "bassssand",
     "lastName": "edge",
     "email": "hasssan@email.com",
     "password": "nokia6300",
     "avatar": "https://yt3.googleusercontent.com",
     "address": "otavantie 20 a 15",
-    "zip": "01x550",
+    "zip": "01xa550",
     "city": "vantxaa"
 }

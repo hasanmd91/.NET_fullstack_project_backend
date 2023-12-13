@@ -11,7 +11,7 @@ namespace Ecom.WebAPI.src.Repository
             throw new NotImplementedException();
         }
 
-        public bool DeleteOne(Guid id)
+        public bool DeleteOneById(Guid id)
         {
             throw new NotImplementedException();
         }

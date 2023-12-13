@@ -10,6 +10,6 @@ namespace Ecom.Core.src.Abstraction
         IEnumerable<Category> GetAll(GetAllParams options);
         Category GetOne(Guid id);
         Category UpdateOne(Guid id, Category Category);
-        bool DeleteOne(Guid id);
+        bool DeleteOneById(Guid id);
     }
 }

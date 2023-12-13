@@ -42,9 +42,9 @@ namespace Ecom.Controller.src.Controller
 
         [HttpDelete("{userId}")]
 
-        public ActionResult<bool> DeleteOne(Guid userId)
+        public ActionResult<bool> DeleteOneById(Guid userId)
         {
-            return Ok(_userService.DeleteOne(userId));
+            return StatusCode(204, _userService.DeleteOneById(userId));
         }
 
 

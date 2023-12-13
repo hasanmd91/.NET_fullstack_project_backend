@@ -1,3 +1,4 @@
+using System.Text;
 using Ecom.Core.src.Abstraction;
 using Ecom.Service.src.Abstraction;
 using Ecom.Service.src.Service;
@@ -5,7 +6,10 @@ using Ecom.Service.src.Shared;
 using Ecom.WebAPI.src.Database;
 using Ecom.WebAPI.src.Middleware;
 using Ecom.WebAPI.src.Repository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +30,31 @@ builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 builder.Services.AddDbContext<DataBaseContext>(options => options.UseNpgsql());
 
 
+// config authentication 
+// Inside the ConfigureServices method in your Program.cs or Startup.cs
+
+// Add JWT authentication
+builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    }).AddJwtBearer(o =>
+    {
+        o.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey
+            (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)),
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = false,
+            ValidateIssuerSigningKey = true
+        };
+    });
+
+
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionHandeler>();
@@ -38,6 +67,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
 
 app.UseAuthorization();
 

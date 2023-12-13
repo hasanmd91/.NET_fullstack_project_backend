@@ -5,8 +5,5 @@ namespace Ecom.Core.src.Entity
         public DateTime OrderDate { get; set; }
         public decimal TotalAmount { get; set; }
         public IEnumerable<Product> Products { get; set; }
-
-
-
     }
 }
