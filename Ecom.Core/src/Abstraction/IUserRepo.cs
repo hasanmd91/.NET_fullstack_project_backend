@@ -10,6 +10,6 @@ namespace Ecom.Core.src.Abstraction
         User GetOne(Guid id);
         User UpdateOne(Guid id, User user);
         bool DeleteOneById(Guid id);
-        User GetOneByEmail(User user);
+        User GetOneByEmail(string email);
     }
 }

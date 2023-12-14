@@ -9,7 +9,7 @@ Content-Type: application/json
 {
     "firstName": "hasa",
     "lastName": "edge",
-    "email": "haasaasaduun@email.com",
+    "email": "haasan@email.com",
     "password": "nokia6300",
     "avatar": "https://yt3.googleusercontent.com",
     "address": "otavantie 20 a 15",

@@ -48,11 +48,6 @@ namespace Ecom.Controller.src.Controller
         }
 
 
-        [HttpPost("{login}")]
-        public ActionResult<UserReadDTO> GetOneByEmail([FromBody] LoginDTO loginDTO)
-        {
-            return Ok(_userService.GetOneByEmail(loginDTO));
-        }
 
     }
 }

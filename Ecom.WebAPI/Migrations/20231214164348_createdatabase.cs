@@ -40,6 +40,7 @@ namespace Ecom.WebAPI.Migrations
                     role = table.Column<Role>(type: "role", nullable: false),
                     email = table.Column<string>(type: "text", nullable: true),
                     password = table.Column<string>(type: "text", nullable: true),
+                    salt = table.Column<byte[]>(type: "bytea", nullable: true),
                     avatar = table.Column<string>(type: "text", nullable: true),
                     address = table.Column<string>(type: "text", nullable: true),
                     zip = table.Column<string>(type: "text", nullable: true),
@@ -60,7 +61,6 @@ namespace Ecom.WebAPI.Migrations
                     title = table.Column<string>(type: "text", nullable: true),
                     description = table.Column<string>(type: "text", nullable: true),
                     price = table.Column<decimal>(type: "numeric", nullable: false),
-                    image = table.Column<string>(type: "text", nullable: true),
                     quantity = table.Column<int>(type: "integer", nullable: false),
                     category_id = table.Column<Guid>(type: "uuid", nullable: true),
                     created_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -98,13 +98,32 @@ namespace Ecom.WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "image",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    image_url = table.Column<string>(type: "text", nullable: true),
+                    product_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    created_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    updated_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_image", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_image_product_product_id",
+                        column: x => x.product_id,
+                        principalTable: "product",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "review",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     content = table.Column<string>(type: "text", nullable: true),
-                    review_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    range = table.Column<int>(type: "integer", nullable: false),
+                    ratings = table.Column<int>(type: "integer", nullable: false),
                     product_id = table.Column<Guid>(type: "uuid", nullable: true),
                     user_id = table.Column<Guid>(type: "uuid", nullable: true),
                     created_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -150,6 +169,11 @@ namespace Ecom.WebAPI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "ix_image_product_id",
+                table: "image",
+                column: "product_id");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_order_user_id",
                 table: "order",
                 column: "user_id");
@@ -184,6 +208,9 @@ namespace Ecom.WebAPI.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "image");
+
             migrationBuilder.DropTable(
                 name: "order_product");
 

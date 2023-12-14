@@ -21,7 +21,14 @@ namespace Ecom.Service.src.Service
 
         public UserReadDTO CreateOne(UserCreateDTO userCreateDTO)
         {
-            var result = _userRepo.CreateOne(_mapper.Map<UserCreateDTO, User>(userCreateDTO)) ?? throw CustomException.NotFoundException();
+
+            PasswordService.HashPassword(userCreateDTO.Password, out string hashedPassword, out byte[] salt);
+
+            var user = _mapper.Map<UserCreateDTO, User>(userCreateDTO);
+            user.Password = hashedPassword;
+            user.Salt = salt;
+
+            var result = _userRepo.CreateOne(user) ?? throw CustomException.BadRequestException();
             return _mapper.Map<User, UserReadDTO>(result);
         }
 
@@ -48,13 +55,6 @@ namespace Ecom.Service.src.Service
         public UserReadDTO GetOne(Guid id)
         {
             var result = _userRepo.GetOne(id) ?? throw CustomException.NotFoundException();
-            return _mapper.Map<User, UserReadDTO>(result);
-
-        }
-
-        public UserReadDTO GetOneByEmail(LoginDTO loginDTO)
-        {
-            var result = _userRepo.GetOneByEmail(_mapper.Map<LoginDTO, User>(loginDTO)) ?? throw CustomException.UnauthorizedException();
             return _mapper.Map<User, UserReadDTO>(result);
 
         }

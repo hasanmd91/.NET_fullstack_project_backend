@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Ecom.WebAPI.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20231211213450_createdatabase")]
+    [Migration("20231214164348_createdatabase")]
     partial class createdatabase
     {
         /// <inheritdoc />
@@ -54,6 +54,38 @@ namespace Ecom.WebAPI.Migrations
                         .HasName("pk_category");
 
                     b.ToTable("category", (string)null);
+                });
+
+            modelBuilder.Entity("Ecom.Core.src.Entity.Image", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("created_date");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("text")
+                        .HasColumnName("image_url");
+
+                    b.Property<Guid?>("ProductId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("product_id");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("updated_date");
+
+                    b.HasKey("Id")
+                        .HasName("pk_image");
+
+                    b.HasIndex("ProductId")
+                        .HasDatabaseName("ix_image_product_id");
+
+                    b.ToTable("image", (string)null);
                 });
 
             modelBuilder.Entity("Ecom.Core.src.Entity.Order", b =>
@@ -111,10 +143,6 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnType("text")
                         .HasColumnName("description");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("text")
-                        .HasColumnName("image");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric")
                         .HasColumnName("price");
@@ -159,13 +187,9 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("product_id");
 
-                    b.Property<int>("Range")
+                    b.Property<int>("Ratings")
                         .HasColumnType("integer")
-                        .HasColumnName("range");
-
-                    b.Property<DateTime>("ReviewDate")
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("review_date");
+                        .HasColumnName("ratings");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("timestamp without time zone")
@@ -230,6 +254,10 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnType("role")
                         .HasColumnName("role");
 
+                    b.Property<byte[]>("Salt")
+                        .HasColumnType("bytea")
+                        .HasColumnName("salt");
+
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("updated_date");
@@ -265,6 +293,14 @@ namespace Ecom.WebAPI.Migrations
                         .HasDatabaseName("ix_order_product_products_id");
 
                     b.ToTable("order_product", (string)null);
+                });
+
+            modelBuilder.Entity("Ecom.Core.src.Entity.Image", b =>
+                {
+                    b.HasOne("Ecom.Core.src.Entity.Product", null)
+                        .WithMany("Images")
+                        .HasForeignKey("ProductId")
+                        .HasConstraintName("fk_image_product_product_id");
                 });
 
             modelBuilder.Entity("Ecom.Core.src.Entity.Order", b =>
@@ -320,6 +356,8 @@ namespace Ecom.WebAPI.Migrations
 
             modelBuilder.Entity("Ecom.Core.src.Entity.Product", b =>
                 {
+                    b.Navigation("Images");
+
                     b.Navigation("Reviews");
                 });
 

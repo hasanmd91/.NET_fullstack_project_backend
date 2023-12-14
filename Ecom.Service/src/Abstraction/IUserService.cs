@@ -1,3 +1,4 @@
+using Ecom.Core.src.Entity;
 using Ecom.Core.src.parameters;
 using Ecom.Service.src.DTO;
 
@@ -10,7 +11,6 @@ namespace Ecom.Service.src.Abstraction
         UserReadDTO CreateOne(UserCreateDTO userCreateDTO);
         UserReadDTO UpdateOne(Guid userId, UserUpdateDTO userUpdateDTO);
         bool DeleteOneById(Guid id);
-        UserReadDTO GetOneByEmail(LoginDTO loginDTO);
 
     }
 }

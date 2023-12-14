@@ -9,6 +9,7 @@ namespace Ecom.Core.src.Entity
         public Role Role { get; set; } = Role.User;
         public string Email { get; set; }
         public string Password { get; set; }
+        public byte[] Salt { get; set; }
         public string Avatar { get; set; }
         public string Address { get; set; }
         public string Zip { get; set; }

@@ -48,9 +48,9 @@ namespace Ecom.WebAPI.src.Repository
             return user;
         }
 
-        public User GetOneByEmail(User user)
+        public User GetOneByEmail(string email)
         {
-            var foundUser = _users.FirstOrDefault(u => u.Email == user.Email);
+            var foundUser = _users.FirstOrDefault(u => u.Email == email);
             return foundUser;
         }
 
