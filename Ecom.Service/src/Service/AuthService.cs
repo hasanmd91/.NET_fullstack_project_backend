@@ -1,5 +1,6 @@
 using Ecom.Core.src.Abstraction;
 using Ecom.Core.src.parameters;
+using Ecom.Service.src.Abstraction;
 using Ecom.Service.src.Shared;
 
 namespace Ecom.Service.src.Service
@@ -7,10 +8,12 @@ namespace Ecom.Service.src.Service
     public class AuthService : IAuthService
     {
         private readonly IUserRepo _userRepo;
-        public AuthService(IUserRepo userRepo)
+        private readonly ITokenService _tokenService;
+
+        public AuthService(IUserRepo userRepo, ITokenService tokenService)
         {
             _userRepo = userRepo;
-
+            _tokenService = tokenService;
         }
 
         public string Login(Credentials credentials)
@@ -21,9 +24,7 @@ namespace Ecom.Service.src.Service
             {
                 throw CustomException.UnauthorizedException("Incorrect password");
             }
-
-            throw new NotImplementedException();
-
+            return _tokenService.GenerateToken(foundUserByEmail);
         }
     }
 }

@@ -6,6 +6,7 @@ using Ecom.Service.src.Shared;
 using Ecom.WebAPI.src.Database;
 using Ecom.WebAPI.src.Middleware;
 using Ecom.WebAPI.src.Repository;
+using Ecom.WebAPI.src.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -24,6 +25,8 @@ builder.Services.AddScoped<ExceptionHandeler>();
 
 // declare services
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserRepo, UserRepo>();
 
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
@@ -34,12 +37,8 @@ builder.Services.AddDbContext<DataBaseContext>(options => options.UseNpgsql());
 // Inside the ConfigureServices method in your Program.cs or Startup.cs
 
 // Add JWT authentication
-builder.Services.AddAuthentication(options =>
-    {
-        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-    }).AddJwtBearer(o =>
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
+    o =>
     {
         o.TokenValidationParameters = new TokenValidationParameters
         {
