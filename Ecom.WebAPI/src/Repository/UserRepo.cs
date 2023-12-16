@@ -10,12 +10,10 @@ namespace Ecom.WebAPI.src.Repository
     {
         private DbSet<User> _users;
         private DataBaseContext _database;
-        private IConfiguration _config;
 
         public UserRepo(DataBaseContext dataBase, IConfiguration config)
         {
             _users = dataBase.Users;
-            _config = config;
             _database = dataBase;
         }
         public User CreateOne(User user)
@@ -71,9 +69,6 @@ namespace Ecom.WebAPI.src.Repository
 
             return existingUser;
         }
-
-
     }
-
 }
 

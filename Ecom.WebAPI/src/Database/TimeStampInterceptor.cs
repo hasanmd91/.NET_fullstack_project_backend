@@ -34,12 +34,7 @@ namespace Ecom.WebAPI.src.Database
                 }
 
             }
-
-
             return base.SavingChanges(eventData, result);
-
-
         }
-
     }
 }
