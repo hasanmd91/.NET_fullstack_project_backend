@@ -33,9 +33,6 @@ builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 builder.Services.AddDbContext<DataBaseContext>(options => options.UseNpgsql());
 
 
-// config authentication 
-// Inside the ConfigureServices method in your Program.cs or Startup.cs
-
 // Add JWT authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
     o =>
@@ -66,13 +63,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
-
 app.UseAuthorization();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
