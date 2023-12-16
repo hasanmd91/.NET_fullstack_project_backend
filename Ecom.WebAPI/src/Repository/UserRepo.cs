@@ -58,6 +58,7 @@ namespace Ecom.WebAPI.src.Repository
         {
             var existingUser = _users.FirstOrDefault(u => u.Id == userId);
 
+
             existingUser.FirstName = updatedUser.FirstName ?? existingUser.FirstName;
             existingUser.LastName = updatedUser.LastName ?? existingUser.LastName;
             existingUser.Email = updatedUser.Email ?? existingUser.Email;

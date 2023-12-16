@@ -28,7 +28,6 @@ namespace Ecom.WebAPI.src.Service
             var singingKey = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
             var descriptor = new SecurityTokenDescriptor
             {
-
                 Issuer = issuer,
                 Audience = audience,
                 Expires = DateTime.Now.AddDays(2),
