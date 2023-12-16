@@ -1,34 +1,71 @@
 using Ecom.Core.src.Abstraction;
 using Ecom.Core.src.Entity;
 using Ecom.Core.src.parameters;
+using Ecom.WebAPI.src.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ecom.WebAPI.src.Repository
 {
     public class CategoryRepo : ICategoryRepo
     {
-        public Category CreateOne(Category Category)
+        private readonly DbSet<Category> _category;
+        private readonly DataBaseContext _database;
+        public CategoryRepo(DataBaseContext dataBase)
         {
-            throw new NotImplementedException();
+            _category = dataBase.Category;
+            _database = dataBase;
         }
 
-        public bool DeleteOneById(Guid id)
+        public async Task<IEnumerable<Category>> GetAllCategoryAsync(GetAllParams options)
         {
-            throw new NotImplementedException();
+            return await Task.Run(() =>
+            {
+                return _category
+                    .Where(c => c.Name.Contains(options.Search))
+                    .Skip(options.Offset)
+                    .Take(options.Limit)
+                    .ToList();
+            });
         }
 
-        public IEnumerable<Category> GetAll(GetAllParams options)
+        public async Task<Category> CreateOneCategoryAsync(Category category)
         {
-            throw new NotImplementedException();
+            _category.Add(category);
+            await _database.SaveChangesAsync();
+            return category;
         }
 
-        public Category GetOne(Guid id)
+        public async Task<Category?> GetOneCategoryByIdAsync(Guid categoryId)
         {
-            throw new NotImplementedException();
+            return await _category.FirstOrDefaultAsync(c => c.Id == categoryId);
         }
 
-        public Category UpdateOne(Guid id, Category Category)
+        public async Task<bool> DeleteOneByIdCategoryAsync(Guid categoryId)
         {
-            throw new NotImplementedException();
+            {
+                var category = _category.FirstOrDefault(c => c.Id == categoryId);
+                if (category != null)
+                {
+                    _category.Remove(category);
+                    await _database.SaveChangesAsync();
+                    return true;
+                }
+                return false;
+            }
         }
+
+        public async Task<Category?> UpdateOneCategoryAsync(Guid categoryId, Category updatedCategory)
+        {
+            var existingCategory = await _category.FirstOrDefaultAsync(u => u.Id == categoryId);
+
+            if (existingCategory != null)
+            {
+                existingCategory.Name = updatedCategory.Name ?? existingCategory.Name;
+                await _database.SaveChangesAsync();
+            }
+
+            return existingCategory;
+        }
+
     }
 }

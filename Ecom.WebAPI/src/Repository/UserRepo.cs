@@ -11,7 +11,7 @@ namespace Ecom.WebAPI.src.Repository
         private DbSet<User> _users;
         private DataBaseContext _database;
 
-        public UserRepo(DataBaseContext dataBase, IConfiguration config)
+        public UserRepo(DataBaseContext dataBase)
         {
             _users = dataBase.Users;
             _database = dataBase;
