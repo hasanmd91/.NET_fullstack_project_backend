@@ -37,7 +37,7 @@ namespace Ecom.Controller.src.Controller
         public async Task<ActionResult<UserReadDTO>> CreateOneUserAsync([FromBody] UserCreateDTO userCreateDTO)
         {
             var createdUser = await _userService.CreateOneUserAsync(userCreateDTO);
-            return CreatedAtAction(nameof(CreateOneUserAsync), new { id = createdUser.Id }, createdUser);
+            return Ok(createdUser);
         }
 
 
