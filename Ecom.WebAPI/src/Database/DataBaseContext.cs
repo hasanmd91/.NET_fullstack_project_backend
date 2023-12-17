@@ -8,7 +8,6 @@ namespace Ecom.WebAPI.src.Database
     public class DataBaseContext : DbContext
     {
         IConfiguration _config;
-
         public DbSet<User> Users { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Product> Product { get; set; }
@@ -43,6 +42,7 @@ namespace Ecom.WebAPI.src.Database
             modelBuilder.HasPostgresEnum<Role>();
             modelBuilder.Entity<User>(entity => entity.Property(e => e.Role).HasColumnType("role"));
             modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
+            modelBuilder.Entity<Category>().HasIndex(c => c.Name).IsUnique();
             modelBuilder.Entity<Review>().HasOne<User>().WithMany(r => r.Reviews);
             modelBuilder.Entity<Order>().HasOne<User>().WithMany(r => r.Orders);
 

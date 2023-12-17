@@ -17,7 +17,7 @@ namespace Ecom.Controller.src.Controller
             _userService = userService;
         }
 
-        [Authorize(Roles = "Admin")]
+        // [Authorize(Roles = "Admin")]
         [HttpGet()]
         public ActionResult<IEnumerable<UserReadDTO>> GetAll([FromQuery] GetAllParams options)
         {
@@ -25,7 +25,7 @@ namespace Ecom.Controller.src.Controller
         }
 
 
-        [Authorize]
+        // [Authorize]
         [HttpGet("{useriId}")]
         public ActionResult<UserReadDTO> GetOne(Guid useriId)
         {
@@ -33,7 +33,7 @@ namespace Ecom.Controller.src.Controller
         }
 
 
-        [Authorize(Roles = "User")]
+        // [Authorize(Roles = "User")]
         [HttpPost()]
         public ActionResult<UserReadDTO> CreateOne([FromBody] UserCreateDTO userCreateDTO)
         {
@@ -41,7 +41,7 @@ namespace Ecom.Controller.src.Controller
         }
 
 
-        [Authorize(Roles = "User")]
+        // [Authorize(Roles = "User")]
         [HttpPatch("{userid}")]
         public ActionResult<UserReadDTO> UpdateOne(Guid userId, [FromBody] UserUpdateDTO userUpdateDTO)
         {
@@ -49,14 +49,11 @@ namespace Ecom.Controller.src.Controller
         }
 
 
-        [Authorize(Roles = "Admin")]
+        // [Authorize(Roles = "Admin")]
         [HttpDelete("{userId}")]
         public ActionResult<bool> DeleteOneById(Guid userId)
         {
             return StatusCode(204, _userService.DeleteOneById(userId));
         }
-
-
-
     }
 }

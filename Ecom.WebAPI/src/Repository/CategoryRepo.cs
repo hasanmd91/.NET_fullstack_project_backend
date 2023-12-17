@@ -30,7 +30,7 @@ namespace Ecom.WebAPI.src.Repository
 
         public async Task<Category> CreateOneCategoryAsync(Category category)
         {
-            _category.Add(category);
+            await _category.AddAsync(category);
             await _database.SaveChangesAsync();
             return category;
         }
