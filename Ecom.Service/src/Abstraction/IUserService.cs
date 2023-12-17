@@ -6,11 +6,11 @@ namespace Ecom.Service.src.Abstraction
 {
     public interface IUserService
     {
-        IEnumerable<UserReadDTO> GetAll(GetAllParams options);
-        UserReadDTO GetOne(Guid id);
-        UserReadDTO CreateOne(UserCreateDTO userCreateDTO);
-        UserReadDTO UpdateOne(Guid userId, UserUpdateDTO userUpdateDTO);
-        bool DeleteOneById(Guid id);
+        Task<IEnumerable<UserReadDTO>> GetAllUserAsync(GetAllParams options);
+        Task<UserReadDTO> GetOneUserByIdAsync(Guid id);
+        Task<UserReadDTO> CreateOneUserAsync(UserCreateDTO userCreateDTO);
+        Task<UserReadDTO> UpdateOneUserAsync(Guid userId, UserUpdateDTO userUpdateDTO);
+        Task<bool> DeleteOneUserAsync(Guid id);
 
     }
 }

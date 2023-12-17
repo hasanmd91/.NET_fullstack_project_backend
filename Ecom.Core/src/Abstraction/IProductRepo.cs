@@ -6,10 +6,10 @@ namespace Ecom.Core.src.Abstraction
     public interface IProductRepo
     {
 
-        Product CreateOne(Product product);
-        IEnumerable<Product> GetAll(GetAllParams options);
-        Product GetOne(Guid id);
-        Product UpdateOne(Guid id, Product product);
-        bool DeleteOneById(Guid id);
+        Product CreateOneProductAsync(Product product);
+        IEnumerable<Product> GetAllProductAsync(GetAllParams options);
+        Product GetOneProductByIdAsync(Guid id);
+        Product UpdateOneProductAsync(Guid id, Product product);
+        bool DeleteOneProductAsync(Guid id);
     }
 }
