@@ -18,10 +18,10 @@ namespace Ecom.Controller.src.Controller
 
 
         [HttpPost()]
-        public ActionResult<string> Login([FromBody] Credentials credentials)
+        public async Task<ActionResult<string>> Login([FromBody] Credentials credentials)
         {
 
-            return _authService.Login(credentials);
+            return await _authService.Login(credentials);
         }
 
 

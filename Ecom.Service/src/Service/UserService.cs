@@ -10,31 +10,30 @@ namespace Ecom.Service.src.Service
 {
     public class UserService : IUserService
     {
-        private IUserRepo _userRepo;
-        private IMapper _mapper;
+        private readonly IUserRepo _userRepo;
+        private readonly IMapper _mapper;
+
         public UserService(IUserRepo userRepo, IMapper mapper)
         {
             _userRepo = userRepo;
             _mapper = mapper;
-
         }
 
-        public UserReadDTO CreateOne(UserCreateDTO userCreateDTO)
+        public async Task<UserReadDTO> CreateOneUserAsync(UserCreateDTO userCreateDTO)
         {
-
             PasswordService.HashPassword(userCreateDTO.Password, out string hashedPassword, out byte[] salt);
 
             var user = _mapper.Map<UserCreateDTO, User>(userCreateDTO);
             user.Password = hashedPassword;
             user.Salt = salt;
 
-            var result = _userRepo.CreateOne(user) ?? throw CustomException.BadRequestException();
+            var result = await _userRepo.CreateOneUserAsync(user) ?? throw CustomException.BadRequestException();
             return _mapper.Map<User, UserReadDTO>(result);
         }
 
-        public bool DeleteOneById(Guid id)
+        public async Task<bool> DeleteOneUserAsync(Guid id)
         {
-            var result = _userRepo.DeleteOneById(id);
+            var result = await _userRepo.DeleteOneUserAsync(id);
 
             if (!result)
             {
@@ -42,28 +41,25 @@ namespace Ecom.Service.src.Service
             }
 
             return result;
-
         }
 
-        public IEnumerable<UserReadDTO> GetAll(GetAllParams options)
+        public async Task<IEnumerable<UserReadDTO>> GetAllUserAsync(GetAllParams options)
         {
-            var result = _userRepo.GetAll(options);
-            return _mapper.Map<IEnumerable<User>, IEnumerable<UserReadDTO>>(result);
-
+            var result = _userRepo.GetAllUserAsync(options);
+            var users = await Task.FromResult(result);
+            return _mapper.Map<IEnumerable<User>, IEnumerable<UserReadDTO>>(users);
         }
 
-        public UserReadDTO GetOne(Guid id)
+        public async Task<UserReadDTO> GetOneUserByIdAsync(Guid id)
         {
-            var result = _userRepo.GetOne(id) ?? throw CustomException.NotFoundException();
+            var result = await _userRepo.GetOneUserByIdAsync(id) ?? throw CustomException.NotFoundException();
             return _mapper.Map<User, UserReadDTO>(result);
-
         }
 
-        public UserReadDTO UpdateOne(Guid userId, UserUpdateDTO userUpdateDTO)
+        public async Task<UserReadDTO> UpdateOneUserAsync(Guid userId, UserUpdateDTO userUpdateDTO)
         {
-            var result = _userRepo.UpdateOne(userId, _mapper.Map<UserUpdateDTO, User>(userUpdateDTO)) ?? throw CustomException.NotFoundException();
+            var result = await _userRepo.UpdateOneUserAsync(userId, _mapper.Map<UserUpdateDTO, User>(userUpdateDTO)) ?? throw CustomException.NotFoundException();
             return _mapper.Map<User, UserReadDTO>(result);
-
         }
     }
 }

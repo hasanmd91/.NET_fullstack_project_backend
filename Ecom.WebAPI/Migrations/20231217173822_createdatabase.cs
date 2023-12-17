@@ -21,7 +21,6 @@ namespace Ecom.WebAPI.Migrations
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     name = table.Column<string>(type: "text", nullable: true),
-                    image = table.Column<string>(type: "text", nullable: true),
                     created_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     updated_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
@@ -167,6 +166,12 @@ namespace Ecom.WebAPI.Migrations
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "ix_category_name",
+                table: "category",
+                column: "name",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_image_product_id",

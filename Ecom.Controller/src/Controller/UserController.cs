@@ -2,7 +2,6 @@ using Ecom.Core.src.Enum;
 using Ecom.Core.src.parameters;
 using Ecom.Service.src.Abstraction;
 using Ecom.Service.src.DTO;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecom.Controller.src.Controller
@@ -17,46 +16,45 @@ namespace Ecom.Controller.src.Controller
             _userService = userService;
         }
 
-        [Authorize(Roles = "Admin")]
+        // [Authorize(Roles = "Admin")]
         [HttpGet()]
-        public ActionResult<IEnumerable<UserReadDTO>> GetAll([FromQuery] GetAllParams options)
+        public async Task<ActionResult<IEnumerable<UserReadDTO>>> GetAllUserAsync([FromQuery] GetAllParams options)
         {
-            return Ok(_userService.GetAll(options));
+            return Ok(await _userService.GetAllUserAsync(options));
         }
 
 
-        [Authorize]
+        // [Authorize]
         [HttpGet("{useriId}")]
-        public ActionResult<UserReadDTO> GetOne(Guid useriId)
+        public async Task<ActionResult<UserReadDTO>> GetOneUserByIdAsync(Guid useriId)
         {
-            return Ok(_userService.GetOne(useriId));
+            return Ok(await _userService.GetOneUserByIdAsync(useriId));
         }
 
 
-        [Authorize(Roles = "User")]
+        // [Authorize(Roles = "User")]
         [HttpPost()]
-        public ActionResult<UserReadDTO> CreateOne([FromBody] UserCreateDTO userCreateDTO)
+        public async Task<ActionResult<UserReadDTO>> CreateOneUserAsync([FromBody] UserCreateDTO userCreateDTO)
         {
-            return CreatedAtAction(nameof(CreateOne), _userService.CreateOne(userCreateDTO));
+            var createdUser = await _userService.CreateOneUserAsync(userCreateDTO);
+            return CreatedAtAction(nameof(CreateOneUserAsync), new { id = createdUser.Id }, createdUser);
         }
 
 
-        [Authorize(Roles = "User")]
+
+        // [Authorize(Roles = "User")]
         [HttpPatch("{userid}")]
-        public ActionResult<UserReadDTO> UpdateOne(Guid userId, [FromBody] UserUpdateDTO userUpdateDTO)
+        public async Task<ActionResult<UserReadDTO>> UpdateOneUserAsync(Guid userId, [FromBody] UserUpdateDTO userUpdateDTO)
         {
-            return Ok(_userService.UpdateOne(userId, userUpdateDTO));
+            return Ok(await _userService.UpdateOneUserAsync(userId, userUpdateDTO));
         }
 
 
-        [Authorize(Roles = "Admin")]
+        // [Authorize(Roles = "Admin")]
         [HttpDelete("{userId}")]
-        public ActionResult<bool> DeleteOneById(Guid userId)
+        public async Task<ActionResult<bool>> DeleteOneUserAsync(Guid userId)
         {
-            return StatusCode(204, _userService.DeleteOneById(userId));
+            return StatusCode(204, await _userService.DeleteOneUserAsync(userId));
         }
-
-
-
     }
 }

@@ -16,9 +16,9 @@ namespace Ecom.Service.src.Service
             _tokenService = tokenService;
         }
 
-        public string Login(Credentials credentials)
+        public async Task<string> Login(Credentials credentials)
         {
-            var foundUserByEmail = _userRepo.GetOneByEmail(credentials.Email) ?? throw CustomException.NotFoundException();
+            var foundUserByEmail = await _userRepo.GetOneUserByEmailAsync(credentials.Email) ?? throw CustomException.NotFoundException();
             var isPasswordMatch = PasswordService.VerifyPassword(credentials.Password, foundUserByEmail.Password, foundUserByEmail.Salt);
             if (!isPasswordMatch)
             {

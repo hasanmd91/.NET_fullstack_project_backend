@@ -35,10 +35,6 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("created_date");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("text")
-                        .HasColumnName("image");
-
                     b.Property<string>("Name")
                         .HasColumnType("text")
                         .HasColumnName("name");
@@ -49,6 +45,10 @@ namespace Ecom.WebAPI.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_category");
+
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasDatabaseName("ix_category_name");
 
                     b.ToTable("category", (string)null);
                 });

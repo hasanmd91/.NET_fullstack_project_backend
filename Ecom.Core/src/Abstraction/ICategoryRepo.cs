@@ -5,11 +5,10 @@ namespace Ecom.Core.src.Abstraction
 {
     public interface ICategoryRepo
     {
-
-        Category CreateOne(Category Category);
-        IEnumerable<Category> GetAll(GetAllParams options);
-        Category GetOne(Guid id);
-        Category UpdateOne(Guid id, Category Category);
-        bool DeleteOneById(Guid id);
+        Task<Category> CreateOneCategoryAsync(Category category);
+        Task<IEnumerable<Category>> GetAllCategoryAsync(GetAllParams options);
+        Task<Category> GetOneCategoryByIdAsync(Guid categoryId);
+        Task<Category> UpdateOneCategoryAsync(Guid categoryId, Category category);
+        Task<bool> DeleteOneByIdCategoryAsync(Guid categoryId);
     }
 }

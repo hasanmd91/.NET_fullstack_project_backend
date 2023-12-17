@@ -26,8 +26,10 @@ builder.Services.AddScoped<ExceptionHandeler>();
 // declare services
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserRepo, UserRepo>();
+builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
 
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 builder.Services.AddDbContext<DataBaseContext>(options => options.UseNpgsql());

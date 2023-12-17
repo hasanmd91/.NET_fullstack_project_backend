@@ -6,27 +6,27 @@ namespace Ecom.WebAPI.src.Repository
 {
     public class ProductRepo : IProductRepo
     {
-        public Product CreateOne(Product product)
+        public Product CreateOneProductAsync(Product product)
         {
             throw new NotImplementedException();
         }
 
-        public bool DeleteOneById(Guid id)
+        public bool DeleteOneProductAsync(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Product> GetAll(GetAllParams options)
+        public IEnumerable<Product> GetAllProductAsync(GetAllParams options)
         {
             throw new NotImplementedException();
         }
 
-        public Product GetOne(Guid id)
+        public Product GetOneProductByIdAsync(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Product UpdateOne(Guid id, Product product)
+        public Product UpdateOneProductAsync(Guid id, Product product)
         {
             throw new NotImplementedException();
         }

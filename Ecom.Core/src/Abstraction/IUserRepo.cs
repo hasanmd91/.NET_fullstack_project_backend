@@ -5,11 +5,11 @@ namespace Ecom.Core.src.Abstraction
 {
     public interface IUserRepo
     {
-        User CreateOne(User user);
-        IEnumerable<User> GetAll(GetAllParams options);
-        User GetOne(Guid id);
-        User UpdateOne(Guid id, User user);
-        bool DeleteOneById(Guid id);
-        User GetOneByEmail(string email);
+        Task<User> CreateOneUserAsync(User user);
+        IEnumerable<User> GetAllUserAsync(GetAllParams options);
+        Task<User> GetOneUserByIdAsync(Guid id);
+        Task<User> UpdateOneUserAsync(Guid id, User user);
+        Task<bool> DeleteOneUserAsync(Guid id);
+        Task<User> GetOneUserByEmailAsync(string email);
     }
 }
