@@ -12,6 +12,7 @@ namespace Ecom.Service.src.DTO
         public Guid CategoryId { get; set; }
         public required Category Category { get; set; }
         public required IEnumerable<Image> Images { get; set; }
+        public required IEnumerable<Review> Reviews { get; set; }
 
     }
 
