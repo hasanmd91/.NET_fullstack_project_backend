@@ -40,15 +40,34 @@ namespace Ecom.WebAPI.src.Repository
 
         public async Task<IEnumerable<Product>> GetAllProductAsync(GetAllParams options)
         {
-            var products = _products
-                                    .Include(p => p.Images)
-                                    .Include(p => p.Category)
-                                    .Where(p => p.Title.Contains(options.Search))
-                                    .Skip(options.Offset)
-                                    .Take(options.Limit).ToListAsync();
+            var query = _products
+                .Include(p => p.Images)
+                .Include(p => p.Category)
+                .Where(p => p.Title.Contains(options.Search));
 
-            return await products;
+            if (options.CategoryId != Guid.Empty)
+            {
+                query = query.Where(p => p.Category.Id == options.CategoryId);
+            }
+
+            switch (options.SortOrder)
+            {
+                case "asc":
+                    query = query.OrderBy(p => p.Price);
+                    break;
+                case "dsc":
+                    query = query.OrderByDescending(p => p.Price);
+                    break;
+            }
+
+            var products = await query
+                .Skip(options.Offset)
+                .Take(options.Limit)
+                .ToListAsync();
+
+            return products;
         }
+
 
 
         public async Task<Product> GetOneProductByIdAsync(Guid productId)

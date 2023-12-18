@@ -1,5 +1,5 @@
 ### Get Method 
-GET  http://localhost:5137/api/product/ HTTP/1.1
+GET  http://localhost:5137/api/product?Limit=10&Offset=0&CategoryId=89b8434b-d036-49f5-836b-5b3841be53c4&SortOrder=dsc HTTP/1.1
 content-type: application/json
 
 ### Get one Method 
@@ -7,7 +7,7 @@ GET  http://localhost:5137/api/product/13cf534f-d5b5-468c-b513-2ef3e8cf92a1 HTTP
 content-type: application/json
 
 
-### Delete Method 
+### Delete Method
 DELETE   http://localhost:5137/api/product/1328f25a-50ef-4ead-996e-522e5e7141fa HTTP/1.1
 content-type: application/json
 
@@ -17,9 +17,9 @@ POST http://localhost:5137/api/product/ HTTP/1.1
 Content-Type: application/json
 
 {
-    "title": "Coat",
+    "title": "Polo Shirt",
     "description": "Woven coats for winter",
-    "price": 20,
+    "price": 10,
     "quantity": 50,
     "CategoryId": "89b8434b-d036-49f5-836b-5b3841be53c4",
     "images": 
