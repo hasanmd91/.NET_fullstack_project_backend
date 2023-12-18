@@ -20,16 +20,17 @@ namespace Ecom.WebAPI.src.Repository
 
         public async Task<Product> CreateOneProductAsync(Product product)
         {
-            _products.Add(product);
+            await _products.AddAsync(product);
             await _database.SaveChangesAsync();
             return product;
         }
 
         public async Task<bool> DeleteOneProductAsync(Guid productId)
         {
-            var product = await _products.FirstOrDefaultAsync(u => u.Id == productId);
+            var product = await _products.Include(p => p.Images).FirstOrDefaultAsync(u => u.Id == productId);
             if (product != null)
             {
+                _database.Images.RemoveRange(product.Images);
                 _products.Remove(product);
                 await _database.SaveChangesAsync();
                 return true;
@@ -52,7 +53,10 @@ namespace Ecom.WebAPI.src.Repository
 
         public async Task<Product> GetOneProductByIdAsync(Guid productId)
         {
-            var product = await _products.FirstOrDefaultAsync(u => u.Id == productId);
+            var product = await _products
+                                    .Include(p => p.Images)
+                                    .Include(p => p.Category)
+                                    .FirstOrDefaultAsync(p => p.Id == productId);
             return product;
         }
 

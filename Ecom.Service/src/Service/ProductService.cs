@@ -33,6 +33,7 @@ namespace Ecom.Service.src.Service
         public async Task<IEnumerable<ProductReadDTO>> GetAllProductAsync(GetAllParams options)
         {
             var result = await _productRepo.GetAllProductAsync(options);
+            Console.WriteLine("this is the service layer", result);
             return _mapper.Map<IEnumerable<Product>, IEnumerable<ProductReadDTO>>(result);
         }
 

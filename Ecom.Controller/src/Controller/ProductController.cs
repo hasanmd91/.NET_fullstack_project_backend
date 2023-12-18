@@ -23,10 +23,10 @@ namespace Ecom.Controller.src.Controller
         }
 
         [HttpGet("{productId}")]
-        public async Task<ActionResult<ProductReadDTO>> GetOneProductByIdAsync(Guid guid)
+        public async Task<ActionResult<ProductReadDTO>> GetOneProductByIdAsync(Guid productId)
         {
-            var product = await _productService.GetOneProductByIdAsync(guid);
-            return Ok(product.Images.ToList());
+            var product = await _productService.GetOneProductByIdAsync(productId);
+            return Ok(product);
         }
 
         [HttpPost()]
@@ -37,17 +37,17 @@ namespace Ecom.Controller.src.Controller
         }
 
         [HttpDelete("{productId}")]
-        public async Task<ActionResult<bool>> DeleteOneProductAsync(Guid guid)
+        public async Task<ActionResult<bool>> DeleteOneProductAsync(Guid productId)
         {
-            var product = await _productService.DeleteOneProductAsync(guid);
+            var product = await _productService.DeleteOneProductAsync(productId);
             return StatusCode(204, product);
         }
 
 
         [HttpPatch("{productId}")]
-        public async Task<ActionResult<ProductReadDTO>> UpdateOneProductAsync(Guid guid, ProductUpdateDTO productUpdateDTO)
+        public async Task<ActionResult<ProductReadDTO>> UpdateOneProductAsync(Guid productId, ProductUpdateDTO productUpdateDTO)
         {
-            var product = await _productService.UpdateOneProductAsync(guid, productUpdateDTO);
+            var product = await _productService.UpdateOneProductAsync(productId, productUpdateDTO);
             return Ok(product);
         }
 
