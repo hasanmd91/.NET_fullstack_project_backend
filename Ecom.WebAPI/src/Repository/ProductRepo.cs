@@ -62,7 +62,10 @@ namespace Ecom.WebAPI.src.Repository
 
         public async Task<Product> UpdateOneProductAsync(Guid productId, Product updatedProduct)
         {
-            var existingProduct = await _products.FirstOrDefaultAsync(u => u.Id == productId);
+            var existingProduct = await _products
+                                        .Include(p => p.Images)
+                                        .Include(p => p.Category)
+                                        .FirstOrDefaultAsync(u => u.Id == productId);
 
             if (existingProduct is not null)
             {
