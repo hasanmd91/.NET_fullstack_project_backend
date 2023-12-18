@@ -130,8 +130,8 @@ namespace Ecom.WebAPI.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     content = table.Column<string>(type: "text", nullable: true),
                     ratings = table.Column<int>(type: "integer", nullable: false),
-                    product_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    user_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    product_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
                     created_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     updated_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
@@ -142,12 +142,14 @@ namespace Ecom.WebAPI.Migrations
                         name: "fk_review_product_product_id",
                         column: x => x.product_id,
                         principalTable: "product",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_review_users_user_id",
                         column: x => x.user_id,
                         principalTable: "users",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

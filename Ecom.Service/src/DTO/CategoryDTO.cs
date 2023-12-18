@@ -6,7 +6,6 @@ namespace Ecom.Service.src.DTO
     {
         public Guid Id { get; set; }
         public required string Name { get; set; }
-        public IEnumerable<Product> Products { get; set; }
     }
 
     public class CategoryCreateDTO

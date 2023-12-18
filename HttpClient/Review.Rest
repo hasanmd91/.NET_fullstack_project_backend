@@ -1,0 +1,15 @@
+### Post Method 
+POST http://localhost:5137/api/review/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "content": "this is a very good review",
+  "ratings": 5,
+  "ProductId":"acaa96aa-5a63-4ec7-9035-c5fb8d386783",
+  "UserId": "69f4bf24-c63d-45d5-93dd-f57f0d9466eb"
+}
+
+
+###
+DELETE  http://localhost:5137/api/review/571928b6-d482-4911-9fd8-8aedfde0beba HTTP/1.1
+Content-Type: application/json

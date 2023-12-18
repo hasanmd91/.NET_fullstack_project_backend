@@ -12,8 +12,8 @@ Content-Type: application/json
 }
 
 
-### Post Method 
-GET http://localhost:5137/api/category/2b2f8057-2b8b-46a8-a93f-7f2f384267df HTTP/1.1
+### Get One Method 
+GET http://localhost:5137/api/category/89b8434b-d036-49f5-836b-5b3841be53c4 HTTP/1.1
 Content-Type: application/json
 
 
