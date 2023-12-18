@@ -53,27 +53,6 @@ namespace Ecom.WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "order",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    order_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    total_amount = table.Column<decimal>(type: "numeric", nullable: false),
-                    user_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    created_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    updated_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_order", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_order_users_user_id",
-                        column: x => x.user_id,
-                        principalTable: "users",
-                        principalColumn: "id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "product",
                 columns: table => new
                 {
@@ -83,7 +62,6 @@ namespace Ecom.WebAPI.Migrations
                     price = table.Column<decimal>(type: "numeric", nullable: false),
                     quantity = table.Column<int>(type: "integer", nullable: false),
                     category_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    order_id = table.Column<Guid>(type: "uuid", nullable: true),
                     created_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     updated_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
@@ -96,11 +74,27 @@ namespace Ecom.WebAPI.Migrations
                         principalTable: "category",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "order",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    total_price = table.Column<decimal>(type: "numeric", nullable: false),
+                    created_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    updated_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_order", x => x.id);
                     table.ForeignKey(
-                        name: "fk_product_order_order_id",
-                        column: x => x.order_id,
-                        principalTable: "order",
-                        principalColumn: "id");
+                        name: "fk_order_users_user_id",
+                        column: x => x.user_id,
+                        principalTable: "users",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -152,6 +146,27 @@ namespace Ecom.WebAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "order_product",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    product_id = table.Column<int>(type: "integer", nullable: false),
+                    quantity = table.Column<int>(type: "integer", nullable: false),
+                    order_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    created_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    updated_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_order_product", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_order_product_order_order_id",
+                        column: x => x.order_id,
+                        principalTable: "order",
+                        principalColumn: "id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "ix_category_name",
                 table: "category",
@@ -169,14 +184,14 @@ namespace Ecom.WebAPI.Migrations
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
+                name: "ix_order_product_order_id",
+                table: "order_product",
+                column: "order_id");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_product_category_id",
                 table: "product",
                 column: "category_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_product_order_id",
-                table: "product",
-                column: "order_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_review_product_id",
@@ -202,19 +217,22 @@ namespace Ecom.WebAPI.Migrations
                 name: "images");
 
             migrationBuilder.DropTable(
+                name: "order_product");
+
+            migrationBuilder.DropTable(
                 name: "review");
-
-            migrationBuilder.DropTable(
-                name: "product");
-
-            migrationBuilder.DropTable(
-                name: "category");
 
             migrationBuilder.DropTable(
                 name: "order");
 
             migrationBuilder.DropTable(
+                name: "product");
+
+            migrationBuilder.DropTable(
                 name: "users");
+
+            migrationBuilder.DropTable(
+                name: "category");
         }
     }
 }

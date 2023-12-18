@@ -15,19 +15,16 @@ namespace Ecom.WebAPI.src.Database
         public DbSet<Order> Order { get; set; }
         public DbSet<Image> Images { get; set; }
 
-
         static DataBaseContext()
         {
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
         }
 
-
         public DataBaseContext(DbContextOptions options, IConfiguration config) : base(options)
         {
             _config = config;
         }
-
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -57,9 +54,13 @@ namespace Ecom.WebAPI.src.Database
                 .WithMany(u => u.Reviews)
                 .HasForeignKey(r => r.UserId);
 
+            modelBuilder.Entity<Order>()
+                .HasOne(r => r.User)
+                .WithMany(u => u.Orders)
+                .HasForeignKey(r => r.UserId);
+
             base.OnModelCreating(modelBuilder);
         }
-
 
     }
 }
