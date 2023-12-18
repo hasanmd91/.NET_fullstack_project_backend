@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Ecom.WebAPI.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20231218033222_createdatabase")]
+    [Migration("20231218145956_createdatabase")]
     partial class createdatabase
     {
         /// <inheritdoc />
@@ -190,7 +190,7 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("created_date");
 
-                    b.Property<Guid?>("ProductId")
+                    b.Property<Guid>("ProductId")
                         .HasColumnType("uuid")
                         .HasColumnName("product_id");
 
@@ -202,7 +202,7 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("updated_date");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uuid")
                         .HasColumnName("user_id");
 
@@ -318,15 +318,23 @@ namespace Ecom.WebAPI.Migrations
 
             modelBuilder.Entity("Ecom.Core.src.Entity.Review", b =>
                 {
-                    b.HasOne("Ecom.Core.src.Entity.Product", null)
+                    b.HasOne("Ecom.Core.src.Entity.Product", "Product")
                         .WithMany("Reviews")
                         .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("fk_review_product_product_id");
 
-                    b.HasOne("Ecom.Core.src.Entity.User", null)
+                    b.HasOne("Ecom.Core.src.Entity.User", "User")
                         .WithMany("Reviews")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("fk_review_users_user_id");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Ecom.Core.src.Entity.Order", b =>
