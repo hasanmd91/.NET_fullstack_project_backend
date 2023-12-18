@@ -1,34 +1,87 @@
 using Ecom.Core.src.Abstraction;
 using Ecom.Core.src.Entity;
 using Ecom.Core.src.parameters;
+using Ecom.WebAPI.src.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ecom.WebAPI.src.Repository
 {
     public class ProductRepo : IProductRepo
     {
-        public Product CreateOneProductAsync(Product product)
+
+        private readonly DbSet<Product> _products;
+        private readonly DataBaseContext _database;
+
+        public ProductRepo(DataBaseContext dataBase)
         {
-            throw new NotImplementedException();
+            _products = dataBase.Product;
+            _database = dataBase;
         }
 
-        public bool DeleteOneProductAsync(Guid id)
+        public async Task<Product> CreateOneProductAsync(Product product)
         {
-            throw new NotImplementedException();
+            _products.Add(product);
+            await _database.SaveChangesAsync();
+            return product;
         }
 
-        public IEnumerable<Product> GetAllProductAsync(GetAllParams options)
+        public async Task<bool> DeleteOneProductAsync(Guid productId)
         {
-            throw new NotImplementedException();
+            var product = await _products.FirstOrDefaultAsync(u => u.Id == productId);
+            if (product != null)
+            {
+                _products.Remove(product);
+                await _database.SaveChangesAsync();
+                return true;
+            }
+            return false;
         }
 
-        public Product GetOneProductByIdAsync(Guid id)
+        public async Task<IEnumerable<Product>> GetAllProductAsync(GetAllParams options)
         {
-            throw new NotImplementedException();
+            var products = _products
+                                    .Include(p => p.Images)
+                                    .Include(p => p.Category)
+                                    .Where(p => p.Title.Contains(options.Search))
+                                    .Skip(options.Offset)
+                                    .Take(options.Limit).ToListAsync();
+
+            return await products;
         }
 
-        public Product UpdateOneProductAsync(Guid id, Product product)
+
+        public async Task<Product> GetOneProductByIdAsync(Guid productId)
         {
-            throw new NotImplementedException();
+            var product = await _products.FirstOrDefaultAsync(u => u.Id == productId);
+            return product;
+        }
+
+        public async Task<Product> UpdateOneProductAsync(Guid productId, Product updatedProduct)
+        {
+            var existingProduct = await _products.FirstOrDefaultAsync(u => u.Id == productId);
+
+            if (existingProduct is not null)
+            {
+
+                existingProduct.Title = updatedProduct.Title ?? existingProduct.Title;
+                existingProduct.Description = updatedProduct.Description ?? existingProduct.Description;
+
+                if (updatedProduct.Price != default)
+                {
+                    existingProduct.Price = updatedProduct.Price;
+                }
+
+                if (updatedProduct.Quantity != default)
+                {
+                    existingProduct.Quantity = updatedProduct.Quantity;
+                }
+                existingProduct.Images = updatedProduct.Images ?? existingProduct.Images;
+
+                _database.Update(existingProduct);
+                await _database.SaveChangesAsync();
+            }
+
+            return existingProduct;
         }
     }
 }
