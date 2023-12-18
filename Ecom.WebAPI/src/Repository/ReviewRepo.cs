@@ -16,10 +16,7 @@ namespace Ecom.WebAPI.src.Repository
             _database = dataBase;
         }
 
-        public async Task<IEnumerable<Review>> GetAllReviewsAsync(GetAllParams options)
-        {
-            return await _reviews.Include(r => r.User).ToListAsync();
-        }
+
         public async Task<Review> CreateOneReviewAsync(Review review)
         {
             _reviews.Add(review);
