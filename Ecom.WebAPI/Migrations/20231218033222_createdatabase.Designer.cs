@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Ecom.WebAPI.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20231217173822_createdatabase")]
+    [Migration("20231218033222_createdatabase")]
     partial class createdatabase
     {
         /// <inheritdoc />
@@ -80,12 +80,12 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnName("updated_date");
 
                     b.HasKey("Id")
-                        .HasName("pk_image");
+                        .HasName("pk_images");
 
                     b.HasIndex("ProductId")
-                        .HasDatabaseName("ix_image_product_id");
+                        .HasDatabaseName("ix_images_product_id");
 
-                    b.ToTable("image", (string)null);
+                    b.ToTable("images", (string)null);
                 });
 
             modelBuilder.Entity("Ecom.Core.src.Entity.Order", b =>
@@ -131,7 +131,7 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<Guid?>("CategoryId")
+                    b.Property<Guid>("CategoryId")
                         .HasColumnType("uuid")
                         .HasColumnName("category_id");
 
@@ -142,6 +142,10 @@ namespace Ecom.WebAPI.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text")
                         .HasColumnName("description");
+
+                    b.Property<Guid?>("OrderId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("order_id");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric")
@@ -164,6 +168,9 @@ namespace Ecom.WebAPI.Migrations
 
                     b.HasIndex("CategoryId")
                         .HasDatabaseName("ix_product_category_id");
+
+                    b.HasIndex("OrderId")
+                        .HasDatabaseName("ix_product_order_id");
 
                     b.ToTable("product", (string)null);
                 });
@@ -276,31 +283,12 @@ namespace Ecom.WebAPI.Migrations
                     b.ToTable("users", (string)null);
                 });
 
-            modelBuilder.Entity("OrderProduct", b =>
-                {
-                    b.Property<Guid>("OrdersId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("orders_id");
-
-                    b.Property<Guid>("ProductsId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("products_id");
-
-                    b.HasKey("OrdersId", "ProductsId")
-                        .HasName("pk_order_product");
-
-                    b.HasIndex("ProductsId")
-                        .HasDatabaseName("ix_order_product_products_id");
-
-                    b.ToTable("order_product", (string)null);
-                });
-
             modelBuilder.Entity("Ecom.Core.src.Entity.Image", b =>
                 {
                     b.HasOne("Ecom.Core.src.Entity.Product", null)
                         .WithMany("Images")
                         .HasForeignKey("ProductId")
-                        .HasConstraintName("fk_image_product_product_id");
+                        .HasConstraintName("fk_images_product_product_id");
                 });
 
             modelBuilder.Entity("Ecom.Core.src.Entity.Order", b =>
@@ -313,10 +301,19 @@ namespace Ecom.WebAPI.Migrations
 
             modelBuilder.Entity("Ecom.Core.src.Entity.Product", b =>
                 {
-                    b.HasOne("Ecom.Core.src.Entity.Category", null)
-                        .WithMany("Products")
+                    b.HasOne("Ecom.Core.src.Entity.Category", "Category")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("fk_product_category_category_id");
+
+                    b.HasOne("Ecom.Core.src.Entity.Order", null)
+                        .WithMany("Products")
+                        .HasForeignKey("OrderId")
+                        .HasConstraintName("fk_product_order_order_id");
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("Ecom.Core.src.Entity.Review", b =>
@@ -332,24 +329,7 @@ namespace Ecom.WebAPI.Migrations
                         .HasConstraintName("fk_review_users_user_id");
                 });
 
-            modelBuilder.Entity("OrderProduct", b =>
-                {
-                    b.HasOne("Ecom.Core.src.Entity.Order", null)
-                        .WithMany()
-                        .HasForeignKey("OrdersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_order_product_order_orders_id");
-
-                    b.HasOne("Ecom.Core.src.Entity.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_order_product_product_products_id");
-                });
-
-            modelBuilder.Entity("Ecom.Core.src.Entity.Category", b =>
+            modelBuilder.Entity("Ecom.Core.src.Entity.Order", b =>
                 {
                     b.Navigation("Products");
                 });
