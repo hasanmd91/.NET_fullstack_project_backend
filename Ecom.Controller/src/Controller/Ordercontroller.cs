@@ -26,9 +26,9 @@ namespace Ecom.Controller.src.Controller
         }
 
         [HttpPost()]
-        public async Task<ActionResult<Order>> CreateOrderAsync([FromBody] Order Order)
+        public async Task<ActionResult<OrderReadDTO>> CreateOrderAsync([FromBody] OrderCreateDTO orderCreateDTO)
         {
-            var result = await _orderService.CreateOrderAsync(Order);
+            var result = await _orderService.CreateOrderAsync(orderCreateDTO);
             return Ok(result);
         }
 

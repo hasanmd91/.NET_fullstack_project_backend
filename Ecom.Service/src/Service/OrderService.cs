@@ -17,11 +17,12 @@ namespace Ecom.Service.src.Service
             _mapper = mapper;
         }
 
-        public async Task<Order> CreateOrderAsync(Order order)
+        public async Task<OrderReadDTO> CreateOrderAsync(OrderCreateDTO orderCreateDTO)
         {
+            var order = _mapper.Map<OrderCreateDTO, Order>(orderCreateDTO);
             var result = await _ordeRepo.CreateOrderAsync(order);
+            return _mapper.Map<Order, OrderReadDTO>(result);
 
-            return result;
         }
 
         public async Task<IEnumerable<Order>> GetAllOrderAsync(GetAllParams options)

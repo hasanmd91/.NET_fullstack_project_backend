@@ -21,7 +21,7 @@ Content-Type: application/json
     "description": "Woven coats for winter",
     "price": 10,
     "quantity": 50,
-    "CategoryId": "1af80ca8-641f-4c79-a265-a18f346cd67f",
+    "CategoryId": "9fcd9811-33db-415f-ba15-527515a7495e",
     "images": 
     [
     { "imageUrl": "string"},

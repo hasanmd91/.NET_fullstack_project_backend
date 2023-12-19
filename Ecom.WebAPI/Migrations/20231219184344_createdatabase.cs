@@ -103,6 +103,7 @@ namespace Ecom.WebAPI.Migrations
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     user_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    total_price = table.Column<decimal>(type: "numeric", nullable: false),
                     product_id = table.Column<Guid>(type: "uuid", nullable: true),
                     created_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     updated_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)

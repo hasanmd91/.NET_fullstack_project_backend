@@ -100,6 +100,10 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("product_id");
 
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("numeric")
+                        .HasColumnName("total_price");
+
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("updated_date");

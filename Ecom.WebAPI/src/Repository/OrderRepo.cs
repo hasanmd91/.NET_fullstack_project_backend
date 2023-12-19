@@ -22,9 +22,6 @@ namespace Ecom.WebAPI.src.Repository
         {
             order.User = await _users.FindAsync(order.UserId);
 
-            Console.WriteLine(order.User);
-
-
             await _orders.AddAsync(order);
             await _database.SaveChangesAsync();
             return order;
@@ -33,7 +30,6 @@ namespace Ecom.WebAPI.src.Repository
         public async Task<IEnumerable<Order>> GetAllOrderAsync(GetAllParams options)
         {
             var result = await _orders.Include(o => o.User).Include(o => o.OrderDetails).Skip(options.Offset).Take(options.Limit).ToListAsync();
-            Console.WriteLine(result.ToArray());
             return result;
 
         }

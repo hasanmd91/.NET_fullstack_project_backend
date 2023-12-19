@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Ecom.WebAPI.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20231219180904_createdatabase")]
+    [Migration("20231219184344_createdatabase")]
     partial class createdatabase
     {
         /// <inheritdoc />
@@ -102,6 +102,10 @@ namespace Ecom.WebAPI.Migrations
                     b.Property<Guid?>("ProductId")
                         .HasColumnType("uuid")
                         .HasColumnName("product_id");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("numeric")
+                        .HasColumnName("total_price");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("timestamp without time zone")
