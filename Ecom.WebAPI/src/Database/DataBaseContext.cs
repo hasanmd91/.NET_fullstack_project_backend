@@ -13,6 +13,7 @@ namespace Ecom.WebAPI.src.Database
         public DbSet<Product> Product { get; set; }
         public DbSet<Review> Review { get; set; }
         public DbSet<Order> Order { get; set; }
+        public DbSet<OrderDetails> OrderDetails { get; set; }
         public DbSet<Image> Images { get; set; }
 
         static DataBaseContext()
@@ -43,6 +44,7 @@ namespace Ecom.WebAPI.src.Database
             modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
             modelBuilder.Entity<Category>().HasIndex(c => c.Name).IsUnique();
 
+
             modelBuilder.Entity<Review>()
                .HasOne(r => r.Product)
                .WithMany(p => p.Reviews)
@@ -54,10 +56,8 @@ namespace Ecom.WebAPI.src.Database
                 .WithMany(u => u.Reviews)
                 .HasForeignKey(r => r.UserId);
 
-            modelBuilder.Entity<Order>()
-                .HasOne(r => r.User)
-                .WithMany(u => u.Orders)
-                .HasForeignKey(r => r.UserId);
+
+
 
             base.OnModelCreating(modelBuilder);
         }

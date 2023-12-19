@@ -17,6 +17,5 @@ namespace Ecom.Core.src.Entity
         public IEnumerable<Review> Reviews { get; set; }
         public IEnumerable<Order> Orders { get; set; }
 
-
     }
 }

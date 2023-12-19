@@ -96,9 +96,9 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("created_date");
 
-                    b.Property<decimal>("TotalPrice")
-                        .HasColumnType("numeric")
-                        .HasColumnName("total_price");
+                    b.Property<Guid?>("ProductId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("product_id");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("timestamp without time zone")
@@ -111,13 +111,16 @@ namespace Ecom.WebAPI.Migrations
                     b.HasKey("Id")
                         .HasName("pk_order");
 
+                    b.HasIndex("ProductId")
+                        .HasDatabaseName("ix_order_product_id");
+
                     b.HasIndex("UserId")
                         .HasDatabaseName("ix_order_user_id");
 
                     b.ToTable("order", (string)null);
                 });
 
-            modelBuilder.Entity("Ecom.Core.src.Entity.OrderProduct", b =>
+            modelBuilder.Entity("Ecom.Core.src.Entity.OrderDetails", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -132,8 +135,8 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("order_id");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid")
                         .HasColumnName("product_id");
 
                     b.Property<int>("Quantity")
@@ -145,12 +148,12 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnName("updated_date");
 
                     b.HasKey("Id")
-                        .HasName("pk_order_product");
+                        .HasName("pk_order_details");
 
                     b.HasIndex("OrderId")
-                        .HasDatabaseName("ix_order_product_order_id");
+                        .HasDatabaseName("ix_order_details_order_id");
 
-                    b.ToTable("order_product", (string)null);
+                    b.ToTable("order_details", (string)null);
                 });
 
             modelBuilder.Entity("Ecom.Core.src.Entity.Product", b =>
@@ -175,6 +178,10 @@ namespace Ecom.WebAPI.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric")
                         .HasColumnName("price");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("product_id");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("integer")
@@ -315,6 +322,11 @@ namespace Ecom.WebAPI.Migrations
 
             modelBuilder.Entity("Ecom.Core.src.Entity.Order", b =>
                 {
+                    b.HasOne("Ecom.Core.src.Entity.Product", null)
+                        .WithMany("Orders")
+                        .HasForeignKey("ProductId")
+                        .HasConstraintName("fk_order_product_product_id");
+
                     b.HasOne("Ecom.Core.src.Entity.User", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
@@ -325,12 +337,12 @@ namespace Ecom.WebAPI.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Ecom.Core.src.Entity.OrderProduct", b =>
+            modelBuilder.Entity("Ecom.Core.src.Entity.OrderDetails", b =>
                 {
                     b.HasOne("Ecom.Core.src.Entity.Order", null)
-                        .WithMany("OrderProducts")
+                        .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
-                        .HasConstraintName("fk_order_product_order_order_id");
+                        .HasConstraintName("fk_order_details_order_order_id");
                 });
 
             modelBuilder.Entity("Ecom.Core.src.Entity.Product", b =>
@@ -368,12 +380,14 @@ namespace Ecom.WebAPI.Migrations
 
             modelBuilder.Entity("Ecom.Core.src.Entity.Order", b =>
                 {
-                    b.Navigation("OrderProducts");
+                    b.Navigation("OrderDetails");
                 });
 
             modelBuilder.Entity("Ecom.Core.src.Entity.Product", b =>
                 {
                     b.Navigation("Images");
+
+                    b.Navigation("Orders");
 
                     b.Navigation("Reviews");
                 });

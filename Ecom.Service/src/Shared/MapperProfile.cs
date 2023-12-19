@@ -24,6 +24,8 @@ namespace Ecom.Service.src.Shared
             CreateMap<Review, ReviewReadDTO>();
             CreateMap<ReviewCreateDTO, Review>();
             CreateMap<ReviewUpdateDTO, Review>();
+
+
         }
     }
 }

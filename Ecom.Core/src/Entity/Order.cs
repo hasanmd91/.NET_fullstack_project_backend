@@ -4,7 +4,6 @@ namespace Ecom.Core.src.Entity
     {
         public Guid UserId { get; set; }
         public User User { get; set; }
-        public decimal TotalPrice { get; set; }
-        public IEnumerable<OrderProduct> OrderProducts { get; set; }
+        public IEnumerable<OrderDetails> OrderDetails { get; set; }
     }
 }
