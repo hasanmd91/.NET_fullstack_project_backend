@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Ecom.WebAPI.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20231219172056_createdatabase")]
+    [Migration("20231219180904_createdatabase")]
     partial class createdatabase
     {
         /// <inheritdoc />
@@ -331,7 +331,7 @@ namespace Ecom.WebAPI.Migrations
                         .HasConstraintName("fk_order_product_product_id");
 
                     b.HasOne("Ecom.Core.src.Entity.User", "User")
-                        .WithMany("Orders")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
@@ -397,8 +397,6 @@ namespace Ecom.WebAPI.Migrations
 
             modelBuilder.Entity("Ecom.Core.src.Entity.User", b =>
                 {
-                    b.Navigation("Orders");
-
                     b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618

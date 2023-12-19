@@ -2,25 +2,31 @@
 GET  http://localhost:5137/api/order/ HTTP/1.1
 content-type: application/json
 
+{
+
+  
+}
+
+
 
 ### Post Method 
 POST http://localhost:5137/api/order/ HTTP/1.1
 Content-Type: application/json
 
 {
-  "userId": "8b56d95b-1c4a-409d-abb9-9fcbd8f3cdbd",
+  "userId": "3bb27bb5-0933-49cd-b00d-61a1e798718f",
   "totalPrice": 21,
   "orderDetails": [
     {
-      "productId": "c39acf91-de8c-4dee-997f-ac9c954a35fa",
+      "productId": "2ce9d76c-bc46-4ceb-9e03-2961570e2912",
       "quantity": 1
     },
         {
-      "productId": "c39acf91-de8c-4dee-997f-ac9c954a35fa",
+      "productId": "2ce9d76c-bc46-4ceb-9e03-2961570e2912",
       "quantity": 2
     },
         {
-      "productId": "c39acf91-de8c-4dee-997f-ac9c954a35fa",
+      "productId": "2ce9d76c-bc46-4ceb-9e03-2961570e2912",
       "quantity": 1
     }
   ]

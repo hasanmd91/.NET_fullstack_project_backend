@@ -20,6 +20,7 @@ namespace Ecom.Controller.src.Controller
         [HttpGet()]
         public async Task<ActionResult<IEnumerable<Order>>> GetAllOrderAsync(GetAllParams options)
         {
+            Console.WriteLine("controller was reached");
             var result = await _orderService.GetAllOrderAsync(options);
             return Ok(result);
         }

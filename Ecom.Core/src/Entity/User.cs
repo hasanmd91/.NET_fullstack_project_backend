@@ -15,7 +15,6 @@ namespace Ecom.Core.src.Entity
         public string Zip { get; set; }
         public string City { get; set; }
         public IEnumerable<Review> Reviews { get; set; }
-        public IEnumerable<Order> Orders { get; set; }
 
     }
 }
