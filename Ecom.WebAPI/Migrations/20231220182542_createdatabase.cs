@@ -78,6 +78,27 @@ namespace Ecom.WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "order",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    total_price = table.Column<decimal>(type: "numeric", nullable: false),
+                    created_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    updated_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_order", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_order_users_user_id",
+                        column: x => x.user_id,
+                        principalTable: "users",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "images",
                 columns: table => new
                 {
@@ -95,33 +116,6 @@ namespace Ecom.WebAPI.Migrations
                         column: x => x.product_id,
                         principalTable: "product",
                         principalColumn: "id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "order",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    total_price = table.Column<decimal>(type: "numeric", nullable: false),
-                    product_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    created_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    updated_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_order", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_order_product_product_id",
-                        column: x => x.product_id,
-                        principalTable: "product",
-                        principalColumn: "id");
-                    table.ForeignKey(
-                        name: "fk_order_users_user_id",
-                        column: x => x.user_id,
-                        principalTable: "users",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -173,6 +167,12 @@ namespace Ecom.WebAPI.Migrations
                         column: x => x.order_id,
                         principalTable: "order",
                         principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_order_details_product_product_id",
+                        column: x => x.product_id,
+                        principalTable: "product",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -187,11 +187,6 @@ namespace Ecom.WebAPI.Migrations
                 column: "product_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_order_product_id",
-                table: "order",
-                column: "product_id");
-
-            migrationBuilder.CreateIndex(
                 name: "ix_order_user_id",
                 table: "order",
                 column: "user_id");
@@ -200,6 +195,11 @@ namespace Ecom.WebAPI.Migrations
                 name: "ix_order_details_order_id",
                 table: "order_details",
                 column: "order_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_order_details_product_id",
+                table: "order_details",
+                column: "product_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_product_category_id",

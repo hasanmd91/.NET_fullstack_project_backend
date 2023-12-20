@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Ecom.WebAPI.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20231220165152_createdatabase")]
+    [Migration("20231220182542_createdatabase")]
     partial class createdatabase
     {
         /// <inheritdoc />
@@ -99,10 +99,6 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("created_date");
 
-                    b.Property<Guid?>("ProductId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("product_id");
-
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("numeric")
                         .HasColumnName("total_price");
@@ -117,9 +113,6 @@ namespace Ecom.WebAPI.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_order");
-
-                    b.HasIndex("ProductId")
-                        .HasDatabaseName("ix_order_product_id");
 
                     b.HasIndex("UserId")
                         .HasDatabaseName("ix_order_user_id");
@@ -159,6 +152,9 @@ namespace Ecom.WebAPI.Migrations
 
                     b.HasIndex("OrderId")
                         .HasDatabaseName("ix_order_details_order_id");
+
+                    b.HasIndex("ProductId")
+                        .HasDatabaseName("ix_order_details_product_id");
 
                     b.ToTable("order_details", (string)null);
                 });
@@ -333,11 +329,6 @@ namespace Ecom.WebAPI.Migrations
 
             modelBuilder.Entity("Ecom.Core.src.Entity.Order", b =>
                 {
-                    b.HasOne("Ecom.Core.src.Entity.Product", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("ProductId")
-                        .HasConstraintName("fk_order_product_product_id");
-
                     b.HasOne("Ecom.Core.src.Entity.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -354,6 +345,13 @@ namespace Ecom.WebAPI.Migrations
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
                         .HasConstraintName("fk_order_details_order_order_id");
+
+                    b.HasOne("Ecom.Core.src.Entity.Product", null)
+                        .WithMany("Orders")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_order_details_product_product_id");
                 });
 
             modelBuilder.Entity("Ecom.Core.src.Entity.Product", b =>

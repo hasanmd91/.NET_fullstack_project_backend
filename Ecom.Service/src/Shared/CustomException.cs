@@ -36,7 +36,11 @@ namespace Ecom.Service.src.Shared
             return new CustomException(403, msg);
         }
 
-
+        public static CustomException TransactionException(string msg = "Error happend while creating order")
+        {
+            return new CustomException(400, msg);
+        }
 
     }
 }
+

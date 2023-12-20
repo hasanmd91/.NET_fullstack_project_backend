@@ -11,7 +11,7 @@ namespace Ecom.Core.src.Entity
         public Category Category { get; set; }
         public IEnumerable<Review> Reviews { get; set; }
         public IEnumerable<Image> Images { get; set; }
-        public IEnumerable<Order> Orders { get; set; }
+        public IEnumerable<OrderDetails> Orders { get; set; }
 
     }
 }
