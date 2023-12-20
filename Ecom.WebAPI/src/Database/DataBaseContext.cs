@@ -43,22 +43,6 @@ namespace Ecom.WebAPI.src.Database
             modelBuilder.Entity<User>(entity => entity.Property(e => e.Role).HasColumnType("role"));
             modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
             modelBuilder.Entity<Category>().HasIndex(c => c.Name).IsUnique();
-
-
-            modelBuilder.Entity<Review>()
-               .HasOne(r => r.Product)
-               .WithMany(p => p.Reviews)
-               .HasForeignKey(r => r.ProductId);
-
-
-            modelBuilder.Entity<Review>()
-                .HasOne(r => r.User)
-                .WithMany(u => u.Reviews)
-                .HasForeignKey(r => r.UserId);
-
-
-
-
             base.OnModelCreating(modelBuilder);
         }
 

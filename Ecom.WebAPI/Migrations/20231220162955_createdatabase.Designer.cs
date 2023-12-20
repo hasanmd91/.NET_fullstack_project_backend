@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Ecom.WebAPI.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20231219184344_createdatabase")]
+    [Migration("20231220162955_createdatabase")]
     partial class createdatabase
     {
         /// <inheritdoc />

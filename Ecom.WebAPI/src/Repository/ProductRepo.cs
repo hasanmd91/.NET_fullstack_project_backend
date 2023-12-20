@@ -43,6 +43,7 @@ namespace Ecom.WebAPI.src.Repository
             var query = _products
                 .Include(p => p.Images)
                 .Include(p => p.Category)
+                .Include(p => p.Reviews)
                 .Where(p => p.Title.Contains(options.Search));
 
             if (options.CategoryId != Guid.Empty)

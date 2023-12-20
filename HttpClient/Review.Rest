@@ -5,8 +5,8 @@ Content-Type: application/json
 {
   "content": "this is a very good review",
   "ratings": 5,
-  "ProductId":"acaa96aa-5a63-4ec7-9035-c5fb8d386783",
-  "UserId": "69f4bf24-c63d-45d5-93dd-f57f0d9466eb"
+  "ProductId":"4faa64d7-815e-4750-9bef-409c69aee4d2",
+  "UserId": "9d930536-aebe-4196-a217-72c69609bac6"
 }
 
 
