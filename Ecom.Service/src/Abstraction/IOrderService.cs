@@ -7,7 +7,7 @@ namespace Ecom.Service.src.Abstraction
     public interface IOrderService
     {
         public Task<OrderReadDTO> CreateOrderAsync(OrderCreateDTO orderCreateDTO);
-        public Task<IEnumerable<Order>> GetAllOrderAsync(GetAllParams options);
+        public Task<IEnumerable<OrderReadDTO>> GetAllOrderAsync(GetAllParams options);
 
     }
 }

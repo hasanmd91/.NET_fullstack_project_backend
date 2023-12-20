@@ -25,11 +25,10 @@ namespace Ecom.Service.src.Service
 
         }
 
-        public async Task<IEnumerable<Order>> GetAllOrderAsync(GetAllParams options)
+        public async Task<IEnumerable<OrderReadDTO>> GetAllOrderAsync(GetAllParams options)
         {
             var result = await _ordeRepo.GetAllOrderAsync(options);
-
-            return result;
+            return _mapper.Map<IEnumerable<Order>, IEnumerable<OrderReadDTO>>(result);
         }
     }
 }
