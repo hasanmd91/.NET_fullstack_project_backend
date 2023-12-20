@@ -9,6 +9,7 @@ namespace Ecom.Service.src.DTO
         public int Ratings { get; set; }
         public Guid ProductId { get; set; }
         public Guid UserId { get; set; }
+        public string Name { get; set; }
     }
 
     public class ReviewCreateDTO

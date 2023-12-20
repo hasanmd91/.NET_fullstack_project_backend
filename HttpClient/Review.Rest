@@ -3,10 +3,10 @@ POST http://localhost:5137/api/review/ HTTP/1.1
 Content-Type: application/json
 
 {
-  "content": "this is a very good review",
+  "content": "this is a another  very very good review",
   "ratings": 5,
-  "ProductId":"4faa64d7-815e-4750-9bef-409c69aee4d2",
-  "UserId": "9d930536-aebe-4196-a217-72c69609bac6"
+  "ProductId":"8d502f6d-2668-4557-846c-791cb70240ca",
+  "UserId": "dc0a34e9-c527-4500-97a7-61b5db73d01c"
 }
 
 

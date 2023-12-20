@@ -6,5 +6,6 @@ namespace Ecom.Core.src.Entity
         public int Ratings { get; set; }
         public Guid ProductId { get; set; }
         public Guid UserId { get; set; }
+        public string Name { get; set; }
     }
 }
