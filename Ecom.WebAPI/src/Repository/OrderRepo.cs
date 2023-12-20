@@ -11,7 +11,6 @@ namespace Ecom.WebAPI.src.Repository
     {
         private readonly DbSet<Order> _orders;
         private readonly DbSet<User> _users;
-        private DbSet<Product> _products;
         private readonly DataBaseContext _database;
         public OrderRepo(DataBaseContext dataBase)
         {
@@ -22,13 +21,15 @@ namespace Ecom.WebAPI.src.Repository
 
         public async Task<Order> CreateOrderAsync(Order order)
         {
+
+            Console.WriteLine(order.OrderDetails.ToString());
+
             using var transaction = await _database.Database.BeginTransactionAsync();
             try
             {
 
                 order.User = await _users.FindAsync(order.UserId);
 
-                //some bug while finding order.OrderDetails
                 // foreach (var OrderDetail in order.OrderDetails)
                 // {
                 //     var product = await _products.FindAsync(OrderDetail.ProductId) ?? throw CustomException.TransactionException("Product is out of stock");
@@ -57,7 +58,20 @@ namespace Ecom.WebAPI.src.Repository
         {
             var result = await _orders.Include(o => o.User).Include(o => o.OrderDetails).Skip(options.Offset).Take(options.Limit).ToListAsync();
             return result;
-
         }
+
+
+        public async Task<bool> DeleteOrderAsync(Guid orderId)
+        {
+            var order = await _orders.FindAsync(orderId);
+            if (order is not null)
+            {
+                _orders.Remove(order);
+                await _database.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
+
     }
 }
