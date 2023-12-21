@@ -4,7 +4,6 @@ content-type: application/json
 
 {
 
-  
 }
 
 
@@ -18,10 +17,17 @@ Content-Type: application/json
   "orderDetails": [
     {
       "productId": "d9e29dd2-c3e5-4750-8440-7428f286d26a",
-      "quantity": 1
+      "quantity": 20
     }
 
   ]
 }
 
 
+### Delete Method 
+POST http://localhost:5137/api/order/41e8979a-fbba-4d72-99a5-26711d6107db HTTP/1.1
+Content-Type: application/json
+
+{
+
+}
