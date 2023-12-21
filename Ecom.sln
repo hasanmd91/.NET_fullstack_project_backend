@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecom.Core", "Ecom.Core\Ecom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecom.WebAPI", "Ecom.WebAPI\Ecom.WebAPI.csproj", "{246BF5E4-F9CC-442E-B40F-A4793F18F151}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecom.Test", "Ecom.Test\Ecom.Test.csproj", "{17792A03-3263-4543-B3DB-533B793A6CD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{246BF5E4-F9CC-442E-B40F-A4793F18F151}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{246BF5E4-F9CC-442E-B40F-A4793F18F151}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{246BF5E4-F9CC-442E-B40F-A4793F18F151}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17792A03-3263-4543-B3DB-533B793A6CD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17792A03-3263-4543-B3DB-533B793A6CD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17792A03-3263-4543-B3DB-533B793A6CD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17792A03-3263-4543-B3DB-533B793A6CD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
