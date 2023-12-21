@@ -30,16 +30,16 @@ namespace Ecom.WebAPI.src.Repository
 
                 order.User = await _users.FindAsync(order.UserId);
 
-                // foreach (var OrderDetail in order.OrderDetails)
-                // {
-                //     var product = await _products.FindAsync(OrderDetail.ProductId) ?? throw CustomException.TransactionException("Product is out of stock");
-                //     if (product.Quantity < OrderDetail.Quantity)
-                //     {
-                //         throw CustomException.TransactionException("Not enough products in inventory");
-                //     }
-                //     product.Quantity -= OrderDetail.Quantity;
-                //     _products.Update(product);
-                // }
+                foreach (var OrderDetail in order.OrderDetails)
+                {
+                    var product = await _database.Product.FindAsync(OrderDetail.ProductId) ?? throw CustomException.TransactionException("Product is out of stock");
+                    if (product.Quantity < OrderDetail.Quantity)
+                    {
+                        throw CustomException.TransactionException("Not enough products in inventory");
+                    }
+                    product.Quantity -= OrderDetail.Quantity;
+                    _database.Product.Update(product);
+                }
 
                 await _orders.AddAsync(order);
                 await _database.SaveChangesAsync();
@@ -63,7 +63,7 @@ namespace Ecom.WebAPI.src.Repository
 
         public async Task<bool> DeleteOrderAsync(Guid orderId)
         {
-            var order = await _orders.FindAsync(orderId);
+            var order = await _orders.FirstOrDefaultAsync(o => o.Id == orderId);
             if (order is not null)
             {
                 _orders.Remove(order);

@@ -33,10 +33,10 @@ namespace Ecom.Controller.src.Controller
 
 
         [HttpDelete("{orderId}")]
-        public async Task<ActionResult<OrderReadDTO>> DeleteOrderAsync(Guid orderId)
+        public async Task<ActionResult<bool>> DeleteOrderAsync(Guid orderId)
         {
             var result = await _orderService.DeleteOrderAsync(orderId);
-            return Ok(result);
+            return StatusCode(204, result);
         }
 
     }
