@@ -2,6 +2,7 @@ namespace Ecom.Core.src.Entity
 {
     public class Product : BaseEntity
     {
+        public Guid ProductId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
@@ -10,6 +11,7 @@ namespace Ecom.Core.src.Entity
         public Category Category { get; set; }
         public IEnumerable<Review> Reviews { get; set; }
         public IEnumerable<Image> Images { get; set; }
+        public IEnumerable<OrderDetails> Orders { get; set; }
 
     }
 }

@@ -13,8 +13,8 @@ namespace Ecom.WebAPI.src.Database
         public DbSet<Product> Product { get; set; }
         public DbSet<Review> Review { get; set; }
         public DbSet<Order> Order { get; set; }
+        public DbSet<OrderDetails> OrderDetails { get; set; }
         public DbSet<Image> Images { get; set; }
-
 
         static DataBaseContext()
         {
@@ -22,12 +22,10 @@ namespace Ecom.WebAPI.src.Database
 
         }
 
-
         public DataBaseContext(DbContextOptions options, IConfiguration config) : base(options)
         {
             _config = config;
         }
-
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -45,21 +43,8 @@ namespace Ecom.WebAPI.src.Database
             modelBuilder.Entity<User>(entity => entity.Property(e => e.Role).HasColumnType("role"));
             modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
             modelBuilder.Entity<Category>().HasIndex(c => c.Name).IsUnique();
-
-            modelBuilder.Entity<Review>()
-               .HasOne(r => r.Product)
-               .WithMany(p => p.Reviews)
-               .HasForeignKey(r => r.ProductId);
-
-
-            modelBuilder.Entity<Review>()
-                .HasOne(r => r.User)
-                .WithMany(u => u.Reviews)
-                .HasForeignKey(r => r.UserId);
-
             base.OnModelCreating(modelBuilder);
         }
-
 
     }
 }

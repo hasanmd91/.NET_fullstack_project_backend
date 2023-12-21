@@ -75,6 +75,7 @@ namespace Ecom.WebAPI.src.Repository
             var product = await _products
                                     .Include(p => p.Images)
                                     .Include(p => p.Category)
+                                    .Include(p => p.Reviews)
                                     .FirstOrDefaultAsync(p => p.Id == productId);
             return product;
         }

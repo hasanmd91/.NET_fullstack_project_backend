@@ -24,6 +24,10 @@ namespace Ecom.Service.src.Shared
             CreateMap<Review, ReviewReadDTO>();
             CreateMap<ReviewCreateDTO, Review>();
             CreateMap<ReviewUpdateDTO, Review>();
+
+            CreateMap<Order, OrderReadDTO>();
+            CreateMap<OrderCreateDTO, Order>();
+
         }
     }
 }

@@ -9,16 +9,22 @@ namespace Ecom.WebAPI.src.Repository
     public class ReviewRepo : IReviewRepo
     {
         private readonly DbSet<Review> _reviews;
+        private readonly DbSet<User> _users;
+
         private readonly DataBaseContext _database;
         public ReviewRepo(DataBaseContext dataBase)
         {
             _reviews = dataBase.Review;
             _database = dataBase;
-        }
+            _users = dataBase.Users;
 
+        }
 
         public async Task<Review> CreateOneReviewAsync(Review review)
         {
+
+            var user = await _users.FindAsync(review.UserId);
+            review.Name = user.FirstName;
             _reviews.Add(review);
             await _database.SaveChangesAsync();
             return review;
