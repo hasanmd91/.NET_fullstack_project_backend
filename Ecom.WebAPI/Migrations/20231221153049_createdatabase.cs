@@ -156,6 +156,8 @@ namespace Ecom.WebAPI.Migrations
                     quantity = table.Column<int>(type: "integer", nullable: false),
                     product_id = table.Column<Guid>(type: "uuid", nullable: false),
                     order_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    order_id1 = table.Column<Guid>(type: "uuid", nullable: true),
+                    product_id1 = table.Column<Guid>(type: "uuid", nullable: true),
                     created_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     updated_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
@@ -168,11 +170,22 @@ namespace Ecom.WebAPI.Migrations
                         principalTable: "order",
                         principalColumn: "id");
                     table.ForeignKey(
+                        name: "fk_order_details_order_order_id1",
+                        column: x => x.order_id1,
+                        principalTable: "order",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "fk_order_details_product_product_id",
                         column: x => x.product_id,
                         principalTable: "product",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "fk_order_details_product_product_id1",
+                        column: x => x.product_id1,
+                        principalTable: "product",
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -197,9 +210,19 @@ namespace Ecom.WebAPI.Migrations
                 column: "order_id");
 
             migrationBuilder.CreateIndex(
+                name: "ix_order_details_order_id1",
+                table: "order_details",
+                column: "order_id1");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_order_details_product_id",
                 table: "order_details",
                 column: "product_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_order_details_product_id1",
+                table: "order_details",
+                column: "product_id1");
 
             migrationBuilder.CreateIndex(
                 name: "ix_product_category_id",

@@ -9,6 +9,7 @@ namespace Ecom.Service.src.Abstraction
         public Task<OrderReadDTO> CreateOrderAsync(OrderCreateDTO orderCreateDTO);
         public Task<IEnumerable<OrderReadDTO>> GetAllOrderAsync(GetAllParams options);
         public Task<bool> DeleteOrderAsync(Guid orderId);
+        public Task<OrderReadDTO> GetOneOrderAsync(Guid orderId);
 
     }
 }

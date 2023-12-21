@@ -43,6 +43,10 @@ namespace Ecom.WebAPI.src.Database
             modelBuilder.Entity<User>(entity => entity.Property(e => e.Role).HasColumnType("role"));
             modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
             modelBuilder.Entity<Category>().HasIndex(c => c.Name).IsUnique();
+
+            modelBuilder.Entity<OrderDetails>().HasOne<Product>().WithMany().HasForeignKey(op => op.ProductId).OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Order>().HasMany<OrderDetails>().WithOne().OnDelete(DeleteBehavior.Cascade);
+
             base.OnModelCreating(modelBuilder);
         }
 

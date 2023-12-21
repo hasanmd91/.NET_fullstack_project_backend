@@ -41,5 +41,11 @@ namespace Ecom.Service.src.Service
             var result = await _ordeRepo.GetAllOrderAsync(options);
             return _mapper.Map<IEnumerable<Order>, IEnumerable<OrderReadDTO>>(result);
         }
+
+        public async Task<OrderReadDTO> GetOneOrderAsync(Guid orderId)
+        {
+            var result = await _ordeRepo.GetOneOrderAsync(orderId);
+            return _mapper.Map<Order, OrderReadDTO>(result);
+        }
     }
 }

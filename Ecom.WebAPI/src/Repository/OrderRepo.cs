@@ -22,8 +22,6 @@ namespace Ecom.WebAPI.src.Repository
         public async Task<Order> CreateOrderAsync(Order order)
         {
 
-            Console.WriteLine(order.OrderDetails.ToString());
-
             using var transaction = await _database.Database.BeginTransactionAsync();
             try
             {
@@ -50,7 +48,7 @@ namespace Ecom.WebAPI.src.Repository
             {
                 Console.WriteLine(e.Message);
                 await transaction.RollbackAsync();
-                throw;
+                throw CustomException.BadRequestException();
             }
         }
 
@@ -73,5 +71,10 @@ namespace Ecom.WebAPI.src.Repository
             return false;
         }
 
+        public async Task<Order> GetOneOrderAsync(Guid orderId)
+        {
+            var result = await _orders.Include(o => o.User).Include(o => o.OrderDetails).FirstOrDefaultAsync(o => o.Id == orderId);
+            return result;
+        }
     }
 }

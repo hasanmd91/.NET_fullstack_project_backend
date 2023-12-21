@@ -24,6 +24,14 @@ namespace Ecom.Controller.src.Controller
             return Ok(result);
         }
 
+
+        [HttpGet("{orderId}")]
+        public async Task<ActionResult<IEnumerable<OrderReadDTO>>> GetOneOrderAsync(Guid orderId)
+        {
+            var result = await _orderService.GetOneOrderAsync(orderId);
+            return Ok(result);
+        }
+
         [HttpPost()]
         public async Task<ActionResult<OrderReadDTO>> CreateOrderAsync([FromBody] OrderCreateDTO orderCreateDTO)
         {
