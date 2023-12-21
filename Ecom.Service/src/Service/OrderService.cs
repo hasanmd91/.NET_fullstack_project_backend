@@ -21,7 +21,7 @@ namespace Ecom.Service.src.Service
         public async Task<OrderReadDTO> CreateOrderAsync(OrderCreateDTO orderCreateDTO)
         {
             var order = _mapper.Map<OrderCreateDTO, Order>(orderCreateDTO);
-            var result = await _ordeRepo.CreateOrderAsync(order);
+            var result = await _ordeRepo.CreateOrderAsync(order) ?? throw CustomException.BadRequestException();
             return _mapper.Map<Order, OrderReadDTO>(result);
 
         }
@@ -44,7 +44,7 @@ namespace Ecom.Service.src.Service
 
         public async Task<OrderReadDTO> GetOneOrderAsync(Guid orderId)
         {
-            var result = await _ordeRepo.GetOneOrderAsync(orderId);
+            var result = await _ordeRepo.GetOneOrderAsync(orderId) ?? throw CustomException.NotFoundException();
             return _mapper.Map<Order, OrderReadDTO>(result);
         }
     }
