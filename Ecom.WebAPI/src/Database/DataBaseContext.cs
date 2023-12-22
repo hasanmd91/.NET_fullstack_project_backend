@@ -30,7 +30,7 @@ namespace Ecom.WebAPI.src.Database
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
-            var dataSourceBuilder = new NpgsqlDataSourceBuilder(_config.GetConnectionString("LocalDb"));
+            var dataSourceBuilder = new NpgsqlDataSourceBuilder(_config.GetConnectionString("Ecommer"));
             dataSourceBuilder.MapEnum<Role>();
             var dataSource = dataSourceBuilder.Build();
             optionsBuilder.UseNpgsql(dataSource).UseSnakeCaseNamingConvention().AddInterceptors(new TimeStampInterceptor());

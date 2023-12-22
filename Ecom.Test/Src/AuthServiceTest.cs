@@ -1,7 +1,6 @@
 using Ecom.Core.src.Abstraction;
 using Ecom.Core.src.Entity;
 using Ecom.Core.src.parameters;
-using Ecom.Service.src;
 using Ecom.Service.src.Abstraction;
 using Ecom.Service.src.Service;
 using Ecom.Service.src.Shared;
@@ -11,11 +10,6 @@ namespace Ecom.Test.Src
 {
     public class AuthServiceTest
     {
-        [Fact]
-        public void Test1()
-        {
-            Assert.True(true);
-        }
 
         // [Fact]
         // public async void Login_ShouldInvokeTokenService()
@@ -25,17 +19,15 @@ namespace Ecom.Test.Src
         //     repo.Setup(repo => repo.GetOneUserByEmailAsync(It.IsAny<string>())).ReturnsAsync(user);
 
         //     var tokenService = new Mock<ITokenService>();
-        //     tokenService.Setup(tk => tk.GenerateToken(It.IsAny<User>())).Returns("vskjcdakjc");
+        //     tokenService.Setup(tk => tk.GenerateToken(It.IsAny<User>())).Returns("sampleTokenValue");
 
         //     var authService = new AuthService(repo.Object, tokenService.Object);
-        //     var cred = new Credentials() { Email = "usdscsdcer@mail.com", Password = "vdsvv" };
+        //     var cred = new Credentials() { Email = "example@mail.com", Password = "password" };
 
         //     await authService.Login(It.IsAny<Credentials>());
 
         //     tokenService.Verify(service => service.GenerateToken(It.IsAny<User>()), Times.Once);
         // }
-
-
 
         // [Theory]
         // [ClassData(typeof(LoginData))]
@@ -46,9 +38,7 @@ namespace Ecom.Test.Src
         //     var tokenService = new Mock<ITokenService>();
         //     tokenService.Setup(ts => ts.GenerateToken(It.IsAny<User>())).Returns(tokenServiceResponse);
         //     var authService = new AuthService(repo.Object, tokenService.Object);
-        //     var passwordService = new Mock<IPasswordService>();
-        //     passwordService.Setup(ps => ps.VerifyPassword(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<byte[]>())).Returns(true);
-        //     var cred = new Credentials() { Email = "user@mail.com", Password = "password" };
+        //     var cred = new Credentials() { Email = "example@mail.com", Password = "password" };
 
         //     if (exceptionType is not null)
         //     {
@@ -57,7 +47,6 @@ namespace Ecom.Test.Src
         //     else
         //     {
         //         var response = await authService.Login(cred);
-
         //         Assert.Equivalent(expected, response);
         //     }
         // }
@@ -66,20 +55,20 @@ namespace Ecom.Test.Src
         // {
         //     public LoginData()
         //     {
-        //         User user1 = new()
+        //         User validUser  = new()
         //         {
-        //             FirstName = "x",
-        //             LastName = "y",
-        //             Email = "xssdy@gmail.com",
-        //             Password = "asdkasnj",
-        //             Avatar = "sncjklna@njas",
-        //             Address = "lcsal",
-        //             Zip = "makl",
-        //             City = "jsna"
+        //             FirstName = "John",
+        //             LastName = "Doe",
+        //             Email = "john@example.com",
+        //             Password = "password123",
+        //             Avatar = "avatarUrl",
+        //             Address = "123 Street",
+        //             Zip = "12345",
+        //             City = "Sample City"
         //         };
-        //         Add(user1, "token", "token", null);
+        //         Add(validUser , "sampleToken", "sampleToken", null);
         //         Add(null, null, null, typeof(CustomException));
-        //         Add(user1, null, null, typeof(CustomException));
+        //         Add(validUser , null, null, typeof(CustomException));
         //     }
         // }
 
