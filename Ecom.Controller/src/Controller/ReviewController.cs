@@ -1,6 +1,7 @@
 using Ecom.Core.src.parameters;
 using Ecom.Service.src.Abstraction;
 using Ecom.Service.src.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecom.Controller.src.Controller
@@ -15,7 +16,7 @@ namespace Ecom.Controller.src.Controller
             _reviewService = reviewService;
         }
 
-
+        [AllowAnonymous]
         [HttpPost()]
         public async Task<ActionResult<ReviewReadDTO>> CreateOneReviewAsync([FromBody] ReviewCreateDTO reviewCreateDTO)
         {
@@ -23,6 +24,7 @@ namespace Ecom.Controller.src.Controller
             return Ok(createdReview);
         }
 
+        [Authorize(Roles = "user")]
         [HttpDelete("{reviewId}")]
         public async Task<ActionResult<bool>> DeleteOneReviewAsync(Guid reviewId)
         {
@@ -30,7 +32,7 @@ namespace Ecom.Controller.src.Controller
             return StatusCode(2014, createdReview);
         }
 
-
+        [Authorize(Roles = "user")]
         [HttpPatch("{reviewId}")]
         public async Task<ActionResult<bool>> UpdateOneReviewAsync(Guid reviewId, ReviewUpdateDTO reviewUpdateDTO)
         {

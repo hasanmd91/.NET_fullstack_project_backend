@@ -1,6 +1,7 @@
 using Ecom.Core.src.parameters;
 using Ecom.Service.src.Abstraction;
 using Ecom.Service.src.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecom.Controller.src.Controller
@@ -15,6 +16,7 @@ namespace Ecom.Controller.src.Controller
             _productService = productService;
         }
 
+        [AllowAnonymous]
         [HttpGet()]
         public async Task<ActionResult<IEnumerable<ProductReadDTO>>> GetAllProductAsync([FromQuery] GetAllParams options)
         {
@@ -22,6 +24,7 @@ namespace Ecom.Controller.src.Controller
             return Ok(product);
         }
 
+        [AllowAnonymous]
         [HttpGet("{productId}")]
         public async Task<ActionResult<ProductReadDTO>> GetOneProductByIdAsync(Guid productId)
         {
@@ -29,6 +32,7 @@ namespace Ecom.Controller.src.Controller
             return Ok(product);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost()]
         public async Task<ActionResult<ProductReadDTO>> CreateOneProductAsync([FromBody] ProductCreateDTO productCreateDTO)
         {
@@ -36,6 +40,7 @@ namespace Ecom.Controller.src.Controller
             return Ok(product);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{productId}")]
         public async Task<ActionResult<bool>> DeleteOneProductAsync(Guid productId)
         {
@@ -43,7 +48,7 @@ namespace Ecom.Controller.src.Controller
             return StatusCode(204, product);
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPatch("{productId}")]
         public async Task<ActionResult<ProductReadDTO>> UpdateOneProductAsync(Guid productId, ProductUpdateDTO productUpdateDTO)
         {

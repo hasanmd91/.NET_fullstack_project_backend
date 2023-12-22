@@ -1,6 +1,7 @@
 using Ecom.Core.src.parameters;
 using Ecom.Service.src.Abstraction;
 using Ecom.Service.src.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecom.Controller.src.Controller
@@ -16,6 +17,7 @@ namespace Ecom.Controller.src.Controller
             _categoryService = categoryService;
         }
 
+        [AllowAnonymous]
         [HttpGet()]
         public async Task<ActionResult<IEnumerable<CategoryReadDTO>>> GetAllCategoryAsync([FromQuery] GetAllParams options)
         {
@@ -23,14 +25,14 @@ namespace Ecom.Controller.src.Controller
             return result.ToArray();
         }
 
-
+        [AllowAnonymous]
         [HttpGet("{categoryId}")]
         public async Task<ActionResult<CategoryReadDTO>> GetOneCategoryByIdAsync(Guid categoryId)
         {
             return Ok(await _categoryService.GetOneCategoryByIdAsync(categoryId));
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPost()]
         public async Task<ActionResult<CategoryReadDTO>> CreateOneCategoryAsync([FromBody] CategoryCreateDTO categoryCreateDTO)
         {
@@ -38,7 +40,7 @@ namespace Ecom.Controller.src.Controller
         }
 
 
-
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{categoryId}")]
         public async Task<ActionResult<bool>> DeleteOneByIdCategoryAsync(Guid categoryId)
         {
@@ -46,7 +48,7 @@ namespace Ecom.Controller.src.Controller
         }
 
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPatch("{categoryId}")]
         public async Task<ActionResult<CategoryReadDTO>> UpdateOneCategoryAsync(Guid categoryId, [FromBody] CategoryUpdateDTO categoryUpdateDTO)
         {
