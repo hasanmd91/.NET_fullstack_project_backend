@@ -31,6 +31,7 @@ namespace Ecom.Test.Src
             await productService.GetAllProductAsync(options);
             repo.Verify(repo => repo.GetAllProductAsync(options), Times.Once);
         }
+
         [Fact]
         public async void GetAllProductsAsync_ShouldReturnValidResponse()
         {
