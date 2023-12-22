@@ -5,10 +5,8 @@ using Ecom.Core.src.parameters;
 using Ecom.Service.src.DTO;
 using Ecom.Service.src.Service;
 using Ecom.Service.src.Shared;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Moq;
-using Newtonsoft.Json;
-using Xunit;
+
 namespace Ecom.Test.Src
 {
     public class ProductServiceTest
@@ -58,10 +56,10 @@ namespace Ecom.Test.Src
                 Images = new List<Image> { new() { ImageUrl = "string" } }
             };
 
-            IEnumerable<Product> repoResponse = new List<Product> { Shoe, Cloths };
-            IEnumerable<ProductReadDTO> expected = _mapper.Map<IEnumerable<Product>, IEnumerable<ProductReadDTO>>(repoResponse);
+            IEnumerable<Product> products = new List<Product> { Shoe, Cloths };
+            IEnumerable<ProductReadDTO> expected = _mapper.Map<IEnumerable<Product>, IEnumerable<ProductReadDTO>>(products);
 
-            repo.Setup(repo => repo.GetAllProductAsync(options)).ReturnsAsync(repoResponse);
+            repo.Setup(repo => repo.GetAllProductAsync(options)).ReturnsAsync(products);
             var productService = new ProductService(repo.Object, _mapper);
             var response = await productService.GetAllProductAsync(options);
 

@@ -57,5 +57,10 @@ namespace Ecom.Service.src.Service
             return _mapper.Map<Product, ProductReadDTO>(result);
 
         }
+
+        public Task GetOneUserByIdAsync(Guid guid)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
