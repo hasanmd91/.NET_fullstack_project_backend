@@ -2,6 +2,7 @@ using Ecom.Core.src.Entity;
 using Ecom.Core.src.parameters;
 using Ecom.Service.src.Abstraction;
 using Ecom.Service.src.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecom.Controller.src.Controller
@@ -17,6 +18,7 @@ namespace Ecom.Controller.src.Controller
             _orderService = orderService;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet()]
         public async Task<ActionResult<IEnumerable<OrderReadDTO>>> GetAllOrderAsync(GetAllParams options)
         {
@@ -24,7 +26,7 @@ namespace Ecom.Controller.src.Controller
             return Ok(result);
         }
 
-
+        [Authorize(Roles = "User, Admin")]
         [HttpGet("{orderId}")]
         public async Task<ActionResult<IEnumerable<OrderReadDTO>>> GetOneOrderAsync(Guid orderId)
         {
@@ -32,6 +34,7 @@ namespace Ecom.Controller.src.Controller
             return Ok(result);
         }
 
+        [Authorize(Roles = "User")]
         [HttpPost()]
         public async Task<ActionResult<OrderReadDTO>> CreateOrderAsync([FromBody] OrderCreateDTO orderCreateDTO)
         {
@@ -39,7 +42,7 @@ namespace Ecom.Controller.src.Controller
             return Ok(result);
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{orderId}")]
         public async Task<ActionResult<bool>> DeleteOrderAsync(Guid orderId)
         {

@@ -1,7 +1,7 @@
-using Ecom.Core.src.Enum;
 using Ecom.Core.src.parameters;
 using Ecom.Service.src.Abstraction;
 using Ecom.Service.src.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecom.Controller.src.Controller
@@ -16,7 +16,7 @@ namespace Ecom.Controller.src.Controller
             _userService = userService;
         }
 
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpGet()]
         public async Task<ActionResult<IEnumerable<UserReadDTO>>> GetAllUserAsync([FromQuery] GetAllParams options)
         {
@@ -24,7 +24,7 @@ namespace Ecom.Controller.src.Controller
         }
 
 
-        // [Authorize]
+        [Authorize(Roles = "User, Admin")]
         [HttpGet("{useriId}")]
         public async Task<ActionResult<UserReadDTO>> GetOneUserByIdAsync(Guid useriId)
         {
@@ -32,7 +32,7 @@ namespace Ecom.Controller.src.Controller
         }
 
 
-        // [Authorize(Roles = "User")]
+        [AllowAnonymous]
         [HttpPost()]
         public async Task<ActionResult<UserReadDTO>> CreateOneUserAsync([FromBody] UserCreateDTO userCreateDTO)
         {
@@ -40,9 +40,7 @@ namespace Ecom.Controller.src.Controller
             return Ok(createdUser);
         }
 
-
-
-        // [Authorize(Roles = "User")]
+        [Authorize(Roles = "User")]
         [HttpPatch("{userid}")]
         public async Task<ActionResult<UserReadDTO>> UpdateOneUserAsync(Guid userId, [FromBody] UserUpdateDTO userUpdateDTO)
         {
@@ -50,7 +48,7 @@ namespace Ecom.Controller.src.Controller
         }
 
 
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{userId}")]
         public async Task<ActionResult<bool>> DeleteOneUserAsync(Guid userId)
         {
