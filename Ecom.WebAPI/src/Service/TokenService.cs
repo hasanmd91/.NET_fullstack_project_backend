@@ -20,6 +20,7 @@ namespace Ecom.WebAPI.src.Service
             var issuer = _config.GetSection("Jwt:Issuer").Value;
             var claims = new List<Claim>{
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim("userId", user.Id.ToString()),
                 new Claim(ClaimTypes.Role, user.Role.ToString()),
             };
             var audience = _config.GetSection("Jwt:Audience").Value;

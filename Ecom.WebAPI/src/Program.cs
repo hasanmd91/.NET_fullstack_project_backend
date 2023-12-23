@@ -69,12 +69,20 @@ var app = builder.Build();
 app.UseMiddleware<ExceptionHandeler>();
 
 
-app.UseSwagger();
-app.UseSwaggerUI(options =>
+app.UseCors(options =>
 {
-    options.SwaggerEndpoint("swagger/v1/swagger.json", "v1");
-    options.RoutePrefix = string.Empty;
+    options
+      .AllowAnyOrigin()
+      .AllowAnyMethod()
+      .AllowAnyHeader();
 });
+
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 
 app.UseHttpsRedirection();
