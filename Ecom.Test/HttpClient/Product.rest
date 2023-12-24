@@ -7,7 +7,7 @@ content-type: application/json
 }
 
 ### Get one Method 
-GET  http://localhost:5137/api/product/8d502f6d-2668-4557-846c-791cb70240ca HTTP/1.1
+GET  http://localhost:5137/api/product/75e9deab-30e3-4dd2-bee5-cc5df5b62b6c HTTP/1.1
 content-type: application/json
 
 
@@ -26,7 +26,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIwZTE2Y
     "description": "Woven coats for winter",
     "price": 10,
     "quantity": 50,
-    "CategoryId": "2b1dc9d8-3fec-42d0-831e-cec81666c41b",
+    "CategoryId": "6cd12efa-8c27-46df-bb24-1e9484376ce7",
     "images": 
     [
     { "imageUrl": "string"},

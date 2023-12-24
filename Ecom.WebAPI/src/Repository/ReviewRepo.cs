@@ -22,9 +22,6 @@ namespace Ecom.WebAPI.src.Repository
 
         public async Task<Review> CreateOneReviewAsync(Review review)
         {
-
-            var user = await _users.FindAsync(review.UserId);
-            review.Name = user.FirstName;
             _reviews.Add(review);
             await _database.SaveChangesAsync();
             return review;

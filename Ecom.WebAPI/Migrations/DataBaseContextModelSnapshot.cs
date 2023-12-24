@@ -215,10 +215,6 @@ namespace Ecom.WebAPI.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("created_date");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("text")
-                        .HasColumnName("name");
-
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uuid")
                         .HasColumnName("product_id");
@@ -363,7 +359,7 @@ namespace Ecom.WebAPI.Migrations
 
             modelBuilder.Entity("Ecom.Core.src.Entity.Review", b =>
                 {
-                    b.HasOne("Ecom.Core.src.Entity.Product", "Product")
+                    b.HasOne("Ecom.Core.src.Entity.Product", null)
                         .WithMany("Reviews")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -376,8 +372,6 @@ namespace Ecom.WebAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_review_users_user_id");
-
-                    b.Navigation("Product");
 
                     b.Navigation("User");
                 });
