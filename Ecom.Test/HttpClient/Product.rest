@@ -1,5 +1,5 @@
 ### Get Method 
-GET  http://localhost:5137/api/product/ HTTP/1.1
+GET  http://localhost:5137/api/product?Search=Shirt HTTP/1.1
 content-type: application/json
 
 {
@@ -22,15 +22,14 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIwZTE2YTNmOS0xMjVjLTQ3ODUtYjIwMS1kN2Y4NDdmMzMyNzEiLCJ1c2VySWQiOiIwZTE2YTNmOS0xMjVjLTQ3ODUtYjIwMS1kN2Y4NDdmMzMyNzEiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MDMzNzQzMTIsImV4cCI6MTcwMzU0NzExMiwiaWF0IjoxNzAzMzc0MzEyLCJpc3MiOiJIYXNhbiIsImF1ZCI6Imh0dHBzOi8vam95ZGlwa2FuamlsYWwuY29tLyJ9.8zNbkm2nLfooWTG_Ov7DnzACimpuepOsGngHl0VL4-8
 
 {
-    "title": "Polo Shirt",
+    "title": "Shirt",
     "description": "Woven coats for winter",
     "price": 10,
     "quantity": 50,
     "CategoryId": "6cd12efa-8c27-46df-bb24-1e9484376ce7",
     "images": 
     [
-    { "imageUrl": "string"},
-    { "imageUrl": "string"}
+    { "imageUrl": "https://cdni.llbean.net/is/image/wim/520655_459_41?hei=1095&wid=950&resMode=sharp2&defaultImage=llbprod/520655_459_41"}
     ]
 }
 

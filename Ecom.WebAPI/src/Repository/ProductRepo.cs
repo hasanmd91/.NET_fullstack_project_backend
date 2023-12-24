@@ -2,6 +2,7 @@ using Ecom.Core.src.Abstraction;
 using Ecom.Core.src.Entity;
 using Ecom.Core.src.parameters;
 using Ecom.WebAPI.src.Database;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ecom.WebAPI.src.Repository
@@ -48,6 +49,11 @@ namespace Ecom.WebAPI.src.Repository
             if (options.CategoryId != Guid.Empty)
             {
                 query = query.Where(p => p.Category.Id == options.CategoryId);
+            }
+
+            if (options.Search != string.Empty)
+            {
+                query = query.Where(p => p.Title == options.Search);
             }
 
             switch (options.SortOrder)
