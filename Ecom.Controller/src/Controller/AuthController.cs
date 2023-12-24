@@ -24,7 +24,7 @@ namespace Ecom.Controller.src.Controller
         }
 
 
-        [HttpPost()]
+        [HttpPost("login")]
         public async Task<ActionResult<string>> Login([FromBody] Credentials credentials)
         {
 

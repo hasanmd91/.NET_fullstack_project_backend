@@ -1,3 +1,4 @@
+using Ecom.Core.src.Entity;
 using Ecom.Core.src.Enum;
 
 namespace Ecom.Service.src.DTO
@@ -13,6 +14,8 @@ namespace Ecom.Service.src.DTO
         public string Zip { get; set; }
         public string City { get; set; }
         public Role Role { get; set; }
+        public IEnumerable<Order> Orders { get; set; }
+
 
     }
 

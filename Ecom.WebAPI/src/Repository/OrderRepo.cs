@@ -1,3 +1,4 @@
+using System.Runtime.Serialization;
 using Ecom.Core.src.Abstraction;
 using Ecom.Core.src.Entity;
 using Ecom.Core.src.parameters;
@@ -30,7 +31,8 @@ namespace Ecom.WebAPI.src.Repository
 
                 foreach (var OrderDetail in order.OrderDetails)
                 {
-                    var product = await _database.Product.FindAsync(OrderDetail.ProductId) ?? throw CustomException.TransactionException("Product is out of stock");
+                    var product = await _database.Product.FindAsync(OrderDetail.ProductId)
+                    ?? throw CustomException.TransactionException("Product is out of stock");
                     if (product.Quantity < OrderDetail.Quantity)
                     {
                         throw CustomException.TransactionException("Not enough products in inventory");
@@ -54,7 +56,11 @@ namespace Ecom.WebAPI.src.Repository
 
         public async Task<IEnumerable<Order>> GetAllOrderAsync(GetAllParams options)
         {
-            var result = await _orders.Include(o => o.User).Include(o => o.OrderDetails).Skip(options.Offset).Take(options.Limit).ToListAsync();
+            var result = await _orders.Include(o => o.User)
+                                    .Include(o => o.OrderDetails)
+                                    .ThenInclude(od => od.Product)
+                                    .ThenInclude(od => od.Images)
+                                    .Skip(options.Offset).Take(options.Limit).ToListAsync();
             return result;
         }
 
@@ -73,7 +79,11 @@ namespace Ecom.WebAPI.src.Repository
 
         public async Task<Order> GetOneOrderAsync(Guid orderId)
         {
-            var result = await _orders.Include(o => o.User).Include(o => o.OrderDetails).FirstOrDefaultAsync(o => o.Id == orderId);
+            var result = await _orders.Include(o => o.User)
+            .Include(o => o.OrderDetails)
+            .ThenInclude(od => od.Product)
+            .ThenInclude(od => od.Images)
+            .FirstOrDefaultAsync(o => o.Id == orderId);
             return result;
         }
     }
