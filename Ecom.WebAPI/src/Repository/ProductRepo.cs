@@ -44,16 +44,11 @@ namespace Ecom.WebAPI.src.Repository
             var query = _products
                 .Include(p => p.Images)
                 .Include(p => p.Category)
-                .Where(p => p.Title.Contains(options.Search));
+                .Where(p => p.Title.ToLower().Contains(options.Search.ToLower()));
 
             if (options.CategoryId != Guid.Empty)
             {
                 query = query.Where(p => p.Category.Id == options.CategoryId);
-            }
-
-            if (options.Search != string.Empty)
-            {
-                query = query.Where(p => p.Title == options.Search);
             }
 
             switch (options.SortOrder)
@@ -66,10 +61,7 @@ namespace Ecom.WebAPI.src.Repository
                     break;
             }
 
-            var products = await query
-                .Skip(options.Offset)
-                .Take(options.Limit)
-                .ToListAsync();
+            var products = await query.ToListAsync();
 
             return products;
         }
