@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "content": "this is a another  very very good review",
-  "ratings": 5,
+  "ratings": 4,
   "ProductId":"75e9deab-30e3-4dd2-bee5-cc5df5b62b6c",
   "UserId": "8cda8c0d-6be4-49f8-a668-91e05fe1f7b0"
 }

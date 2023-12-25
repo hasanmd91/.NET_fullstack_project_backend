@@ -59,7 +59,11 @@ namespace Ecom.WebAPI.src.Repository
 
         public async Task<User> GetOneUserByEmailAsync(string email)
         {
-            var foundUser = await _users.FirstOrDefaultAsync(u => u.Email == email);
+            var foundUser = await _users.Include(u => u.Orders)
+                               .ThenInclude(od => od.OrderDetails)
+                               .ThenInclude(od => od.Product)
+                               .ThenInclude(od => od.Images).
+                               FirstOrDefaultAsync(u => u.Email == email);
             return foundUser;
         }
 

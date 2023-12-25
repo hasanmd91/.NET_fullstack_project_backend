@@ -1,13 +1,14 @@
 using Ecom.Core.src.Entity;
 using Ecom.Core.src.Enum;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Npgsql;
 
 namespace Ecom.WebAPI.src.Database
 {
     public class DataBaseContext : DbContext
     {
-        IConfiguration _config;
+        private readonly string? _connectionString;
         public DbSet<User> Users { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Product> Product { get; set; }
@@ -24,16 +25,23 @@ namespace Ecom.WebAPI.src.Database
 
         public DataBaseContext(DbContextOptions options, IConfiguration config) : base(options)
         {
-            _config = config;
+            _connectionString = config.GetConnectionString("LocalDb");
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
-            var dataSourceBuilder = new NpgsqlDataSourceBuilder(_config.GetConnectionString("LocalDb"));
+            var dataSourceBuilder = new NpgsqlDataSourceBuilder(_connectionString);
             dataSourceBuilder.MapEnum<Role>();
             var dataSource = dataSourceBuilder.Build();
-            optionsBuilder.UseNpgsql(dataSource).UseSnakeCaseNamingConvention().AddInterceptors(new TimeStampInterceptor());
+            optionsBuilder
+            .UseNpgsql(dataSource)
+            .UseSnakeCaseNamingConvention()
+            .AddInterceptors(new TimeStampInterceptor())
+            .EnableDetailedErrors()
+            .ConfigureWarnings(warnings => { warnings.Ignore(CoreEventId.ManyServiceProvidersCreatedWarning); });
+
             base.OnConfiguring(optionsBuilder);
         }
 

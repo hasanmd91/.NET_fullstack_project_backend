@@ -43,7 +43,7 @@ namespace Ecom.WebAPI.src.Repository
         public async Task<bool> DeleteOneByIdCategoryAsync(Guid categoryId)
         {
             {
-                var category = _category.FirstOrDefault(c => c.Id == categoryId);
+                var category = await _category.FirstOrDefaultAsync(c => c.Id == categoryId);
                 if (category != null)
                 {
                     _category.Remove(category);
