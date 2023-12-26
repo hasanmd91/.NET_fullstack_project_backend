@@ -9,6 +9,7 @@ namespace Ecom.Core.src.Abstraction
         public Task<IEnumerable<Order>> GetAllOrderAsync(GetAllParams options);
         public Task<bool> DeleteOrderAsync(Guid orderId);
         public Task<Order> GetOneOrderAsync(Guid orderId);
+        public Task<Order> UpdateOrderAsync(Order order);
 
     }
 }

@@ -50,5 +50,14 @@ namespace Ecom.Controller.src.Controller
             return StatusCode(204, result);
         }
 
+
+        [Authorize(Roles = "Admin")]
+        [HttpPatch("{orderId}")]
+        public async Task<ActionResult<OrderReadDTO>> UpdateOrderAsync(Guid orderId, OrderUpdateDTO orderUpdateDTO)
+        {
+            var result = await _orderService.UpdateOrderAsync(orderId, orderUpdateDTO);
+            return Ok(result);
+        }
+
     }
 }

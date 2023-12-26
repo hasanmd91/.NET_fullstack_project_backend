@@ -10,7 +10,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIwZTE2YTNmOS0xMjVjLTQ3ODUtYjIwMS1kN2Y4NDdmMzMyNzEiLCJ1c2VySWQiOiIwZTE2YTNmOS0xMjVjLTQ3ODUtYjIwMS1kN2Y4NDdmMzMyNzEiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MDMzNzQzMTIsImV4cCI6MTcwMzU0NzExMiwiaWF0IjoxNzAzMzc0MzEyLCJpc3MiOiJIYXNhbiIsImF1ZCI6Imh0dHBzOi8vam95ZGlwa2FuamlsYWwuY29tLyJ9.8zNbkm2nLfooWTG_Ov7DnzACimpuepOsGngHl0VL4-8
 
 {
-    "name": "Shoe"
+    "name": "Men"
 }
 
 

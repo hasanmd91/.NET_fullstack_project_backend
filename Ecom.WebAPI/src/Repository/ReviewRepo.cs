@@ -1,6 +1,7 @@
 using Ecom.Core.src.Abstraction;
 using Ecom.Core.src.Entity;
 using Ecom.Core.src.parameters;
+using Ecom.Service.src.Shared;
 using Ecom.WebAPI.src.Database;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,6 +23,13 @@ namespace Ecom.WebAPI.src.Repository
 
         public async Task<Review> CreateOneReviewAsync(Review review)
         {
+            User user = await _users.FirstOrDefaultAsync((u) => u.Id == review.UserId) ?? throw CustomException.NotFoundException();
+
+            if (user is not null)
+            {
+                review.Reviewer = user.FirstName;
+            }
+
             _reviews.Add(review);
             await _database.SaveChangesAsync();
             return review;

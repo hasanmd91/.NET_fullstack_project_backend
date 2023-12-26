@@ -13,6 +13,7 @@ namespace Ecom.WebAPI.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterDatabase()
+                .Annotation("Npgsql:Enum:order_status", "pending,delivered,returned,canceled,paid")
                 .Annotation("Npgsql:Enum:role", "admin,user");
 
             migrationBuilder.CreateTable(
@@ -83,6 +84,7 @@ namespace Ecom.WebAPI.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     user_id = table.Column<Guid>(type: "uuid", nullable: false),
                     total_price = table.Column<decimal>(type: "numeric", nullable: false),
+                    order_status = table.Column<OrderStatus>(type: "order_status", nullable: false),
                     created_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     updated_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
@@ -124,6 +126,7 @@ namespace Ecom.WebAPI.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     content = table.Column<string>(type: "text", nullable: true),
                     ratings = table.Column<int>(type: "integer", nullable: false),
+                    reviewer = table.Column<string>(type: "text", nullable: true),
                     product_id = table.Column<Guid>(type: "uuid", nullable: false),
                     user_id = table.Column<Guid>(type: "uuid", nullable: false),
                     created_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),

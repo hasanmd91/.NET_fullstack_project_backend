@@ -26,7 +26,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIwZTE2Y
     "description": "Woven coats for winter",
     "price": 10,
     "quantity": 50,
-    "categoryId": "6cd12efa-8c27-46df-bb24-1e9484376ce7",
+    "categoryId": "832110d4-1eb0-41a8-80de-3d6a9a8a7787",
     "images": 
     [
     { "imageUrl": "https://cdni.llbean.net/is/image/wim/520655_459_41?hei=1095&wid=950&resMode=sharp2&defaultImage=llbprod/520655_459_41"}

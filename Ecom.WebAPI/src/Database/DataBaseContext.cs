@@ -34,6 +34,7 @@ namespace Ecom.WebAPI.src.Database
 
             var dataSourceBuilder = new NpgsqlDataSourceBuilder(_connectionString);
             dataSourceBuilder.MapEnum<Role>();
+            dataSourceBuilder.MapEnum<OrderStatus>();
             var dataSource = dataSourceBuilder.Build();
             optionsBuilder
             .UseNpgsql(dataSource)
@@ -48,12 +49,12 @@ namespace Ecom.WebAPI.src.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasPostgresEnum<Role>();
+            modelBuilder.HasPostgresEnum<OrderStatus>();
             modelBuilder.Entity<User>(entity => entity.Property(e => e.Role).HasColumnType("role"));
+            modelBuilder.Entity<Order>(entity => entity.Property(e => e.OrderStatus).HasColumnType("order_status"));
             modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
             modelBuilder.Entity<Category>().HasIndex(c => c.Name).IsUnique();
 
-            // modelBuilder.Entity<OrderDetails>().HasOne<Product>().WithMany().HasForeignKey(op => op.ProductId).OnDelete(DeleteBehavior.Restrict);
-            // modelBuilder.Entity<Order>().HasMany<OrderDetails>().WithOne().OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
         }

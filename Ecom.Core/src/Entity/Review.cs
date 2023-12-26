@@ -8,6 +8,8 @@ namespace Ecom.Core.src.Entity
         public string Content { get; set; }
         public int Ratings { get; set; }
 
+        public string Reviewer { get; set; }
+
         [ForeignKey("Product")]
         public Guid ProductId { get; set; }
 

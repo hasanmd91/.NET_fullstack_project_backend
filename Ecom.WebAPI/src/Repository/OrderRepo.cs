@@ -1,6 +1,7 @@
 using System.Runtime.Serialization;
 using Ecom.Core.src.Abstraction;
 using Ecom.Core.src.Entity;
+using Ecom.Core.src.Enum;
 using Ecom.Core.src.parameters;
 using Ecom.Service.src.Shared;
 using Ecom.WebAPI.src.Database;
@@ -28,6 +29,7 @@ namespace Ecom.WebAPI.src.Repository
             {
 
                 order.User = await _users.FindAsync(order.UserId);
+                order.OrderStatus = OrderStatus.PAID;
 
                 foreach (var OrderDetail in order.OrderDetails)
                 {
@@ -86,5 +88,13 @@ namespace Ecom.WebAPI.src.Repository
             .FirstOrDefaultAsync(o => o.Id == orderId);
             return result;
         }
+
+        public async Task<Order> UpdateOrderAsync(Order order)
+        {
+            _orders.Update(order);
+            await _database.SaveChangesAsync();
+            return order;
+        }
+
     }
 }

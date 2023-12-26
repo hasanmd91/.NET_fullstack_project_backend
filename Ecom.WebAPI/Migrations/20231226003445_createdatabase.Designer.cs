@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Ecom.WebAPI.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20231224171452_createdatabase")]
+    [Migration("20231226003445_createdatabase")]
     partial class createdatabase
     {
         /// <inheritdoc />
@@ -24,6 +24,7 @@ namespace Ecom.WebAPI.Migrations
                 .HasAnnotation("ProductVersion", "7.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
+            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "order_status", new[] { "pending", "delivered", "returned", "canceled", "paid" });
             NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "role", new[] { "admin", "user" });
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
@@ -98,6 +99,10 @@ namespace Ecom.WebAPI.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("created_date");
+
+                    b.Property<OrderStatus>("OrderStatus")
+                        .HasColumnType("order_status")
+                        .HasColumnName("order_status");
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("numeric")
@@ -225,6 +230,10 @@ namespace Ecom.WebAPI.Migrations
                     b.Property<int>("Ratings")
                         .HasColumnType("integer")
                         .HasColumnName("ratings");
+
+                    b.Property<string>("Reviewer")
+                        .HasColumnType("text")
+                        .HasColumnName("reviewer");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("timestamp without time zone")
