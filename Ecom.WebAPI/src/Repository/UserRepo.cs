@@ -39,13 +39,12 @@ namespace Ecom.WebAPI.src.Repository
 
         public IEnumerable<User> GetAllUserAsync(GetAllParams options)
         {
-            return _users.Include(u => u.Orders)
-                                    .ThenInclude(od => od.OrderDetails)
-                                    .ThenInclude(od => od.Product)
-                                    .ThenInclude(od => od.Images)
-                                    .Where(u => u.FirstName.Contains(options.Search)).Skip(options.Offset)
-                                    .Take(options.Limit);
+            return _users.Where(u => u.FirstName.Contains(options.Search))
+                         .OrderBy(u => u.FirstName)
+                         .Skip(options.Offset)
+                         .Take(options.Limit);
         }
+
 
         public async Task<User> GetOneUserByIdAsync(Guid userId)
         {
