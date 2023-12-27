@@ -66,7 +66,7 @@ namespace Ecom.Test.Src
 
         [Theory]
         [ClassData(typeof(SingleUserData))]
-        public async void GetOneUserByIdAsync_ShouldReturn_AProduct(User? response, UserReadDTO? result, Type? type)
+        public async void GetOneUserByIdAsync_ShouldReturn_User(User? response, UserReadDTO? result, Type? type)
         {
             var repo = new Mock<IUserRepo>();
             repo.Setup(repo => repo.GetOneUserByIdAsync(It.IsAny<Guid>())).ReturnsAsync(response);
@@ -151,6 +151,7 @@ namespace Ecom.Test.Src
             }
         }
 
+
         public class CreateUserData : TheoryData<User?, UserCreateDTO, UserReadDTO?, Type?>
         {
             public CreateUserData()
@@ -173,8 +174,6 @@ namespace Ecom.Test.Src
                 Add(null, userCreateDTO, null, typeof(CustomException));
             }
         }
-
-
 
     }
 }

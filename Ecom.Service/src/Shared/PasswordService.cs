@@ -13,6 +13,7 @@ namespace Ecom.Service.src.Shared
             hashedPassword = hmac.ComputeHash(Encoding.UTF8.GetBytes(originalPassword)).ToString()!;
         }
 
+
         public static bool VerifyPassword(string originalPassword, string HashPassword, byte[] salt)
         {
             var hmac = new HMACSHA256(salt);
