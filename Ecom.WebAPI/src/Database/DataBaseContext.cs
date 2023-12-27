@@ -37,7 +37,7 @@ namespace Ecom.WebAPI.src.Database
             dataSourceBuilder.MapEnum<OrderStatus>();
             var dataSource = dataSourceBuilder.Build();
             optionsBuilder
-            .UseNpgsql(dataSource)
+            .UseNpgsql(dataSource, options => options.EnableRetryOnFailure(3))
             .UseSnakeCaseNamingConvention()
             .AddInterceptors(new TimeStampInterceptor())
             .EnableDetailedErrors()

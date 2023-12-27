@@ -2,8 +2,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ecom.Core.src.Entity
 {
-    public class OrderDetails : BaseEntity
+    public class OrderDetails
     {
+        public Guid Id { get; set; }
         public int Quantity { get; set; }
 
         [ForeignKey("Product")]

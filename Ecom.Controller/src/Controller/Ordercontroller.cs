@@ -20,7 +20,7 @@ namespace Ecom.Controller.src.Controller
 
         [Authorize(Roles = "Admin")]
         [HttpGet()]
-        public async Task<ActionResult<IEnumerable<OrderReadDTO>>> GetAllOrderAsync(GetAllParams options)
+        public async Task<ActionResult<IEnumerable<OrderReadDTO>>> GetAllOrderAsync([FromQuery] GetAllParams options)
         {
             var result = await _orderService.GetAllOrderAsync(options);
             return Ok(result);

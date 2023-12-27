@@ -9,7 +9,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIzY2E2N
 
 ### Get One Method 
 
-GET  http://localhost:5137/api/order/c73ce381-6bdf-46d1-9bbc-223139ee208a HTTP/1.1
+GET  http://localhost:5137/api/order/389b2182-b8a3-4b6f-bcf5-4a1aef352c66 HTTP/1.1
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI4ZWU2MzFiOC01NzRkLTRkYWYtODMyOS1iM2E3ZmJiOWIzM2IiLCJ1c2VySWQiOiI4ZWU2MzFiOC01NzRkLTRkYWYtODMyOS1iM2E3ZmJiOWIzM2IiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTcwMzQzMDA5MCwiZXhwIjoxNzAzNjAyODkwLCJpYXQiOjE3MDM0MzAwOTAsImlzcyI6Ikhhc2FuIiwiYXVkIjoiaHR0cHM6Ly9qb3lkaXBrYW5qaWxhbC5jb20vIn0.BIsQUZJtJHMVVT1FM3bzvWgQwno5nCKR_julOaPlJuQ
 

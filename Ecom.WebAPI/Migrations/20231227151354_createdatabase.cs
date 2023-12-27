@@ -156,9 +156,7 @@ namespace Ecom.WebAPI.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     quantity = table.Column<int>(type: "integer", nullable: false),
                     product_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    order_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    created_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    updated_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                    order_id = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {

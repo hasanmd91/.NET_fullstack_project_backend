@@ -11,23 +11,23 @@ namespace Ecom.Test.Src
     public class AuthServiceTest
     {
 
-        // [Fact]
-        // public async void Login_ShouldInvokeTokenService()
-        // {
-        //     var repo = new Mock<IUserRepo>();
-        //     User user = new() { };
-        //     repo.Setup(repo => repo.GetOneUserByEmailAsync(It.IsAny<string>())).ReturnsAsync(user);
+        [Fact]
+        public async void Login_ShouldInvokeTokenService()
+        {
+            var repo = new Mock<IUserRepo>();
+            User user = new() { };
+            repo.Setup(repo => repo.GetOneUserByEmailAsync(It.IsAny<string>())).ReturnsAsync(user);
 
-        //     var tokenService = new Mock<ITokenService>();
-        //     tokenService.Setup(tk => tk.GenerateToken(It.IsAny<User>())).Returns("sampleTokenValue");
+            var tokenService = new Mock<ITokenService>();
+            tokenService.Setup(tk => tk.GenerateToken(It.IsAny<User>())).Returns("sampleTokenValue");
 
-        //     var authService = new AuthService(repo.Object, tokenService.Object);
-        //     var cred = new Credentials() { Email = "example@mail.com", Password = "password" };
+            var authService = new AuthService(repo.Object, tokenService.Object);
+            var cred = new Credentials() { Email = "example@mail.com", Password = "password" };
 
-        //     await authService.Login(It.IsAny<Credentials>());
+            await authService.Login(cred);
 
-        //     tokenService.Verify(service => service.GenerateToken(It.IsAny<User>()), Times.Once);
-        // }
+            tokenService.Verify(service => service.GenerateToken(It.IsAny<User>()), Times.Once);
+        }
 
         // [Theory]
         // [ClassData(typeof(LoginData))]
