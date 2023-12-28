@@ -53,7 +53,7 @@ namespace Ecom.Controller.src.Controller
 
         [Authorize(Roles = "Admin")]
         [HttpPatch("{orderId}")]
-        public async Task<ActionResult<OrderReadDTO>> UpdateOrderAsync(Guid orderId, OrderUpdateDTO orderUpdateDTO)
+        public async Task<ActionResult<OrderReadDTO>> UpdateOrderAsync(Guid orderId, [FromBody] OrderUpdateDTO orderUpdateDTO)
         {
             var result = await _orderService.UpdateOrderAsync(orderId, orderUpdateDTO);
             return Ok(result);

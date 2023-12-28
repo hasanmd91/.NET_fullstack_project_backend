@@ -23,7 +23,7 @@ namespace Ecom.Service.src.DTO
 
     public class OrderUpdateDTO
     {
-        public OrderStatus orderStatus { get; set; }
+        public OrderStatus OrderStatus { get; set; }
     }
 
 }

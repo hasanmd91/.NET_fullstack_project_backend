@@ -9,7 +9,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIzY2E2N
 
 ### Get One Method 
 
-GET  http://localhost:5137/api/order/389b2182-b8a3-4b6f-bcf5-4a1aef352c66 HTTP/1.1
+GET  http://localhost:5137/api/order/62b936a9-2f5c-425b-8737-24fc2a84067c HTTP/1.1
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI4ZWU2MzFiOC01NzRkLTRkYWYtODMyOS1iM2E3ZmJiOWIzM2IiLCJ1c2VySWQiOiI4ZWU2MzFiOC01NzRkLTRkYWYtODMyOS1iM2E3ZmJiOWIzM2IiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTcwMzQzMDA5MCwiZXhwIjoxNzAzNjAyODkwLCJpYXQiOjE3MDM0MzAwOTAsImlzcyI6Ikhhc2FuIiwiYXVkIjoiaHR0cHM6Ly9qb3lkaXBrYW5qaWxhbC5jb20vIn0.BIsQUZJtJHMVVT1FM3bzvWgQwno5nCKR_julOaPlJuQ
 
@@ -43,4 +43,15 @@ Content-Type: application/json
 {
 
 
+}
+
+
+### Update Method 
+
+PATCH  http://localhost:5137/api/order/62b936a9-2f5c-425b-8737-24fc2a84067c HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJjZGM3NWIzNy1hNzljLTQzNWQtYTU3ZS01OTdlOTU2MWNiM2IiLCJ1c2VySWQiOiJjZGM3NWIzNy1hNzljLTQzNWQtYTU3ZS01OTdlOTU2MWNiM2IiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MDM3ODc2MzQsImV4cCI6MTcwMzk2MDQzNCwiaWF0IjoxNzAzNzg3NjM0LCJpc3MiOiJIYXNhbiIsImF1ZCI6Imh0dHBzOi8vam95ZGlwa2FuamlsYWwuY29tLyJ9.gqw0o8997fmtuZ1IsRjxMPfuFDr43d1lT94zs7bNeZU
+
+{
+  "orderStatus": "RETURNED"
 }
