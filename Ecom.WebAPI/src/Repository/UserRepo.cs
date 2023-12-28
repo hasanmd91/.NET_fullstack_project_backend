@@ -1,5 +1,6 @@
 using Ecom.Core.src.Abstraction;
 using Ecom.Core.src.Entity;
+using Ecom.Core.src.Enum;
 using Ecom.Core.src.parameters;
 using Ecom.WebAPI.src.Database;
 using Microsoft.EntityFrameworkCore;

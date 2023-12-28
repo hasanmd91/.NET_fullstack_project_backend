@@ -1,5 +1,6 @@
 using System.Text;
 using Ecom.Core.src.Abstraction;
+using Ecom.Core.src.Enum;
 using Ecom.Service.src.Abstraction;
 using Ecom.Service.src.Service;
 using Ecom.Service.src.Shared;
@@ -10,6 +11,7 @@ using Ecom.WebAPI.src.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Npgsql;
 
 
 
@@ -42,8 +44,14 @@ builder.Services.AddScoped<IReviewRepo, ReviewRepo>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderRepo, OrderRepo>();
 
+
+var dataSourceBuilder = new NpgsqlDataSourceBuilder(builder.Configuration.GetConnectionString("Store"));
+dataSourceBuilder.MapEnum<Role>();
+dataSourceBuilder.MapEnum<OrderStatus>();
+var dataSource = dataSourceBuilder.Build();
+
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
-builder.Services.AddDbContext<DataBaseContext>(options => options.UseNpgsql());
+builder.Services.AddDbContext<DataBaseContext>(options => options.UseNpgsql(dataSource));
 
 
 // Add JWT authentication

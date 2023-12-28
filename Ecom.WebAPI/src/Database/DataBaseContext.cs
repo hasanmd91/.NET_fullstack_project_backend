@@ -32,12 +32,7 @@ namespace Ecom.WebAPI.src.Database
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
-            var dataSourceBuilder = new NpgsqlDataSourceBuilder(_connectionString);
-            dataSourceBuilder.MapEnum<Role>();
-            dataSourceBuilder.MapEnum<OrderStatus>();
-            var dataSource = dataSourceBuilder.Build();
             optionsBuilder
-            .UseNpgsql(dataSource, options => options.EnableRetryOnFailure(3))
             .UseSnakeCaseNamingConvention()
             .AddInterceptors(new TimeStampInterceptor())
             .EnableDetailedErrors()

@@ -1,5 +1,5 @@
 ### Get Method 
-GET  http://localhost:5137/api/product?Search=Shirt HTTP/1.1
+GET  http://localhost:5137/api/product HTTP/1.1
 content-type: application/json
 
 {
@@ -22,14 +22,16 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIwZTE2YTNmOS0xMjVjLTQ3ODUtYjIwMS1kN2Y4NDdmMzMyNzEiLCJ1c2VySWQiOiIwZTE2YTNmOS0xMjVjLTQ3ODUtYjIwMS1kN2Y4NDdmMzMyNzEiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MDMzNzQzMTIsImV4cCI6MTcwMzU0NzExMiwiaWF0IjoxNzAzMzc0MzEyLCJpc3MiOiJIYXNhbiIsImF1ZCI6Imh0dHBzOi8vam95ZGlwa2FuamlsYWwuY29tLyJ9.8zNbkm2nLfooWTG_Ov7DnzACimpuepOsGngHl0VL4-8
 
 {
-    "title": "Shirt",
-    "description": "Woven coats for winter",
-    "price": 10,
-    "quantity": 50,
-    "categoryId": "956c361e-3805-49ce-bc95-53316924b202",
+    "title": "AIR MAX ALPHA TRAINER 5 - Treenikenkä",
+    "description": "Step into the future of athletic excellence with the Nike AirStride 2023, a groundbreaking fusion of cutting-edge technology and sleek design. Crafted for the modern athlete who demands both performance and style, these shoes are your ticket to superior comfort and unstoppable confidence.",
+    "price": 250,
+    "quantity": 200,
+    "categoryId": "03cdc488-e983-4333-bace-70c1b04f3715",
     "images": 
     [
-    { "imageUrl": "https://cdni.llbean.net/is/image/wim/520655_459_41?hei=1095&wid=950&resMode=sharp2&defaultImage=llbprod/520655_459_41"}
+    { "imageUrl": "https://img01.ztat.net/article/spp-media-p1/f7538b3b560a4e97a608553437388282/f15fe8ecb381410189d3fe7ef62f1960.jpg?imwidth=1800"},
+    { "imageUrl": "https://img01.ztat.net/article/spp-media-p1/f7538b3b560a4e97a608553437388282/f15fe8ecb381410189d3fe7ef62f1960.jpg?imwidth=1800"},
+    { "imageUrl": "https://img01.ztat.net/article/spp-media-p1/f7538b3b560a4e97a608553437388282/f15fe8ecb381410189d3fe7ef62f1960.jpg?imwidth=1800"}
     ]
 }
 
