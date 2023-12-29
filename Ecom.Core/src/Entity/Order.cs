@@ -12,6 +12,4 @@ namespace Ecom.Core.src.Entity
         public IEnumerable<OrderDetails> OrderDetails { get; set; }
         public OrderStatus OrderStatus { get; set; }
     }
-
-
 }

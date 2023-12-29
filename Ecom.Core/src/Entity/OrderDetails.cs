@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Ecom.Core.src.Entity
 {
@@ -10,6 +11,12 @@ namespace Ecom.Core.src.Entity
         [ForeignKey("Product")]
         public Guid ProductId { get; set; }
         public Product Product { get; set; }
+
+
+        [ForeignKey("Order")]
+        public Guid OrderId { get; set; }
+        [JsonIgnore]
+        public Order Order { get; set; }
 
     }
 }

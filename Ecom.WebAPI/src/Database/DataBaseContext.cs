@@ -26,7 +26,6 @@ namespace Ecom.WebAPI.src.Database
         public DataBaseContext(DbContextOptions options, IConfiguration config) : base(options)
         {
             _connectionString = config.GetConnectionString("LocalDb");
-
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -50,9 +49,16 @@ namespace Ecom.WebAPI.src.Database
             modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
             modelBuilder.Entity<Category>().HasIndex(c => c.Name).IsUnique();
 
+            modelBuilder.Entity<User>().HasMany(p => p.Orders).WithOne(u => u.User).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<User>().HasMany(r => r.Reviews).WithOne(u => u.User).OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Order>()
+                 .HasMany(o => o.OrderDetails)
+                 .WithOne(od => od.Order)
+                 .HasForeignKey(od => od.OrderId)
+                 .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
         }
-
     }
 }
