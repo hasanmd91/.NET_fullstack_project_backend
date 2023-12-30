@@ -58,7 +58,11 @@ namespace Ecom.Service.src.Service
 
         public async Task<UserReadDTO> UpdateOneUserAsync(Guid userId, UserUpdateDTO userUpdateDTO)
         {
-            var result = await _userRepo.UpdateOneUserAsync(userId, _mapper.Map<UserUpdateDTO, User>(userUpdateDTO)) ?? throw CustomException.NotFoundException();
+            var userToUpdate = await _userRepo.GetOneUserByIdAsync(userId) ?? throw CustomException.NotFoundException();
+
+            var updateUser = _mapper.Map(userUpdateDTO, userToUpdate);
+
+            var result = await _userRepo.UpdateOneUserAsync(updateUser);
             return _mapper.Map<User, UserReadDTO>(result);
         }
     }

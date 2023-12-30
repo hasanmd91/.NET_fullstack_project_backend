@@ -25,7 +25,7 @@ namespace Ecom.Service.src.DTO
     public class ReviewUpdateDTO
     {
 
-        public required string Content { get; set; }
-        public int Ratings { get; set; }
+        public required string? Content { get; set; }
+        public int? Ratings { get; set; }
     }
 }

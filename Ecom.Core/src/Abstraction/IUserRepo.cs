@@ -8,7 +8,7 @@ namespace Ecom.Core.src.Abstraction
         Task<User> CreateOneUserAsync(User user);
         IEnumerable<User> GetAllUserAsync(GetAllParams options);
         Task<User> GetOneUserByIdAsync(Guid id);
-        Task<User> UpdateOneUserAsync(Guid id, User user);
+        Task<User> UpdateOneUserAsync(User user);
         Task<bool> DeleteOneUserAsync(Guid id);
         Task<User> GetOneUserByEmailAsync(string email);
     }

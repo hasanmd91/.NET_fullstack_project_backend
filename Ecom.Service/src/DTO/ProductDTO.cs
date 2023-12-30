@@ -29,11 +29,11 @@ namespace Ecom.Service.src.DTO
 
     public class ProductUpdateDTO
     {
-        public required string Title { get; set; }
-        public required string Description { get; set; }
-        public decimal Price { get; set; }
-        public int Quantity { get; set; }
-        public required IEnumerable<Image> Images { get; set; }
+        public string? Title { get; set; }
+        public string? Description { get; set; }
+        public decimal? Price { get; set; }
+        public int? Quantity { get; set; }
+        public IEnumerable<Image>? Images { get; set; }
 
     }
 
