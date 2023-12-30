@@ -26,8 +26,9 @@ namespace Ecom.Test.Src
         public async void GetAllProducts_withValidLimitAndOffset_ShouldInvokedRepoMethod()
         {
             var repo = new Mock<IProductRepo>();
+            var categoryRepo = new Mock<ICategoryRepo>();
             GetAllParams options = new() { Limit = 20, Offset = 0 };
-            var productService = new ProductService(repo.Object, _mapper);
+            var productService = new ProductService(repo.Object, categoryRepo.Object, _mapper);
             await productService.GetAllProductAsync(options);
             repo.Verify(repo => repo.GetAllProductAsync(options), Times.Once);
         }
@@ -59,9 +60,10 @@ namespace Ecom.Test.Src
 
             IEnumerable<Product> products = new List<Product> { Shoe, Cloths };
             IEnumerable<ProductReadDTO> expected = _mapper.Map<IEnumerable<Product>, IEnumerable<ProductReadDTO>>(products);
+            var categoryRepo = new Mock<ICategoryRepo>();
 
             repo.Setup(repo => repo.GetAllProductAsync(options)).ReturnsAsync(products);
-            var productService = new ProductService(repo.Object, _mapper);
+            var productService = new ProductService(repo.Object, categoryRepo.Object, _mapper);
             var response = await productService.GetAllProductAsync(options);
 
             Assert.Equivalent(expected, response);
@@ -72,8 +74,9 @@ namespace Ecom.Test.Src
         public async void GetOneProductByIdAsync_ShouldReturn_AProduct(Product? response, ProductReadDTO? result, Type? type)
         {
             var repo = new Mock<IProductRepo>();
+            var categoryRepo = new Mock<ICategoryRepo>();
             repo.Setup(repo => repo.GetOneProductByIdAsync(It.IsAny<Guid>())).ReturnsAsync(response);
-            var productService = new ProductService(repo.Object, _mapper);
+            var productService = new ProductService(repo.Object, categoryRepo.Object, _mapper);
 
             if (type is not null)
             {
@@ -102,6 +105,8 @@ namespace Ecom.Test.Src
         public async void DeleteOneProductAsyncById_ShouldReturnValidResponse(Product? foundProduct, bool response, bool? result, Type? type)
         {
             var repo = new Mock<IProductRepo>();
+            var categoryRepo = new Mock<ICategoryRepo>();
+
             if (foundProduct is not null)
             {
                 repo.Setup(repo => repo.DeleteOneProductAsync(It.IsAny<Guid>())).ReturnsAsync(response);
@@ -110,7 +115,7 @@ namespace Ecom.Test.Src
             {
                 repo.Setup(repo => repo.DeleteOneProductAsync(It.IsAny<Guid>())).ReturnsAsync(false);
             }
-            var productService = new ProductService(repo.Object, _mapper);
+            var productService = new ProductService(repo.Object, categoryRepo.Object, _mapper);
 
             if (type is not null)
             {
@@ -139,8 +144,10 @@ namespace Ecom.Test.Src
         public async void CreateOneProductAsync_ShouldReturnValidResponse(Product product, ProductCreateDTO productCreateDTO, ProductReadDTO expected, Type? exceptionType)
         {
             var repo = new Mock<IProductRepo>();
+            var categoryRepo = new Mock<ICategoryRepo>();
+
             repo.Setup(repo => repo.CreateOneProductAsync(It.IsAny<Product>())).ReturnsAsync(product);
-            var productService = new ProductService(repo.Object, _mapper);
+            var productService = new ProductService(repo.Object, categoryRepo.Object, _mapper);
 
             if (exceptionType is not null)
             {
