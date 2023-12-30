@@ -1,6 +1,5 @@
 using Ecom.Core.src.Abstraction;
 using Ecom.Core.src.Entity;
-using Ecom.Core.src.parameters;
 using Ecom.Service.src.Shared;
 using Ecom.WebAPI.src.Database;
 using Microsoft.EntityFrameworkCore;

@@ -38,20 +38,21 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIwZTE2Y
 
 
 ###  Method
-PATCH  http://localhost:5137/api/product/468b9746-f573-4a0d-8dc9-0c5fb2d0ef67 HTTP/1.1
+PATCH  http://localhost:5137/api/product/037c7e1d-d0ce-406f-8c5e-ce2b1ba46afe HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIwZTE2YTNmOS0xMjVjLTQ3ODUtYjIwMS1kN2Y4NDdmMzMyNzEiLCJ1c2VySWQiOiIwZTE2YTNmOS0xMjVjLTQ3ODUtYjIwMS1kN2Y4NDdmMzMyNzEiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MDMzNzQzMTIsImV4cCI6MTcwMzU0NzExMiwiaWF0IjoxNzAzMzc0MzEyLCJpc3MiOiJIYXNhbiIsImF1ZCI6Imh0dHBzOi8vam95ZGlwa2FuamlsYWwuY29tLyJ9.8zNbkm2nLfooWTG_Ov7DnzACimpuepOsGngHl0VL4-8
 
 {
-    "title": "Polo T Shirt",
-    "description": "Woven coats for winter",
-    "price": 10,
-    "quantity": 50,
-    "CategoryId": "b5849463-04ce-47bb-9428-0ccf48030b64",
+    "title": "AIR MAX ALPHA TRAINER 11 - Treenikenkä",
+    "description": "Step into the future of athletic excellence with the Nike AirStride 2023, a groundbreaking fusion of cutting-edge technology and sleek design. Crafted for the modern athlete who demands both performance and style, these shoes are your ticket to superior comfort and unstoppable confidence.",
+    "price": 100,
+    "quantity": 60,
+    "CategoryId": "956c361e-3805-49ce-bc95-53316924b202",
     "images": 
     [
-    { "imageUrl": "string"},
-    { "imageUrl": "string"}
+    { "imageUrl": "https://img01.ztat.net/article/spp-media-p1/f7538b3b560a4e97a608553437388282/f15fe8ecb381410189d3fe7ef62f1960.jpg?imwidth=1800"},
+    { "imageUrl": "https://img01.ztat.net/article/spp-media-p1/f7538b3b560a4e97a608553437388282/f15fe8ecb381410189d3fe7ef62f1960.jpg?imwidth=1800"},
+    { "imageUrl": "https://img01.ztat.net/article/spp-media-p1/f7538b3b560a4e97a608553437388282/f15fe8ecb381410189d3fe7ef62f1960.jpg?imwidth=1800"}
     ]
 }
 

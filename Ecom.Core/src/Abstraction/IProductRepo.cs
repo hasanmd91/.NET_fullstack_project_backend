@@ -9,7 +9,7 @@ namespace Ecom.Core.src.Abstraction
         Task<Product> CreateOneProductAsync(Product product);
         Task<IEnumerable<Product>> GetAllProductAsync(GetAllParams options);
         Task<Product> GetOneProductByIdAsync(Guid id);
-        Task<Product> UpdateOneProductAsync(Guid id, Product product);
+        Task<Product> UpdateOneProductAsync(Product product);
         Task<bool> DeleteOneProductAsync(Guid id);
     }
 }

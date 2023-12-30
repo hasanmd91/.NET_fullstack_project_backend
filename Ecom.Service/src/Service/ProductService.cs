@@ -11,11 +11,13 @@ namespace Ecom.Service.src.Service
     public class ProductService : IProductService
     {
         private readonly IProductRepo _productRepo;
+        private readonly ICategoryRepo _categoryRepo;
         private readonly IMapper _mapper;
-        public ProductService(IProductRepo productRepo, IMapper mapper)
+        public ProductService(IProductRepo productRepo, ICategoryRepo category, IMapper mapper)
         {
             _productRepo = productRepo;
             _mapper = mapper;
+            _categoryRepo = category;
         }
 
         public async Task<IEnumerable<ProductReadDTO>> GetAllProductAsync(GetAllParams options)
@@ -49,18 +51,27 @@ namespace Ecom.Service.src.Service
             return _mapper.Map<Product, ProductReadDTO>(result);
 
         }
-
         public async Task<ProductReadDTO> UpdateOneProductAsync(Guid productId, ProductUpdateDTO productUpdateDTO)
         {
-            var product = _mapper.Map<ProductUpdateDTO, Product>(productUpdateDTO);
-            var result = await _productRepo.UpdateOneProductAsync(productId, product) ?? throw CustomException.NotFoundException();
-            return _mapper.Map<Product, ProductReadDTO>(result);
+            var productToUpdate = await _productRepo.GetOneProductByIdAsync(productId) ?? throw CustomException.NotFoundException();
 
+            if (productUpdateDTO.CategoryId is not null)
+            {
+                var categoryId = (Guid)productUpdateDTO.CategoryId;
+                var foundCategory = await _categoryRepo.GetOneCategoryByIdAsync(categoryId) ?? throw CustomException.NotFoundException("Category with this input Id is not found");
+                var updatedProduct = _mapper.Map(productUpdateDTO, productToUpdate);
+                updatedProduct.CategoryId = categoryId;
+
+                var result = await _productRepo.UpdateOneProductAsync(updatedProduct);
+                return _mapper.Map<Product, ProductReadDTO>(result);
+            }
+            else
+            {
+                var updatedProduct = _mapper.Map(productUpdateDTO, productToUpdate);
+                var result = await _productRepo.UpdateOneProductAsync(updatedProduct);
+                return _mapper.Map<Product, ProductReadDTO>(result);
+            }
         }
 
-        public Task GetOneUserByIdAsync(Guid guid)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

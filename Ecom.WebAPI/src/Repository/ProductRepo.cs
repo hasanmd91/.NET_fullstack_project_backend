@@ -79,35 +79,11 @@ namespace Ecom.WebAPI.src.Repository
             return product;
         }
 
-        public async Task<Product> UpdateOneProductAsync(Guid productId, Product updatedProduct)
+        public async Task<Product> UpdateOneProductAsync(Product updatedProduct)
         {
-            var existingProduct = await _products
-                                        .Include(p => p.Images)
-                                        .Include(p => p.Category)
-                                        .FirstOrDefaultAsync(u => u.Id == productId);
-
-            if (existingProduct is not null)
-            {
-
-                existingProduct.Title = updatedProduct.Title ?? existingProduct.Title;
-                existingProduct.Description = updatedProduct.Description ?? existingProduct.Description;
-
-                if (updatedProduct.Price != default)
-                {
-                    existingProduct.Price = updatedProduct.Price;
-                }
-
-                if (updatedProduct.Quantity != default)
-                {
-                    existingProduct.Quantity = updatedProduct.Quantity;
-                }
-                existingProduct.Images = updatedProduct.Images ?? existingProduct.Images;
-
-                _database.Update(existingProduct);
-                await _database.SaveChangesAsync();
-            }
-
-            return existingProduct;
+            _database.Update(updatedProduct);
+            await _database.SaveChangesAsync();
+            return updatedProduct;
         }
     }
 }
