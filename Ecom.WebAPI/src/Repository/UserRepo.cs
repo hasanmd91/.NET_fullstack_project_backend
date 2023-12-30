@@ -40,7 +40,7 @@ namespace Ecom.WebAPI.src.Repository
 
         public IEnumerable<User> GetAllUserAsync(GetAllParams options)
         {
-            return _users.Include(u => u.Orders).Where(u => u.FirstName.Contains(options.Search))
+            return _users.Where(u => u.FirstName.Contains(options.Search))
                          .OrderBy(u => u.FirstName)
                          .Skip(options.Offset)
                          .Take(options.Limit);

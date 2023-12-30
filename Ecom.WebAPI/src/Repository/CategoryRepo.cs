@@ -54,17 +54,11 @@ namespace Ecom.WebAPI.src.Repository
             }
         }
 
-        public async Task<Category?> UpdateOneCategoryAsync(Guid categoryId, Category updatedCategory)
+        public async Task<Category?> UpdateOneCategoryAsync(Category updatedCategory)
         {
-            var existingCategory = await _category.FirstOrDefaultAsync(u => u.Id == categoryId);
-
-            if (existingCategory != null)
-            {
-                existingCategory.Name = updatedCategory.Name ?? existingCategory.Name;
-                await _database.SaveChangesAsync();
-            }
-
-            return existingCategory;
+            _database.Update(updatedCategory);
+            await _database.SaveChangesAsync();
+            return updatedCategory;
         }
 
     }

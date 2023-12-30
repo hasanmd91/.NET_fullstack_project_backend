@@ -6,7 +6,8 @@ namespace Ecom.Core.src.Abstraction
     public interface IReviewRepo
     {
         Task<Review> CreateOneReviewAsync(Review review);
-        Task<Review> UpdateOneReviewAsync(Guid id, Review review);
+        Task<Review> GeteOneReviewAsync(Guid reviewId);
+        Task<Review> UpdateOneReviewAsync(Review review);
         Task<bool> DeleteOneReviewAsync(Guid id);
     }
 }

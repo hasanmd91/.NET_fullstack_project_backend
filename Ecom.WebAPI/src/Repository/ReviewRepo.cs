@@ -24,10 +24,7 @@ namespace Ecom.WebAPI.src.Repository
         {
             User user = await _users.FirstOrDefaultAsync((u) => u.Id == review.UserId) ?? throw CustomException.NotFoundException();
 
-            if (user is not null)
-            {
-                review.Reviewer = user.FirstName;
-            }
+            review.Reviewer = user.FirstName;
 
             _reviews.Add(review);
             await _database.SaveChangesAsync();
@@ -45,22 +42,18 @@ namespace Ecom.WebAPI.src.Repository
             return true;
         }
 
-        public async Task<Review?> UpdateOneReviewAsync(Guid id, Review review)
+        public Task<Review> GeteOneReviewAsync(Guid reviewId)
         {
-            var existingReview = await _reviews.FindAsync(id);
-            if (existingReview == null)
-                return null;
+            var foundReview = _reviews.FirstOrDefaultAsync((r) => r.Id == reviewId);
+            return foundReview;
+        }
 
-            existingReview.Content = review.Content ?? existingReview.Content;
+        public async Task<Review?> UpdateOneReviewAsync(Review review)
+        {
 
-            if (review.Ratings != default)
-            {
-                existingReview.Ratings = review.Ratings;
-            }
-
-            _database.Update(existingReview);
+            _database.Update(review);
             await _database.SaveChangesAsync();
-            return existingReview;
+            return review;
         }
     }
 }

@@ -53,10 +53,11 @@ namespace Ecom.Service.src.Service
             return deleteResult;
         }
 
-        public async Task<CategoryReadDTO> UpdateOneCategoryAsync(Guid categoryId, CategoryUpdateDTO category)
+        public async Task<CategoryReadDTO> UpdateOneCategoryAsync(Guid categoryId, CategoryUpdateDTO categoryUpdateDTO)
         {
-            var updatedCategory = _mapper.Map<CategoryUpdateDTO, Category>(category);
-            var result = await _categoryRepo.UpdateOneCategoryAsync(categoryId, updatedCategory) ?? throw CustomException.BadRequestException();
+            var categoryToupdate = await _categoryRepo.GetOneCategoryByIdAsync(categoryId) ?? throw CustomException.NotFoundException("Category not found");
+            var updatedCategory = _mapper.Map(categoryUpdateDTO, categoryToupdate);
+            var result = await _categoryRepo.UpdateOneCategoryAsync(updatedCategory);
             return _mapper.Map<Category, CategoryReadDTO>(result);
         }
     }

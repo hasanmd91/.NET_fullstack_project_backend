@@ -5,11 +5,22 @@ Content-Type: application/json
 {
   "content": "this is a another  very very good review",
   "ratings": 4,
-  "ProductId":"abb6fcea-1c2e-42e6-a927-e9ab49960ef4",
-  "UserId": "004d51a4-fbae-44fb-b687-da4019e8d7c6"
+  "ProductId":"037c7e1d-d0ce-406f-8c5e-ce2b1ba46afe",
+  "UserId": "23105f93-f49c-49a6-a371-9102c2792989"
 }
 
 
 ###
 DELETE  http://localhost:5137/api/review/571928b6-d482-4911-9fd8-8aedfde0beba HTTP/1.1
 Content-Type: application/json
+
+###
+PATCH   http://localhost:5137/api/review/e351bb42-d0a2-4fc0-8389-dfbd963fc0c8 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyMzEwNWY5My1mNDljLTQ5YTYtYTM3MS05MTAyYzI3OTI5ODkiLCJ1c2VySWQiOiIyMzEwNWY5My1mNDljLTQ5YTYtYTM3MS05MTAyYzI3OTI5ODkiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTcwMzk1ODE5NywiZXhwIjoxNzA0MTMwOTk3LCJpYXQiOjE3MDM5NTgxOTcsImlzcyI6Ikhhc2FuIiwiYXVkIjoiaHR0cHM6Ly9qb3lkaXBrYW5qaWxhbC5jb20vIn0.MwXWMrwg9Sm5y2r2LE9yq3-59wiPtatHg8-8FqKhl4Y
+
+{
+  "content": "this is a another nice review",
+  "ratings": 5,
+}
+

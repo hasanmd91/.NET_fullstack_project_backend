@@ -8,7 +8,7 @@ namespace Ecom.Core.src.Abstraction
         Task<Category> CreateOneCategoryAsync(Category category);
         Task<IEnumerable<Category>> GetAllCategoryAsync(GetAllParams options);
         Task<Category> GetOneCategoryByIdAsync(Guid categoryId);
-        Task<Category> UpdateOneCategoryAsync(Guid categoryId, Category category);
+        Task<Category> UpdateOneCategoryAsync(Category category);
         Task<bool> DeleteOneByIdCategoryAsync(Guid categoryId);
     }
 }

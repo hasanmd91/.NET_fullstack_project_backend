@@ -27,10 +27,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI4MWRiN
 
 
 ### Patch Method 
-PUT  http://localhost:5137/api/category/c9a4c198-b17a-4006-b204-6d48f51c95dc HTTP/1.1
+PATCH   http://localhost:5137/api/category/956c361e-3805-49ce-bc95-53316924b202 HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI4MWRiNzFkMC1lZDNmLTQ4ZjMtOGRiZi01Mzk3MGQ3MjhjYjUiLCJ1c2VySWQiOiI4MWRiNzFkMC1lZDNmLTQ4ZjMtOGRiZi01Mzk3MGQ3MjhjYjUiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MDM3NDA4ODEsImV4cCI6MTcwMzkxMzY4MSwiaWF0IjoxNzAzNzQwODgxLCJpc3MiOiJIYXNhbiIsImF1ZCI6Imh0dHBzOi8vam95ZGlwa2FuamlsYWwuY29tLyJ9.yMiaO4NvIxDACIW9gjfuWFFu2LNhgYoHP-gSaPeQVEU
 
 {
-    "name": "Shoe"
+    "name": "Men"
 }
