@@ -34,20 +34,22 @@ This backend project is build wtih ASP.NET Core, Entity Framework Core, and Post
 
 ## Features
 
-#### User Management:
+### User Management:
 
 - Users can register for an account and log in.
-- Self-registration as an admin is not permitted.
 - Users can view all available products and individual product details.
+- Users can post, delete and update products review.
 - The ability to search and sort products is supported.
 - Users can add products to their shopping cart.
 - Cart management functionality is available.
+- Users can order product by checkout no payment info is required
 
-#### Admin Functionalities
+### Admin Functionalities
 
 - Admins have the ability to view and delete user accounts.
-- Product Management.
 - Admins can view, edit, delete, and add new products.
+- Admins can view all orders and update order status
+- Admins can update a user to admin.
 
 ## Project Setup Instructions
 
