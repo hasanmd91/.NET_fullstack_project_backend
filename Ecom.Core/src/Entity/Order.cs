@@ -9,7 +9,6 @@ namespace Ecom.Core.src.Entity
         public decimal TotalPrice { get; set; }
         [JsonIgnore]
         public User User { get; set; }
-        [JsonIgnore]
         public IEnumerable<OrderDetails> OrderDetails { get; set; } = new List<OrderDetails>();
         public OrderStatus OrderStatus { get; set; }
     }

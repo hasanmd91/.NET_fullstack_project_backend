@@ -15,7 +15,6 @@ namespace Ecom.Core.src.Entity
         public string Address { get; set; }
         public string Zip { get; set; }
         public string City { get; set; }
-        [JsonIgnore]
         public IEnumerable<Review> Reviews { get; set; } = new List<Review>();
         [JsonIgnore]
         public IEnumerable<Order> Orders { get; set; } = new List<Order>();

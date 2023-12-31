@@ -10,9 +10,7 @@ namespace Ecom.Core.src.Entity
         public int Quantity { get; set; }
         public Guid CategoryId { get; set; }
         public Category Category { get; set; }
-        [JsonIgnore]
         public IEnumerable<Review> Reviews { get; set; } = new List<Review>();
-        [JsonIgnore]
         public IEnumerable<Image> Images { get; set; } = new List<Image>();
 
     }

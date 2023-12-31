@@ -10,7 +10,6 @@ namespace Ecom.Core.src.Entity
 
         [ForeignKey("Product")]
         public Guid ProductId { get; set; }
-        [JsonIgnore]
         public Product Product { get; set; }
 
 
