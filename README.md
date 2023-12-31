@@ -11,7 +11,9 @@
 ## Table of Contents
 
 1. [Technologies](#technologies)
-1. [Project Setup Instructions](#projectsetupinstructions)
+2. [Project Setup Instructions](#project-setup-instructions)
+3. [Architecture](#architecture)
+4. [Database Design](#database-design)
 
 ### Technologies
 
@@ -70,3 +72,16 @@ dotnet run
 dotnet test
 
 ```
+
+```
+
+
+```
+
+### Architecture
+
+![Architecture](Design/architecture.png)
+
+### DataBase Design
+
+![DataBase Design](Design/erd.png)
