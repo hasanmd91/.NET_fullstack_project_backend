@@ -15,7 +15,7 @@ Content-Type: application/json
 {
     "firstName": "John",
     "lastName": "doe",
-    "email": "von@gmail.com",
+    "email": "vonkon@gmail.com",
     "password": "nokia6300",
     "avatar": "https://assets-prd.ignimgs.com/2022/11/22/avatar-blogroll2-1669090391194.jpg",
     "address": "green street 20 a 15",
@@ -33,7 +33,7 @@ Content-Type: application/json
 {
     "firstName": "Ron",
     "lastName": "Doe",
-    "email": "ron@gmail.com",
+    "email": "ronKon@gmail.com",
     "password": "nokia6300",
     "avatar": "https://assets-prd.ignimgs.com/2022/11/22/avatar-blogroll2-1669090391194.jpg",
     "address": "ogreen street 20 a 15",

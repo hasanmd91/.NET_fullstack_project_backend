@@ -9,7 +9,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI4MWRiNzFkMC1lZDNmLTQ4ZjMtOGRiZi01Mzk3MGQ3MjhjYjUiLCJ1c2VySWQiOiI4MWRiNzFkMC1lZDNmLTQ4ZjMtOGRiZi01Mzk3MGQ3MjhjYjUiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MDM3NDA4ODEsImV4cCI6MTcwMzkxMzY4MSwiaWF0IjoxNzAzNzQwODgxLCJpc3MiOiJIYXNhbiIsImF1ZCI6Imh0dHBzOi8vam95ZGlwa2FuamlsYWwuY29tLyJ9.yMiaO4NvIxDACIW9gjfuWFFu2LNhgYoHP-gSaPeQVEU
 
 {
-    "name": "Nike Performance"
+    "name": "Popular"
 }
 
 
