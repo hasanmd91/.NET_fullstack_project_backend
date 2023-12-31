@@ -20,12 +20,12 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyYzViZTIwNi01MGVmLTQ2ZjItYjY5ZS0xZWIwNGUzNGQ0NjYiLCJ1c2VySWQiOiIyYzViZTIwNi01MGVmLTQ2ZjItYjY5ZS0xZWIwNGUzNGQ0NjYiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTcwNDA1NDA0NywiZXhwIjoxNzA0MjI2ODQ3LCJpYXQiOjE3MDQwNTQwNDcsImlzcyI6Ikhhc2FuIiwiYXVkIjoiaHR0cHM6Ly9qb3lkaXBrYW5qaWxhbC5jb20vIn0.1L7Qm4rJsABfQb1TYtDnQVi1SgTvxbOWztkZ-Ph13U8
 
 {
-  "userId": "2c5be206-50ef-46f2-b69e-1eb04e34d466",
+  "userId": "c9b79005-dd67-4e5a-be9f-15f6e0f8a905",
   "orderStatus": "PAID",
   "totalPrice": 21,
   "orderDetails": [
     {
-      "productId": "758010ae-edfb-470e-9efb-96287ca0ccaf",
+      "productId": "0e315388-3120-4db2-a4e3-a37cf743dd96",
       "quantity": 2
     }
 
