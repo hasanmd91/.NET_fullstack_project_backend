@@ -31,8 +31,8 @@ namespace Ecom.Service.src.Service
             var product = _mapper.Map<ProductCreateDTO, Product>(productCreateDTO);
             var result = await _productRepo.CreateOneProductAsync(product) ?? throw CustomException.BadRequestException();
             return _mapper.Map<Product, ProductReadDTO>(result);
-
         }
+
         public async Task<bool> DeleteOneProductAsync(Guid productId)
         {
             var result = await _productRepo.DeleteOneProductAsync(productId);

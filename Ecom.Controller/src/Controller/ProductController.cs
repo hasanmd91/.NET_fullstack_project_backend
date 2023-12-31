@@ -36,8 +36,10 @@ namespace Ecom.Controller.src.Controller
         [HttpPost()]
         public async Task<ActionResult<ProductReadDTO>> CreateOneProductAsync([FromBody] ProductCreateDTO productCreateDTO)
         {
+
             var product = await _productService.CreateOneProductAsync(productCreateDTO);
             return Ok(product);
+
         }
 
         [Authorize(Roles = "Admin")]

@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
 namespace Ecom.Core.src.Entity
 {
@@ -15,7 +14,6 @@ namespace Ecom.Core.src.Entity
 
         [ForeignKey("User")]
         public Guid UserId { get; set; }
-        [JsonIgnore]
         public User User { get; set; }
     }
 }
