@@ -23,9 +23,8 @@ namespace Ecom.WebAPI.src.Database
 
         }
 
-        public DataBaseContext(DbContextOptions options, IConfiguration config) : base(options)
+        public DataBaseContext(DbContextOptions options) : base(options)
         {
-            _connectionString = config.GetConnectionString("LocalDb");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

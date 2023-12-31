@@ -156,7 +156,7 @@ namespace Ecom.WebAPI.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     quantity = table.Column<int>(type: "integer", nullable: false),
                     product_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    order_id = table.Column<Guid>(type: "uuid", nullable: true)
+                    order_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -165,7 +165,8 @@ namespace Ecom.WebAPI.Migrations
                         name: "fk_order_details_order_order_id",
                         column: x => x.order_id,
                         principalTable: "order",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_order_details_product_product_id",
                         column: x => x.product_id,
