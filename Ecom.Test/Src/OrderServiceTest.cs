@@ -1,10 +1,14 @@
 using AutoMapper;
 using Ecom.Core.src.Abstraction;
 using Ecom.Core.src.Entity;
+using Ecom.Core.src.Enum;
 using Ecom.Core.src.parameters;
 using Ecom.Service.src.DTO;
 using Ecom.Service.src.Service;
 using Ecom.Service.src.Shared;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
+using Microsoft.EntityFrameworkCore.Query;
 using Moq;
 
 namespace Ecom.Test.Src
@@ -113,6 +117,53 @@ namespace Ecom.Test.Src
                 Add(null, orderCreateDTO, null, typeof(CustomException));
             }
         }
+
+        [Theory]
+        [ClassData(typeof(UpdateOrderdata))]
+        public async void UpdateOrderAsync_shouldReturnValidResponse(Order order, OrderUpdateDTO orderUpdateDTO, OrderReadDTO expected, Type? exceptionType)
+        {
+            var repo = new Mock<IOrderRepo>();
+            repo.Setup((repo) => repo.GetOneOrderAsync(It.IsAny<Guid>())).ReturnsAsync(order);
+            var orderService = new OrderService(repo.Object, _mapper);
+
+
+            if (exceptionType is not null)
+            {
+                await Assert.ThrowsAsync(exceptionType, () => orderService.UpdateOrderAsync(It.IsAny<Guid>(), orderUpdateDTO));
+            }
+            else
+            {
+                var result = await orderService.UpdateOrderAsync(It.IsAny<Guid>(), orderUpdateDTO);
+                Assert.Equivalent(expected, result);
+            }
+
+
+
+        }
+
+
+
+        public class UpdateOrderdata : TheoryData<Order?, OrderUpdateDTO, OrderReadDTO?, Type?>
+        {
+            public UpdateOrderdata()
+            {
+                Order order = new() { OrderDetails = new List<OrderDetails> { } };
+                OrderUpdateDTO orderUpdateDTO = new() { OrderStatus = OrderStatus.DELIVERED };
+
+                Order updatedOrder = _mapper.Map(orderUpdateDTO, order);
+                OrderReadDTO orderReadDTO = _mapper.Map<Order, OrderReadDTO>(updatedOrder);
+
+                Add(order, orderUpdateDTO, orderReadDTO, null);
+                Add(null, orderUpdateDTO, null, typeof(CustomException));
+
+            }
+
+
+        }
+
+
+
+
 
 
     }
