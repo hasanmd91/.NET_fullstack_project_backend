@@ -49,9 +49,16 @@ namespace Ecom.Service.src.DTO
 
     public class LoginDTO
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public required string Email { get; set; }
+        public required string Password { get; set; }
     }
+
+
+    public class ChangeRoleDTO
+    {
+        public Role Role { get; set; } = Role.Admin;
+    }
+
 
 
 }

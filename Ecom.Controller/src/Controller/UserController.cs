@@ -54,5 +54,14 @@ namespace Ecom.Controller.src.Controller
         {
             return StatusCode(204, await _userService.DeleteOneUserAsync(userId));
         }
+
+
+        [Authorize(Roles = "Admin")]
+        [HttpPatch("changeUserRole/{userId}")]
+        public async Task<ActionResult<bool>> ChangeUserRoleAsync(Guid userId)
+        {
+            return Ok(await _userService.ChangeUserRoleAsync(userId));
+        }
+
     }
 }

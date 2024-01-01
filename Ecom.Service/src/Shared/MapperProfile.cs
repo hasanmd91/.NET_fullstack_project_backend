@@ -14,6 +14,9 @@ namespace Ecom.Service.src.Shared
             CreateMap<UserUpdateDTO, User>()
             .ForAllMembers(opt => opt.Condition((src, dest, member) => member != null));
 
+            CreateMap<ChangeRoleDTO, User>()
+            .ForAllMembers(opt => opt.Condition((src, dest, member) => member != null));
+
 
             CreateMap<Category, CategoryReadDTO>();
             CreateMap<CategoryCreateDTO, Category>();

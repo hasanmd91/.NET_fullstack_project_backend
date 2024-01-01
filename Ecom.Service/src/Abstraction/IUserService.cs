@@ -1,4 +1,5 @@
 using Ecom.Core.src.Entity;
+using Ecom.Core.src.Enum;
 using Ecom.Core.src.parameters;
 using Ecom.Service.src.DTO;
 
@@ -11,6 +12,7 @@ namespace Ecom.Service.src.Abstraction
         Task<UserReadDTO> CreateOneUserAsync(UserCreateDTO userCreateDTO);
         Task<UserReadDTO> UpdateOneUserAsync(Guid userId, UserUpdateDTO userUpdateDTO);
         Task<bool> DeleteOneUserAsync(Guid id);
+        Task<UserReadDTO> ChangeUserRoleAsync(Guid userid);
 
     }
 }

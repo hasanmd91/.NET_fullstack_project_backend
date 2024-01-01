@@ -1,6 +1,7 @@
 using AutoMapper;
 using Ecom.Core.src.Abstraction;
 using Ecom.Core.src.Entity;
+using Ecom.Core.src.Enum;
 using Ecom.Core.src.parameters;
 using Ecom.Service.src.Abstraction;
 using Ecom.Service.src.DTO;
@@ -18,7 +19,6 @@ namespace Ecom.Service.src.Service
             _userRepo = userRepo;
             _mapper = mapper;
         }
-
         public async Task<UserReadDTO> CreateOneUserAsync(UserCreateDTO userCreateDTO)
         {
             PasswordService.HashPassword(userCreateDTO.Password, out string hashedPassword, out byte[] salt);
@@ -65,5 +65,25 @@ namespace Ecom.Service.src.Service
             var result = await _userRepo.UpdateOneUserAsync(updateUser);
             return _mapper.Map<User, UserReadDTO>(result);
         }
+
+
+        public async Task<UserReadDTO> ChangeUserRoleAsync(Guid userid)
+        {
+
+            User foundUser = await _userRepo.GetOneUserByIdAsync(userid) ?? throw CustomException.NotFoundException("User not found");
+
+            if (foundUser.Role == Role.Admin)
+            {
+                throw CustomException.BadRequestException("User is already an Admin");
+            }
+
+            ChangeRoleDTO admin = new();
+            var newAdminUser = _mapper.Map(admin, foundUser);
+            var result = await _userRepo.UpdateOneUserAsync(newAdminUser);
+
+            return _mapper.Map<User, UserReadDTO>(result);
+
+        }
+
     }
 }
