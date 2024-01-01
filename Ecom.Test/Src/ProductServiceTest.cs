@@ -34,7 +34,7 @@ namespace Ecom.Test.Src
         }
 
         [Fact]
-        public async void GetAllProductsAsync_ShouldReturnValidResponse()
+        public async void GetAllProductsAsync_ShouldReturn_ValidResponse()
         {
             var repo = new Mock<IProductRepo>();
             GetAllParams options = new() { Limit = 20, Offset = 0 };
@@ -102,7 +102,7 @@ namespace Ecom.Test.Src
 
         [Theory]
         [ClassData(typeof(DeleteSingleProductData))]
-        public async void DeleteOneProductAsyncById_ShouldReturnValidResponse(Product? foundProduct, bool response, bool? result, Type? type)
+        public async void DeleteOneProductAsyncById_ShouldReturn_ValidResponse(Product? foundProduct, bool response, bool? result, Type? type)
         {
             var repo = new Mock<IProductRepo>();
             var categoryRepo = new Mock<ICategoryRepo>();

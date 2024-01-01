@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using AutoMapper;
 using Ecom.Core.src.Abstraction;
 using Ecom.Core.src.Entity;
@@ -30,25 +31,25 @@ namespace Ecom.Test.Src
             GetAllParams options = new() { Limit = 20, Offset = 0 };
             User user1 = new()
             {
-                FirstName = "x",
-                LastName = "y",
-                Email = "xy@gmail.com",
-                Password = "asdkasnj",
-                Avatar = "sncjklna@njas",
-                Address = "lcsal",
-                Zip = "makl",
-                City = "jsna"
+                FirstName = "John ",
+                LastName = "Doe",
+                Email = "john.doe@gmail.com",
+                Password = "securePassword123",
+                Avatar = "https://example.com/avatar/johndoe.jpg",
+                Address = "123 Main St",
+                Zip = "12345",
+                City = "Anytown"
             };
             User user2 = new()
             {
-                FirstName = "x",
-                LastName = "y",
-                Email = "xya@gmail.com",
-                Password = "asdkasnj",
-                Avatar = "sncjklna@njas",
-                Address = "lcsal",
-                Zip = "makl",
-                City = "jsna"
+                FirstName = "John ",
+                LastName = "Sminth",
+                Email = "john.smith@gmail.com",
+                Password = "securePassword123",
+                Avatar = "https://example.com/avatar/johndoe.jpg",
+                Address = "123 Main St",
+                Zip = "12345",
+                City = "Anytown"
             };
 
             IEnumerable<User> users = new List<User> { user1, user2 };
@@ -158,20 +159,77 @@ namespace Ecom.Test.Src
             {
                 UserCreateDTO userCreateDTO = new()
                 {
-                    FirstName = "x",
-                    LastName = "y",
-                    Email = "xssdy@gmail.com",
-                    Password = "asdkasnj",
-                    Avatar = "sncjklna@njas",
-                    Address = "lcsal",
-                    Zip = "makl",
-                    City = "jsna"
+                    FirstName = "John ",
+                    LastName = "Doe",
+                    Email = "john.doe@gmail.com",
+                    Password = "securePassword123",
+                    Avatar = "https://example.com/avatar/johndoe.jpg",
+                    Address = "123 Main St",
+                    Zip = "12345",
+                    City = "Anytown"
                 };
 
                 User user = _mapper.Map<UserCreateDTO, User>(userCreateDTO);
                 UserReadDTO userReadDTO = _mapper.Map<User, UserReadDTO>(user);
                 Add(user, userCreateDTO, userReadDTO, null);
                 Add(null, userCreateDTO, null, typeof(CustomException));
+            }
+        }
+
+
+
+        [Theory]
+        [ClassData(typeof(UserUpdateData))]
+        public async void UpdateOneUserAsync_ShouldReturnValidResponse(User user, UserUpdateDTO userUpdateDTO, UserReadDTO expected, Type? exceptionType)
+        {
+            var repo = new Mock<IUserRepo>();
+            repo.Setup(repo => repo.UpdateOneUserAsync(It.IsAny<User>())).ReturnsAsync(user);
+            repo.Setup(repo => repo.GetOneUserByIdAsync(It.IsAny<Guid>())).ReturnsAsync(user);
+            var userService = new UserService(repo.Object, _mapper);
+
+            if (exceptionType is not null)
+            {
+                await Assert.ThrowsAsync(exceptionType, () => userService.UpdateOneUserAsync(It.IsAny<Guid>(), userUpdateDTO));
+            }
+            else
+            {
+                var result = await userService.UpdateOneUserAsync(It.IsAny<Guid>(), userUpdateDTO);
+                Assert.Equivalent(expected, result);
+            }
+        }
+
+        public class UserUpdateData : TheoryData<User?, UserUpdateDTO, UserReadDTO?, Type?>
+        {
+            public UserUpdateData()
+            {
+
+                User user = new()
+                {
+                    FirstName = "John ",
+                    LastName = "Doe",
+                    Email = "john.doe@gmail.com",
+                    Password = "securePassword123",
+                    Avatar = "https://example.com/avatar/johndoe.jpg",
+                    Address = "123 Main St",
+                    Zip = "12345",
+                    City = "Anytown"
+                };
+
+                UserUpdateDTO userUpdateDTO = new()
+                {
+                    FirstName = "John ",
+                    LastName = "Smith",
+                    Address = "Green St 123",
+                    Zip = "12345",
+                    City = "Uk Anytown"
+                };
+
+
+                User Updateduser = _mapper.Map(userUpdateDTO, user);
+                UserReadDTO userReadDTO = _mapper.Map<User, UserReadDTO>(Updateduser);
+                Add(user, userUpdateDTO, userReadDTO, null);
+                Add(null, userUpdateDTO, userReadDTO, typeof(CustomException));
+                Add(null, userUpdateDTO, null, typeof(CustomException));
             }
         }
 
