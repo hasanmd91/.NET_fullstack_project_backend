@@ -23,16 +23,16 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI1NTQwZmUwOS1iMzI0LTQyNTYtYTVhYy0zNTY2NGUxYWMyMTQiLCJ1c2VySWQiOiI1NTQwZmUwOS1iMzI0LTQyNTYtYTVhYy0zNTY2NGUxYWMyMTQiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MDQwNTU3MTMsImV4cCI6MTcwNDIyODUxMywiaWF0IjoxNzA0MDU1NzEzLCJpc3MiOiJIYXNhbiIsImF1ZCI6Imh0dHBzOi8vam95ZGlwa2FuamlsYWwuY29tLyJ9.BJh5kPxCij-ss6TPqRBfI1pHlD58FTHJdCebeAQFDXI
  
 {
-    "title": "AIR MAX ALPHA TRAINER 5 - Treenikenkä",
-    "description": "Step into the future of athletic excellence with the Nike AirStride 2023, a groundbreaking fusion of cutting-edge technology and sleek design. Crafted for the modern athlete who demands both performance and style, these shoes are your ticket to superior comfort and unstoppable confidence.",
-    "price": 250,
-    "quantity": 200,
-    "categoryId": "cbcca7aa-a3b2-43f6-a595-f78c9c0a60bc",
+    "title": "Jordan True Flight",
+    "description": "Nothing as fly, nothing as comfortable, nothing as proven. The Air Max 90 stays true to its running roots with the iconic Waffle sole, stitched overlays and classic details. A bold, dark colourway contrasts with a gum outsole and reflective design details for a sleek look while Max Air cushioning adds comfort to your journey.",
+    "price": 350,
+    "quantity": 2000,
+    "categoryId": "693eb135-2fee-4604-8049-a30b527c1e70",
     "images": 
     [
-    { "imageUrl": "https://img01.ztat.net/article/spp-media-p1/f7538b3b560a4e97a608553437388282/f15fe8ecb381410189d3fe7ef62f1960.jpg?imwidth=1800"},
-    { "imageUrl": "https://img01.ztat.net/article/spp-media-p1/f7538b3b560a4e97a608553437388282/f15fe8ecb381410189d3fe7ef62f1960.jpg?imwidth=1800"},
-    { "imageUrl": "https://img01.ztat.net/article/spp-media-p1/f7538b3b560a4e97a608553437388282/f15fe8ecb381410189d3fe7ef62f1960.jpg?imwidth=1800"}
+    { "imageUrl": "https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/298fb136-14b0-45cf-9c66-b3654c67ef62/jordan-one-take-5-shoes-CQ0GM8.png"},
+    { "imageUrl": "https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/298fb136-14b0-45cf-9c66-b3654c67ef62/jordan-one-take-5-shoes-CQ0GM8.png"},
+    { "imageUrl": "https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/298fb136-14b0-45cf-9c66-b3654c67ef62/jordan-one-take-5-shoes-CQ0GM8.png"}
     ]
 }
 

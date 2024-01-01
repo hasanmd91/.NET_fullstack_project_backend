@@ -182,6 +182,69 @@ namespace Ecom.Test.Src
             }
         }
 
+        [Theory]
+        [ClassData(typeof(UpdateProductData))]
+        public async void UpdateOneProductAsync_ShouldReturn_ValidResponse(Product product, ProductUpdateDTO productUpdateDTO, Category category, ProductReadDTO expected, Type? exceptionType)
+        {
+            var repo = new Mock<IProductRepo>();
+            var categoryRepo = new Mock<ICategoryRepo>();
+
+
+            repo.Setup(repo => repo.UpdateOneProductAsync(It.IsAny<Product>())).ReturnsAsync(product);
+            repo.Setup(repo => repo.GetOneProductByIdAsync(It.IsAny<Guid>())).ReturnsAsync(product);
+            categoryRepo.Setup(repo => repo.GetOneCategoryByIdAsync(category.Id)).ReturnsAsync(category);
+
+            var productService = new ProductService(repo.Object, categoryRepo.Object, _mapper);
+
+            if (exceptionType is not null)
+            {
+                await Assert.ThrowsAsync(exceptionType, () => productService.UpdateOneProductAsync(It.IsAny<Guid>(), productUpdateDTO));
+            }
+            else
+            {
+                var response = await productService.UpdateOneProductAsync(It.IsAny<Guid>(), productUpdateDTO);
+                Assert.Equivalent(expected, response);
+            }
+        }
+
+
+        public class UpdateProductData : TheoryData<Product?, ProductUpdateDTO, Category, ProductReadDTO?, Type?>
+        {
+            public UpdateProductData()
+            {
+                Category category = new()
+                {
+                    Name = "Shoe"
+                };
+
+
+                Product product = new()
+                {
+                    Title = "tshirts",
+                    Description = "woevn",
+                    Price = 10,
+                    Quantity = 500,
+                    CategoryId = category.Id,
+                    Images = new List<Image> { new() { ImageUrl = "string" } }
+                };
+
+                ProductUpdateDTO productUpdateDTO = new()
+                {
+
+                    Title = "Sweater",
+                    Description = "woevn",
+                    Price = 100,
+                };
+
+
+                Product updatedProduct = _mapper.Map(productUpdateDTO, product);
+                ProductReadDTO productReadDTO = _mapper.Map<Product, ProductReadDTO>(updatedProduct);
+
+                Add(product, productUpdateDTO, category, productReadDTO, null);
+                Add(null, productUpdateDTO, category, null, typeof(CustomException));
+            }
+        }
+
 
     }
 }

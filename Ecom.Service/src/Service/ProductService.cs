@@ -47,13 +47,13 @@ namespace Ecom.Service.src.Service
 
         public async Task<ProductReadDTO> GetOneProductByIdAsync(Guid productId)
         {
-            var result = await _productRepo.GetOneProductByIdAsync(productId) ?? throw CustomException.NotFoundException();
+            var result = await _productRepo.GetOneProductByIdAsync(productId) ?? throw CustomException.NotFoundException("Product not found");
             return _mapper.Map<Product, ProductReadDTO>(result);
 
         }
         public async Task<ProductReadDTO> UpdateOneProductAsync(Guid productId, ProductUpdateDTO productUpdateDTO)
         {
-            var productToUpdate = await _productRepo.GetOneProductByIdAsync(productId) ?? throw CustomException.NotFoundException();
+            var productToUpdate = await _productRepo.GetOneProductByIdAsync(productId) ?? throw CustomException.NotFoundException("Product not found");
 
             if (productUpdateDTO.CategoryId is not null)
             {
