@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System.Text;
 using AutoMapper;
 using Ecom.Core.src.Abstraction;
 using Ecom.Core.src.Entity;
@@ -118,14 +120,16 @@ namespace Ecom.Test.Src
             }
         }
 
+
+
         [Theory]
         [ClassData(typeof(UpdateOrderdata))]
         public async void UpdateOrderAsync_shouldReturnValidResponse(Order order, OrderUpdateDTO orderUpdateDTO, OrderReadDTO expected, Type? exceptionType)
         {
             var repo = new Mock<IOrderRepo>();
             repo.Setup((repo) => repo.GetOneOrderAsync(It.IsAny<Guid>())).ReturnsAsync(order);
+            repo.Setup((repo) => repo.UpdateOrderAsync(It.IsAny<Order>())).ReturnsAsync(order);
             var orderService = new OrderService(repo.Object, _mapper);
-
 
             if (exceptionType is not null)
             {
@@ -137,19 +141,16 @@ namespace Ecom.Test.Src
                 Assert.Equivalent(expected, result);
             }
 
-
-
         }
-
-
-
         public class UpdateOrderdata : TheoryData<Order?, OrderUpdateDTO, OrderReadDTO?, Type?>
         {
             public UpdateOrderdata()
             {
-                Order order = new() { OrderDetails = new List<OrderDetails> { } };
+                Order order = new()
+                {
+                    OrderDetails = new List<OrderDetails> { }
+                };
                 OrderUpdateDTO orderUpdateDTO = new() { OrderStatus = OrderStatus.DELIVERED };
-
                 Order updatedOrder = _mapper.Map(orderUpdateDTO, order);
                 OrderReadDTO orderReadDTO = _mapper.Map<Order, OrderReadDTO>(updatedOrder);
 
@@ -157,8 +158,6 @@ namespace Ecom.Test.Src
                 Add(null, orderUpdateDTO, null, typeof(CustomException));
 
             }
-
-
         }
 
 

@@ -44,15 +44,16 @@ namespace Ecom.Service.src.Service
 
         public async Task<OrderReadDTO> GetOneOrderAsync(Guid orderId)
         {
-            var result = await _ordeRepo.GetOneOrderAsync(orderId) ?? throw CustomException.NotFoundException();
+            var result = await _ordeRepo.GetOneOrderAsync(orderId) ?? throw CustomException.NotFoundException("Order is not found");
             return _mapper.Map<Order, OrderReadDTO>(result);
         }
 
         public async Task<OrderReadDTO> UpdateOrderAsync(Guid orderId, OrderUpdateDTO orderUpdateDTO)
         {
-            var order = await _ordeRepo.GetOneOrderAsync(orderId) ?? throw CustomException.NotFoundException();
-            order.OrderStatus = orderUpdateDTO.OrderStatus;
-            var result = await _ordeRepo.UpdateOrderAsync(order);
+            var order = await _ordeRepo.GetOneOrderAsync(orderId) ?? throw CustomException.NotFoundException("Order is not found");
+            var updatedOrder = _mapper.Map(orderUpdateDTO, order);
+
+            var result = await _ordeRepo.UpdateOrderAsync(updatedOrder);
             return _mapper.Map<Order, OrderReadDTO>(result);
         }
     }

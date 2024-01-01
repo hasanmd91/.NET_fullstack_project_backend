@@ -99,8 +99,6 @@ namespace Ecom.Test.Src
             }
         }
 
-
-
         [Fact]
         public async Task CreateOneCategoryAsync_ShouldReturnValidResponse()
         {

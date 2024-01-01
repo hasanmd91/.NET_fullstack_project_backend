@@ -82,7 +82,7 @@ namespace Ecom.Test.Src
             var salt = new byte[16];
 
             userRepoMock.Setup(u => u.GetOneUserByEmailAsync(invalidCredintial.Email))
-                .ReturnsAsync((User)null);
+                      .ReturnsAsync((User)null);
 
             await Assert.ThrowsAsync<CustomException>(async () => await authService.Login(invalidCredintial));
         }
@@ -93,14 +93,14 @@ namespace Ecom.Test.Src
             {
                 UserCreateDTO userCreateDTO = new()
                 {
-                    FirstName = "x",
-                    LastName = "y",
-                    Email = "xssdy@gmail.com",
-                    Password = "asdkasnj",
-                    Avatar = "sncjklna@njas",
-                    Address = "lcsal",
-                    Zip = "makl",
-                    City = "jsna"
+                    FirstName = "John ",
+                    LastName = "Doe",
+                    Email = "john.doe@gmail.com",
+                    Password = "securePassword123",
+                    Avatar = "https://example.com/avatar/johndoe.jpg",
+                    Address = "123 Main St",
+                    Zip = "12345",
+                    City = "Anytown"
                 };
 
                 User user = _mapper.Map<UserCreateDTO, User>(userCreateDTO);
