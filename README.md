@@ -18,7 +18,7 @@
 
 ### Frontend
 
-The frontend of the project has been deployed and is accessible in the repository at [https://github.com/hasanmd91/fs16_6-frontend-project](https://github.com/hasanmd91/fs16_6-frontend-project): Live Link of the frontend Project [https://ilhshoestore.netlify.app/](https://ilhshoestore.netlify.app/)
+The frontend of the project has been deployed and is accessible in the repository at [https://github.com/hasanmd91/.NET_fullstack_project_frontend](https://github.com/hasanmd91/.NET_fullstack_project_frontend): Live Link of the frontend Project [https://ilhshoestore.netlify.app/](https://ilhshoestore.netlify.app/)
 
 ### Backend
 
