@@ -24,6 +24,10 @@ The frontend of the project has been deployed and is accessible in the repositor
 
 This backend project is build wtih ASP.NET Core, Entity Framework Core, and PostgreSQL and is deployed on Microsoft Azure. The backend provides endpoints for performing CRUD operations based on Authorization. Backend deployed link [https://ecommershop.azurewebsites.net](https://ecommershop.azurewebsites.net)
 
+### Swagger Documentation
+
+[https://ecommershop.azurewebsites.net](https://ecommershop.azurewebsites.net)
+
 ### Technologies
 
 - ASP.Net Core
