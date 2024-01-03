@@ -38,13 +38,20 @@ namespace Ecom.WebAPI.src.Repository
             return false;
         }
 
-        public IEnumerable<User> GetAllUserAsync(GetAllParams options)
+        public async Task<IEnumerable<User>> GetAllUserAsync(GetAllParams options)
         {
-            return _users.Include(u => u.Orders).Where(u => u.FirstName.Contains(options.Search))
-                         .OrderBy(u => u.FirstName)
-                         .Skip(options.Offset)
-                         .Take(options.Limit);
+            var users = await _users
+                .Include(u => u.Orders)
+                .Where(u => u.FirstName.Contains(options.Search))
+                .OrderBy(u => u.FirstName)
+                .Skip(options.Offset)
+                .Take(options.Limit)
+                .ToListAsync();
+
+            return users;
         }
+
+
 
 
         public async Task<User> GetOneUserByIdAsync(Guid userId)

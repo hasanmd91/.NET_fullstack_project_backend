@@ -9,7 +9,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI1OTM1ODhkZS1kOWU4LTQyZmQtODMzOS01Yjg3MDYxMWI4NzYiLCJ1c2VySWQiOiI1OTM1ODhkZS1kOWU4LTQyZmQtODMzOS01Yjg3MDYxMWI4NzYiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MDQwNTM3MDgsImV4cCI6MTcwNDIyNjUwOCwiaWF0IjoxNzA0MDUzNzA4LCJpc3MiOiJIYXNhbiIsImF1ZCI6Imh0dHBzOi8vam95ZGlwa2FuamlsYWwuY29tLyJ9.a8kqr-T__aQf27RuBS098GQQolaVAoimUvp4RTVUnD4
 
 {
-    "name": "Air Jordan"
+    "name": "Air Jordan 2024"
 }
 
 

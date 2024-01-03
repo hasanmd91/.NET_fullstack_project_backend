@@ -11,6 +11,7 @@ using Ecom.WebAPI.src.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Npgsql;
 
 
@@ -21,8 +22,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<ExceptionHandeler>();
+builder.Services.AddSwaggerGen(c =>
+    {
+        c.SwaggerDoc("v1", new OpenApiInfo { Title = "ecom", Version = "v1" });
+    }); builder.Services.AddScoped<ExceptionHandeler>();
 
 
 // declare services
@@ -86,11 +89,13 @@ app.UseCors(options =>
 });
 
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+  {
+      c.SwaggerEndpoint("/swagger/v1/swagger.json", "V1");
+      c.RoutePrefix = string.Empty;
+  }
+);
 
 
 app.UseHttpsRedirection();

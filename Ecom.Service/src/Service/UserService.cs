@@ -45,7 +45,7 @@ namespace Ecom.Service.src.Service
 
         public async Task<IEnumerable<UserReadDTO>> GetAllUserAsync(GetAllParams options)
         {
-            var result = _userRepo.GetAllUserAsync(options);
+            var result = await _userRepo.GetAllUserAsync(options);
             var users = await Task.FromResult(result);
             return _mapper.Map<IEnumerable<User>, IEnumerable<UserReadDTO>>(users);
         }

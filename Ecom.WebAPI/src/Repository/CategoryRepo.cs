@@ -24,7 +24,7 @@ namespace Ecom.WebAPI.src.Repository
                     .Where(c => c.Name.Contains(options.Search))
                     .Skip(options.Offset)
                     .Take(options.Limit)
-                    .ToList();
+                    .ToListAsync();
             });
         }
 

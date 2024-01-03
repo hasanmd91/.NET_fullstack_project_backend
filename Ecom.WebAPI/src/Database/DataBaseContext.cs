@@ -33,7 +33,6 @@ namespace Ecom.WebAPI.src.Database
             optionsBuilder
             .UseSnakeCaseNamingConvention()
             .AddInterceptors(new TimeStampInterceptor())
-            .EnableDetailedErrors()
             .ConfigureWarnings(warnings => { warnings.Ignore(CoreEventId.ManyServiceProvidersCreatedWarning); });
 
             base.OnConfiguring(optionsBuilder);
@@ -41,10 +40,6 @@ namespace Ecom.WebAPI.src.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasPostgresEnum<Role>();
-            modelBuilder.HasPostgresEnum<OrderStatus>();
-            modelBuilder.Entity<User>(entity => entity.Property(e => e.Role).HasColumnType("role"));
-            modelBuilder.Entity<Order>(entity => entity.Property(e => e.OrderStatus).HasColumnType("order_status"));
             modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
             modelBuilder.Entity<Category>().HasIndex(c => c.Name).IsUnique();
 
