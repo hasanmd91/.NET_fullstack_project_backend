@@ -4,6 +4,7 @@ using Ecom.Core.src.parameters;
 using Ecom.Service.src.Abstraction;
 using Ecom.Service.src.DTO;
 using Ecom.Service.src.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
@@ -31,7 +32,7 @@ namespace Ecom.Controller.src.Controller
             return await _authService.Login(credentials);
         }
 
-
+        [Authorize]
         [HttpGet("profile")]
         public async Task<ActionResult<UserReadDTO>> GetCurrentUserProfile()
         {

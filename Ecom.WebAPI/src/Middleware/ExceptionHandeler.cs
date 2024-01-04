@@ -1,4 +1,5 @@
 using Ecom.Service.src.Shared;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ecom.WebAPI.src.Middleware
 {
@@ -16,6 +17,12 @@ namespace Ecom.WebAPI.src.Middleware
                 context.Response.StatusCode = e.StatusCode;
                 await context.Response.WriteAsync(e.Message);
             }
+            catch (DbUpdateException e)
+            {
+                context.Response.StatusCode = 500;
+                await context.Response.WriteAsync(e.Message);
+            }
+
             catch (Exception e)
             {
                 context.Response.StatusCode = 500;

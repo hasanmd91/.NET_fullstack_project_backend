@@ -5,11 +5,11 @@ namespace Ecom.Core.src.Abstraction
 {
     public interface IOrderRepo
     {
-        public Task<Order> CreateOrderAsync(Order order);
-        public Task<IEnumerable<Order>> GetAllOrderAsync(GetAllParams options);
-        public Task<bool> DeleteOrderAsync(Guid orderId);
-        public Task<Order> GetOneOrderAsync(Guid orderId);
-        public Task<Order> UpdateOrderAsync(Order order);
+        Task<Order> CreateOrderAsync(Order order);
+        Task<IEnumerable<Order>> GetAllOrderAsync(GetAllParams options);
+        Task<bool> DeleteOrderAsync(Guid orderId);
+        Task<Order> GetOneOrderAsync(Guid orderId);
+        Task<Order> UpdateOrderAsync(Order order);
 
     }
 }

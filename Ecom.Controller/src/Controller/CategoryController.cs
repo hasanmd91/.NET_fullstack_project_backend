@@ -22,7 +22,7 @@ namespace Ecom.Controller.src.Controller
         public async Task<ActionResult<IEnumerable<CategoryReadDTO>>> GetAllCategoryAsync([FromQuery] GetAllParams options)
         {
             var result = await _categoryService.GetAllCategoryAsync(options);
-            return result.ToArray();
+            return result.ToList();
         }
 
         [AllowAnonymous]
