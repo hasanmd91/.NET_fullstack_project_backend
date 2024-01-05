@@ -7,7 +7,7 @@ content-type: application/json
 }
 
 ### Get one Method 
-GET  http://localhost:5137/api/product/16a1895e-bd87-482a-93fa-0d77299410ad HTTP/1.1
+GET  http://localhost:5137/api/product/758010ae-edfb-470e-9efb-96287ca0ccaf HTTP/1.1
 content-type: application/json
 
 

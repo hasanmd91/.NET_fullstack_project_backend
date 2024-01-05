@@ -53,6 +53,8 @@ builder.Services.AddScoped<IOrderRepo, OrderRepo>();
 //add DI custom authorization services 
 builder.Services.AddSingleton<IAuthorizationHandler, OrderAdminOrOwnerHandler>();
 builder.Services.AddSingleton<IAuthorizationHandler, OrderOwnerHandler>();
+builder.Services.AddSingleton<IAuthorizationHandler, ReviewAdminOrOwnerHandeler>();
+builder.Services.AddSingleton<IAuthorizationHandler, ReviewOwnerHandeler>();
 
 
 var dataSourceBuilder = new NpgsqlDataSourceBuilder(builder.Configuration.GetConnectionString("Store"));
@@ -86,6 +88,8 @@ builder.Services.AddAuthorization(policy =>
 {
     policy.AddPolicy("OrderAdminOrOwnerPolicy", policy => policy.Requirements.Add(new AdminOrOwnerRequirement()));
     policy.AddPolicy("OrderOwnerPolicy", policy => policy.Requirements.Add(new OrderOwnerRequirement()));
+    policy.AddPolicy("ReviewAdminOrOwnerPolicy", policy => policy.Requirements.Add(new ReviewAdminOrOwnerRequirement()));
+    policy.AddPolicy("ReviewOwnerPolicy", policy => policy.Requirements.Add(new ReviewOwnerRequirement()));
 
 });
 

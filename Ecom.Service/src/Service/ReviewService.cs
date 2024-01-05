@@ -37,6 +37,13 @@ namespace Ecom.Service.src.Service
             return result;
         }
 
+        public async Task<ReviewReadDTO> GeteOneReviewAsync(Guid reviewId)
+        {
+            var foundReview = await _reviewRepo.GeteOneReviewAsync(reviewId) ?? throw CustomException.NotFoundException("Review with this id is not found");
+            return _mapper.Map<Review, ReviewReadDTO>(foundReview);
+
+        }
+
         public async Task<ReviewReadDTO> UpdateOneReviewAsync(Guid reviewId, ReviewUpdateDTO reviewUpdateDTO)
         {
             var reviewToUpdate = await _reviewRepo.GeteOneReviewAsync(reviewId) ?? throw CustomException.NotFoundException();

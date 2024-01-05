@@ -6,7 +6,8 @@ namespace Ecom.Service.src.Abstraction
     public interface IReviewService
     {
         Task<ReviewReadDTO> CreateOneReviewAsync(ReviewCreateDTO ReviewCreateDTO);
-        Task<ReviewReadDTO> UpdateOneReviewAsync(Guid id, ReviewUpdateDTO reviewUpdateDTO);
-        Task<bool> DeleteOneReviewAsync(Guid id);
+        Task<ReviewReadDTO> UpdateOneReviewAsync(Guid reviewId, ReviewUpdateDTO reviewUpdateDTO);
+        Task<ReviewReadDTO> GeteOneReviewAsync(Guid reviewId);
+        Task<bool> DeleteOneReviewAsync(Guid reviewId);
     }
 }
