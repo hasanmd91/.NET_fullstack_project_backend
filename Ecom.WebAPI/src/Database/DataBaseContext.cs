@@ -8,7 +8,6 @@ namespace Ecom.WebAPI.src.Database
 {
     public class DataBaseContext : DbContext
     {
-        private readonly string? _connectionString;
         public DbSet<User> Users { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Product> Product { get; set; }

@@ -49,6 +49,7 @@ builder.Services.AddScoped<IReviewRepo, ReviewRepo>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderRepo, OrderRepo>();
 
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 //add DI custom authorization services 
 builder.Services.AddSingleton<IAuthorizationHandler, OrderAdminOrOwnerHandler>();
@@ -114,6 +115,13 @@ app.UseSwaggerUI(c =>
       c.RoutePrefix = string.Empty;
   }
 );
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
 
 
 app.UseHttpsRedirection();
