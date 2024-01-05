@@ -70,7 +70,7 @@ POST http://localhost:5137/api/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "vonkon@gmail.com",
+    "email": "vonJon2@gmail.com",
     "password": "nokia6300"
 }
 

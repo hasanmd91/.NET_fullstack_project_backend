@@ -4,11 +4,13 @@ using Ecom.Core.src.Enum;
 using Ecom.Service.src.Abstraction;
 using Ecom.Service.src.Service;
 using Ecom.Service.src.Shared;
+using Ecom.WebAPI.Authorization;
 using Ecom.WebAPI.src.Database;
 using Ecom.WebAPI.src.Middleware;
 using Ecom.WebAPI.src.Repository;
 using Ecom.WebAPI.src.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -48,6 +50,11 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderRepo, OrderRepo>();
 
 
+//add DI custom authorization services 
+builder.Services.AddSingleton<IAuthorizationHandler, OrderAdminOrOwnerHandler>();
+builder.Services.AddSingleton<IAuthorizationHandler, OrderOwnerHandler>();
+
+
 var dataSourceBuilder = new NpgsqlDataSourceBuilder(builder.Configuration.GetConnectionString("Store"));
 dataSourceBuilder.MapEnum<Role>();
 dataSourceBuilder.MapEnum<OrderStatus>();
@@ -75,10 +82,17 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     });
 
 
+builder.Services.AddAuthorization(policy =>
+{
+    policy.AddPolicy("OrderAdminOrOwnerPolicy", policy => policy.Requirements.Add(new AdminOrOwnerRequirement()));
+    policy.AddPolicy("OrderOwnerPolicy", policy => policy.Requirements.Add(new OrderOwnerRequirement()));
+
+});
+
+
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionHandeler>();
-
 
 app.UseCors(options =>
 {
