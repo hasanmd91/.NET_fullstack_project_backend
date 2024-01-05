@@ -37,8 +37,8 @@ namespace Ecom.Controller.src.Controller
         {
             var order = await _orderService.GetOneOrderAsync(orderId) ?? throw CustomException.NotFoundException("order not found");
 
-            var authorizationResult = _authorizationService.AuthorizeAsync(HttpContext.User, order, "OrderOwnerPolicy");
-            if (authorizationResult.IsCompletedSuccessfully)
+            var authorizationResult = await _authorizationService.AuthorizeAsync(HttpContext.User, order, "OrderOwnerPolicy");
+            if (authorizationResult.Succeeded)
             {
                 return Ok(order);
             }
@@ -87,39 +87,92 @@ namespace Ecom.Controller.src.Controller
             {
                 throw CustomException.ForbiddenException("Order must be confirmed as canceled");
             }
-
             var authorizationResult = await _authorizationService.AuthorizeAsync(HttpContext.User, order, "OrderAdminOrOwnerPolicy");
-
-            Console.WriteLine(authorizationResult.ToString());
-
-
             if (authorizationResult.Succeeded)
             {
                 var result = await _orderService.DeleteOrderAsync(orderId);
                 return StatusCode(204, result);
-
             }
             else if (User.Identity.IsAuthenticated)
             {
-
                 return new ForbidResult();
             }
             else
             {
                 return new ChallengeResult();
-
             }
 
         }
 
-
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPatch("{orderId}")]
         public async Task<ActionResult<OrderReadDTO>> UpdateOrderAsync(Guid orderId, [FromBody] OrderUpdateDTO orderUpdateDTO)
         {
             var result = await _orderService.UpdateOrderAsync(orderId, orderUpdateDTO);
             return Ok(result);
         }
+
+
+        [Authorize(Roles = "User")]
+        [HttpPatch("{orderId}/payment")]
+        public async Task<ActionResult<OrderReadDTO>> PaymentOrderAsync(Guid orderId)
+        {
+
+            var order = await _orderService.GetOneOrderAsync(orderId) ?? throw CustomException.NotFoundException("No order Found");
+
+            if (order.OrderStatus != OrderStatus.PENDING)
+            {
+                throw CustomException.ForbiddenException("Order is already Paid or canceled");
+            }
+
+            var authorizationResult = await _authorizationService.AuthorizeAsync(HttpContext.User, order, "OrderOwnerPolicy");
+            if (authorizationResult.Succeeded)
+            {
+                var result = await _orderService.UpdateOrderAsync(orderId, new OrderUpdateDTO { OrderStatus = OrderStatus.PAID });
+                return Ok(result);
+            }
+            else
+            {
+                throw CustomException.ForbiddenException("Only User has permission to access this property");
+            }
+
+        }
+
+
+        [Authorize(Roles = "User")]
+        [HttpPatch("{orderId}/cancel")]
+        public async Task<ActionResult<OrderReadDTO>> CancelOrderAsync(Guid orderId)
+        {
+
+            var order = await _orderService.GetOneOrderAsync(orderId) ?? throw CustomException.NotFoundException("No order Found");
+
+            if (DateTime.UtcNow - order.CreatedDate > TimeSpan.FromDays(14))
+            {
+                throw CustomException.ForbiddenException("Order cannot be canceled as it is older than 14 days");
+            }
+
+            if (order.OrderStatus == OrderStatus.CANCELED)
+            {
+                throw CustomException.ForbiddenException("Order is already canceled");
+            }
+
+            var authorizationResult = await _authorizationService.AuthorizeAsync(HttpContext.User, order, "OrderOwnerPolicy");
+            if (authorizationResult.Succeeded)
+            {
+                var result = await _orderService.UpdateOrderAsync(orderId, new OrderUpdateDTO { OrderStatus = OrderStatus.CANCELED });
+                return Ok(result);
+            }
+            else
+            {
+                throw CustomException.ForbiddenException("Only User has permission to access this property");
+            }
+
+        }
+
+
+
+
+
 
     }
 }

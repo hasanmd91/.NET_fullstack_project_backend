@@ -6,12 +6,12 @@ namespace Ecom.Service.src.DTO
     public class OrderReadDTO
     {
         public Guid Id { get; set; }
+        public DateTime CreatedDate { get; set; }
         public decimal TotalPrice { get; set; }
         public required UserReadDTO User { get; set; }
         public OrderStatus OrderStatus { get; set; }
         public required IEnumerable<OrderDetails> OrderDetails { get; set; }
     }
-
 
     public class OrderCreateDTO
     {

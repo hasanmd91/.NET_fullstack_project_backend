@@ -28,7 +28,7 @@ namespace Ecom.WebAPI.src.Repository
             {
 
                 order.User = await _users.FindAsync(order.UserId);
-                order.OrderStatus = OrderStatus.PAID;
+                order.OrderStatus = OrderStatus.PENDING;
 
                 foreach (var OrderDetail in order.OrderDetails)
                 {
