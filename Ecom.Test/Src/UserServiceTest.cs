@@ -55,7 +55,7 @@ namespace Ecom.Test.Src
             IEnumerable<User> users = new List<User> { user1, user2 };
             IEnumerable<UserReadDTO> expected = _mapper.Map<IEnumerable<User>, IEnumerable<UserReadDTO>>(users);
 
-            repo.Setup(repo => repo.GetAllUserAsync(options)).Returns(users);
+            repo.Setup(repo => repo.GetAllUserAsync(options)).ReturnsAsync(users);
 
             var userService = new UserService(repo.Object, _mapper);
             var response = await userService.GetAllUserAsync(options);

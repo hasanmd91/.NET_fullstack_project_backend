@@ -1,16 +1,12 @@
-using System.Diagnostics;
-using System.Text;
 using AutoMapper;
 using Ecom.Core.src.Abstraction;
 using Ecom.Core.src.Entity;
 using Ecom.Core.src.Enum;
 using Ecom.Core.src.parameters;
+using Ecom.Service.src.Abstraction;
 using Ecom.Service.src.DTO;
 using Ecom.Service.src.Service;
 using Ecom.Service.src.Shared;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.EntityFrameworkCore.Migrations.Operations;
-using Microsoft.EntityFrameworkCore.Query;
 using Moq;
 
 namespace Ecom.Test.Src
@@ -31,8 +27,9 @@ namespace Ecom.Test.Src
         public async void GetAllOrder_withValidLimitAndOffset_ShouldInvokedRepoMethod()
         {
             var repo = new Mock<IOrderRepo>();
+            var emailService = new Mock<IEmailService>();
             GetAllParams options = new() { Limit = 20, Offset = 0 };
-            var orderService = new OrderService(repo.Object, _mapper);
+            var orderService = new OrderService(repo.Object, _mapper, emailService.Object);
             await orderService.GetAllOrderAsync(options);
             repo.Verify(repo => repo.GetAllOrderAsync(options), Times.Once);
         }
@@ -42,6 +39,8 @@ namespace Ecom.Test.Src
         public async void GetAllOrderAsync_ShouldReturnValidResponse()
         {
             var repo = new Mock<IOrderRepo>();
+            var emailService = new Mock<IEmailService>();
+
             GetAllParams options = new() { Limit = 20, Offset = 0 };
 
             Order order1 = new() { };
@@ -51,7 +50,8 @@ namespace Ecom.Test.Src
             IEnumerable<OrderReadDTO> expected = _mapper.Map<IEnumerable<Order>, IEnumerable<OrderReadDTO>>(orders);
 
             repo.Setup(repo => repo.GetAllOrderAsync(options)).ReturnsAsync(orders);
-            var orderService = new OrderService(repo.Object, _mapper);
+            var orderService = new OrderService(repo.Object, _mapper, emailService.Object);
+
             var response = await orderService.GetAllOrderAsync(options);
 
             Assert.Equivalent(expected, response);
@@ -62,8 +62,10 @@ namespace Ecom.Test.Src
         public async void GetOneOrderAsync_ShouldReturn_AOrder(Order? response, OrderReadDTO? result, Type? type)
         {
             var repo = new Mock<IOrderRepo>();
+            var emailService = new Mock<IEmailService>();
+
             repo.Setup(repo => repo.GetOneOrderAsync(It.IsAny<Guid>())).ReturnsAsync(response);
-            var orderService = new OrderService(repo.Object, _mapper);
+            var orderService = new OrderService(repo.Object, _mapper, emailService.Object);
 
             if (type is not null)
             {
@@ -92,8 +94,10 @@ namespace Ecom.Test.Src
         public async void CreateOneProductAsync_ShouldReturnValidResponse(Order order, OrderCreateDTO orderCreateDTO, OrderReadDTO expected, Type? exceptionType)
         {
             var repo = new Mock<IOrderRepo>();
+            var emailService = new Mock<IEmailService>();
+
             repo.Setup(repo => repo.CreateOrderAsync(It.IsAny<Order>())).ReturnsAsync(order);
-            var orderService = new OrderService(repo.Object, _mapper);
+            var orderService = new OrderService(repo.Object, _mapper, emailService.Object);
 
             if (exceptionType is not null)
             {
@@ -127,9 +131,10 @@ namespace Ecom.Test.Src
         public async void UpdateOrderAsync_shouldReturnValidResponse(Order order, OrderUpdateDTO orderUpdateDTO, OrderReadDTO expected, Type? exceptionType)
         {
             var repo = new Mock<IOrderRepo>();
+            var emailService = new Mock<IEmailService>();
             repo.Setup((repo) => repo.GetOneOrderAsync(It.IsAny<Guid>())).ReturnsAsync(order);
             repo.Setup((repo) => repo.UpdateOrderAsync(It.IsAny<Order>())).ReturnsAsync(order);
-            var orderService = new OrderService(repo.Object, _mapper);
+            var orderService = new OrderService(repo.Object, _mapper, emailService.Object);
 
             if (exceptionType is not null)
             {

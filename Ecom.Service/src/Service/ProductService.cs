@@ -58,10 +58,8 @@ namespace Ecom.Service.src.Service
             if (productUpdateDTO.CategoryId is not null)
             {
                 var categoryId = (Guid)productUpdateDTO.CategoryId;
-                var foundCategory = await _categoryRepo.GetOneCategoryByIdAsync(categoryId) ?? throw CustomException.NotFoundException("Category with this input Id is not found");
+                _ = await _categoryRepo.GetOneCategoryByIdAsync(categoryId) ?? throw CustomException.NotFoundException("Category with this input Id is not found");
                 var updatedProduct = _mapper.Map(productUpdateDTO, productToUpdate);
-                updatedProduct.CategoryId = categoryId;
-
                 var result = await _productRepo.UpdateOneProductAsync(updatedProduct);
                 return _mapper.Map<Product, ProductReadDTO>(result);
             }
