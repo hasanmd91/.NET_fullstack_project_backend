@@ -1,5 +1,4 @@
 using Ecom.Core.src.Entity;
-using Ecom.Core.src.Enum;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Npgsql;

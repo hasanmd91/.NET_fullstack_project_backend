@@ -11,17 +11,21 @@ namespace Ecom.Service.src.Service
     public class OrderService : IOrderService
     {
         private readonly IOrderRepo _ordeRepo;
+        private readonly IEmailService _emailService;
         private readonly IMapper _mapper;
-        public OrderService(IOrderRepo orderRepo, IMapper mapper)
+        public OrderService(IOrderRepo orderRepo, IMapper mapper, IEmailService emailService)
         {
             _ordeRepo = orderRepo;
             _mapper = mapper;
+            _emailService = emailService;
         }
 
         public async Task<OrderReadDTO> CreateOrderAsync(OrderCreateDTO orderCreateDTO)
         {
             var order = _mapper.Map<OrderCreateDTO, Order>(orderCreateDTO);
             var result = await _ordeRepo.CreateOrderAsync(order) ?? throw CustomException.BadRequestException();
+            await _emailService.SendOrderConfirmationEmailAsync(result);
+
             return _mapper.Map<Order, OrderReadDTO>(result);
 
         }

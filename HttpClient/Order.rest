@@ -17,15 +17,19 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJiZGQzY
 ### Post Method 
 POST http://localhost:5137/api/order/ HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJiZGQzYzc3OC1kMTFiLTQ2YjItYWE2Yy1jMTk0NzVkYWNiMDkiLCJ1c2VySWQiOiJiZGQzYzc3OC1kMTFiLTQ2YjItYWE2Yy1jMTk0NzVkYWNiMDkiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTcwNDQxNjI1NSwiZXhwIjoxNzA0NTg5MDU1LCJpYXQiOjE3MDQ0MTYyNTUsImlzcyI6Ikhhc2FuIiwiYXVkIjoiaHR0cHM6Ly9qb3lkaXBrYW5qaWxhbC5jb20vIn0.LA5xyBmfsoWEaBdv930LCOZejUkOO7WE-NXhQbV38to
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxNDcxZGYyYi0wZjE3LTQyODItYmY5Mi1jMWViNjZiMjEwODYiLCJ1c2VySWQiOiIxNDcxZGYyYi0wZjE3LTQyODItYmY5Mi1jMWViNjZiMjEwODYiLCJyb2xlIjoiVXNlciIsIm5iZiI6MTcwNDU1Mzc0NywiZXhwIjoxNzA0NzI2NTQ3LCJpYXQiOjE3MDQ1NTM3NDcsImlzcyI6Ikhhc2FuIiwiYXVkIjoiaHR0cHM6Ly9qb3lkaXBrYW5qaWxhbC5jb20vIn0.OHEAvWVr68sQygSgJNaVTlstxnWAzDbQytNC_bc9yCk
 
-{ 
-  
-  "userId": "bdd3c778-d11b-46b2-aa6c-c19475dacb09",
+{
+
+  "userId": "1471df2b-0f17-4282-bf92-c1eb66b21086",
   "orderStatus": "PAID",
   "totalPrice": 1,
   "orderDetails": [
     {
+      "productId": "1e9ccc65-964b-424c-b0ec-c349f040ca6b",
+      "quantity": 2
+    },
+      {
       "productId": "1e9ccc65-964b-424c-b0ec-c349f040ca6b",
       "quantity": 2
     }
