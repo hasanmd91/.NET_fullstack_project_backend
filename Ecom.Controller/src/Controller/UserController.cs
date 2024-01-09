@@ -58,7 +58,7 @@ namespace Ecom.Controller.src.Controller
 
         [Authorize(Roles = "Admin")]
         [HttpPatch("changeUserRole/{userId}")]
-        public async Task<ActionResult<bool>> ChangeUserRoleAsync(Guid userId)
+        public async Task<ActionResult<UserReadDTO>> ChangeUserRoleAsync(Guid userId)
         {
             return Ok(await _userService.ChangeUserRoleAsync(userId));
         }

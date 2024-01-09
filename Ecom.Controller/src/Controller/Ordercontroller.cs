@@ -85,7 +85,7 @@ namespace Ecom.Controller.src.Controller
 
             if (order.OrderStatus != OrderStatus.CANCELED)
             {
-                throw CustomException.ForbiddenException("Order must be confirmed as canceled");
+                throw CustomException.ForbiddenException("Order must be confirmed as canceled before delete it");
             }
             var authorizationResult = await _authorizationService.AuthorizeAsync(HttpContext.User, order, "OrderAdminOrOwnerPolicy");
             if (authorizationResult.Succeeded)
