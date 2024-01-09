@@ -5,6 +5,8 @@ using Ecom.Core.src.parameters;
 using Ecom.Service.src.Shared;
 using Ecom.WebAPI.src.Database;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Org.BouncyCastle.Tls;
 
 namespace Ecom.WebAPI.src.Repository
 {
@@ -95,5 +97,25 @@ namespace Ecom.WebAPI.src.Repository
             return order;
         }
 
+        public async Task<IEnumerable<Order>?> GetOneUserAllOrdersAsync(Guid userId)
+        {
+
+            var user = await _users.FirstOrDefaultAsync((u) => u.Id == userId);
+
+            Console.WriteLine(user?.FirstName);
+
+            if (user is null)
+            {
+                return null;
+            }
+
+            var orders = await _orders
+                .Where(o => o.UserId == user.Id)
+                .Include(o => o.OrderDetails)
+                .ThenInclude(od => od.Product)
+                .ToListAsync();
+
+            return orders;
+        }
     }
 }

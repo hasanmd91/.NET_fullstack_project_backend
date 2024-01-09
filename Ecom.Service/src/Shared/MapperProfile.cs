@@ -37,6 +37,7 @@ namespace Ecom.Service.src.Shared
 
 
             CreateMap<Order, OrderReadDTO>();
+            CreateMap<Order, OneUserAllOrderReadDTO>();
             CreateMap<OrderCreateDTO, Order>();
             CreateMap<OrderUpdateDTO, Order>()
             .ForAllMembers(opt => opt.Condition((src, dest, member) => member != null));

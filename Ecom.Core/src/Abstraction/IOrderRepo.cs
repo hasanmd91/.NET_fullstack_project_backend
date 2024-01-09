@@ -10,6 +10,8 @@ namespace Ecom.Core.src.Abstraction
         Task<bool> DeleteOrderAsync(Guid orderId);
         Task<Order> GetOneOrderAsync(Guid orderId);
         Task<Order> UpdateOrderAsync(Order order);
+        Task<IEnumerable<Order>> GetOneUserAllOrdersAsync(Guid id);
+
 
     }
 }

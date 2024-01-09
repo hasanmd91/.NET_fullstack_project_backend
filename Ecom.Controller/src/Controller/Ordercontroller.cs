@@ -101,8 +101,17 @@ namespace Ecom.Controller.src.Controller
             {
                 return new ChallengeResult();
             }
-
         }
+
+
+        [Authorize(Roles = "User")]
+        [HttpGet("getAllUserOrder/{userId}")]
+        public async Task<ActionResult<IEnumerable<OneUserAllOrderReadDTO>>> GetOneUserAllOrdersAsync(Guid userId)
+        {
+            var result = await _orderService.GetOneUserAllOrdersAsync(userId);
+            return Ok(result);
+        }
+
 
         [Authorize(Roles = "Admin")]
         [HttpPatch("{orderId}")]

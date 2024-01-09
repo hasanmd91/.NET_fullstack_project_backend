@@ -26,5 +26,15 @@ namespace Ecom.Service.src.DTO
         public OrderStatus OrderStatus { get; set; }
     }
 
+
+    public class OneUserAllOrderReadDTO
+    {
+        public Guid Id { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public decimal TotalPrice { get; set; }
+        public OrderStatus OrderStatus { get; set; }
+        public required IEnumerable<OrderDetails> OrderDetails { get; set; }
+    }
+
 }
 

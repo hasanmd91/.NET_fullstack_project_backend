@@ -52,6 +52,8 @@ namespace Ecom.Service.src.Service
             return _mapper.Map<Order, OrderReadDTO>(result);
         }
 
+
+
         public async Task<OrderReadDTO> UpdateOrderAsync(Guid orderId, OrderUpdateDTO orderUpdateDTO)
         {
             var order = await _ordeRepo.GetOneOrderAsync(orderId) ?? throw CustomException.NotFoundException("Order is not found");
@@ -60,5 +62,14 @@ namespace Ecom.Service.src.Service
             var result = await _ordeRepo.UpdateOrderAsync(updatedOrder);
             return _mapper.Map<Order, OrderReadDTO>(result);
         }
+
+
+        public async Task<IEnumerable<OneUserAllOrderReadDTO>> GetOneUserAllOrdersAsync(Guid id)
+        {
+            var orders = await _ordeRepo.GetOneUserAllOrdersAsync(id) ?? throw CustomException.NotFoundException("User is not found");
+            return _mapper.Map<IEnumerable<Order>, IEnumerable<OneUserAllOrderReadDTO>>(orders);
+
+        }
+
     }
 }
