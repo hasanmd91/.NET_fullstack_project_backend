@@ -1,0 +1,13 @@
+name: 'Run Unit tests when pushing codes'
+on: ['push']
+jobs:
+  unit-test:
+    name: unit-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout github repo
+      - uses: actions/checkout@v4
+      - name: Print message
+        run: "echo "Testing started"
+      - name: Run unit test
+        run: Dotnet test
