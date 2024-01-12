@@ -3,15 +3,15 @@ version: '3'
 services:
   # ilh-frontend service
   ilh-frontend:
-    image: hasanmd91/ilh-frontend
+    image: hasanmd91/ilhfrontend
     ports:
       - '3000:3000'
 
   # ilh-server service
   ilh-server:
-    image: docker.io/library/ilh-server
+    image: docker.io/hasanmd91/ilh-backend
     ports:
-      - '8088:8088'
+      - '8080:8080'
 networks:
   dev:
     driver: bridge

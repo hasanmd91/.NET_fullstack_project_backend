@@ -27,7 +27,7 @@ WORKDIR  /Ecom.WebAPI
 RUN dotnet publish -c Release -o /publish 
 
 # Final stage/image
-FROM mcr.microsoft.com/dotnet/sdk:7.0 
+FROM mcr.microsoft.com/dotnet/sdk:7.0
 WORKDIR /
 COPY --from=build /publish . 
 EXPOSE 8080
