@@ -5,19 +5,27 @@ networks:
     driver: bridge
 
 services:
-  # ilh-server service
+  # ilh-frontend
+
+  ilh-frotend:
+    image: hasanmd91/ilh-frontend
+    environment:
+      - REACT_APP_URL=http://localhost:8088/api/
+    ports:
+      - '3000:3000'
+
+  # ilh-backend
   ilh-server:
     image: docker.io/library/ilh-server
     depends_on:
-      - app_db
-    container_name: ilh-services
+      - postgres
+    container_name: ilh-backend
     ports:
       - '8088:8088'
     build:
       context: .
       dockerfile: Dockerfile
     environment:
-      # Set the connection string for ilh-server service
       - ConnectionStrings__LocalDb=Host=localhost;Database=Ecom;Username=postgres;Password=postgres
       - ASPNETCORE_URLS=http://+:8088
       - DB_CONNECTION_POOL_SIZE=20
@@ -25,9 +33,9 @@ services:
       - dev
 
   # app_db service using postgres image
-  app_db:
+  postgres:
     image: postgres:latest
-    container_name: app_db
+    container_name: postgres
     environment:
       POSTGRES_DB: Ecom
       POSTGRES_USER: postgres
