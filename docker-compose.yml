@@ -1,17 +1,38 @@
-version: '3'
-
-services:
-  # ilh-frontend service
-  ilh-frontend:
-    image: hasanmd91/ilhfrontend
-    ports:
-      - '3000:3000'
-
-  # ilh-server service
-  ilh-server:
-    image: docker.io/hasanmd91/ilh-backend
-    ports:
-      - '8080:8080'
+version: '3.8'
 networks:
   dev:
     driver: bridge
+services:
+  ilh-server:
+    image: docker.io/library/ilh-server
+    depends_on:
+      - app_db
+    container_name: ilh-services
+    ports:
+      - '8080:8080'
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - ConnectionStrings__LocalDb=Host=localhost;Database=Ecom;Username=postgres;Password=postgres
+      - ASPNETCORE_URLS=http://+:8080
+      - DB_CONNECTION_POOL_SIZE=20
+    networks:
+      - dev
+  app_db:
+    image: postgres:latest
+    container_name: app_db
+    environment:
+      POSTGRES_DB: Ecom
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - '5433:5432'
+    restart: always
+    volumes:
+      - app_data:/var/lib/postgresql/data
+    networks:
+      - dev
+
+volumes:
+  app_data:

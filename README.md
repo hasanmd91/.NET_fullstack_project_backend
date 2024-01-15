@@ -6,13 +6,30 @@
 
 ## Table of Contents
 
+## Table of Contents
+
 1. [Project Overview](#project-overview)
-2. [Features](#features)
-3. [Project Setup Instructions](#project-setup-instructions)
-4. [Testing](#testing)
-5. [Architecture](#architecture)
-6. [Database Design](#database-design)
-7. [Endpoints](#endpoints)
+   - [Frontend](#frontend)
+   - [Backend](#backend)
+   - [Swagger Documentation](#swagger-documentation)
+   - [Technologies](#technologies)
+2. [Docker](#docker)
+3. [GitHub Actions Workflow](#github-actions-workflow)
+4. [Features](#features)
+   - [User Management](#user-management)
+   - [Admin Functionalities](#admin-functionalities)
+5. [Project Setup Instructions](#project-setup-instructions)
+6. [Testing](#testing)
+7. [Architecture](#architecture)
+8. [Database Design](#database-design)
+9. [Endpoints](#endpoints)
+   - [Authentication](#authentication)
+   - [Category](#category)
+   - [Order](#order)
+   - [Product](#product)
+   - [Review](#review)
+   - [User](#user)
+10. [Demo](#demo)
 
 ## Project Overview
 
@@ -35,6 +52,34 @@ This backend project is build wtih ASP.NET Core, Entity Framework Core, and Post
 - PostgreSql
 - Xunit
 - Microsoft Azure
+
+## Docker
+
+To use the pre-built Docker image for this project, you can pull it from Docker Hub. Run the following command:
+
+```
+docker pull hasanmd91/ilhbackend
+```
+
+Once the image is pulled, you can run the Docker container using the following command:
+
+```
+docker run -p 8080:8080 hasanmd91/ilhbackend
+```
+
+Alternatively, you can run the docker-compose.yml file, you can use the following command to build and start the container
+
+```
+docker-compose up --build
+```
+
+## GitHub Actions Workflow
+
+The CI/CD pipeline is defined in the `.github/workflows` directory and it consists of the following stages:
+
+- **Build:** Build the project and dependencies.
+- **Test:** Run unit tests and any other relevant tests.
+- **Docker:** Build and push the docker image to the docker hub.
 
 ## Features
 
@@ -170,3 +215,7 @@ dotnet test
 | GET    | `/api/user/{userId}` |
 | PATCH  | `/api/user/{userId}` |
 | DELETE | `/api/user/{userId}` |
+
+## Demo
+
+[![Youtube Demo](https://img.youtube.com/vi/kPy1wzJwmSU/0.jpg)](https://www.youtube.com/watch?v=kPy1wzJwmSU)
