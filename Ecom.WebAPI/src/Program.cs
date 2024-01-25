@@ -57,7 +57,7 @@ builder.Services.AddSingleton<IAuthorizationHandler, OrderOwnerHandler>();
 builder.Services.AddSingleton<IAuthorizationHandler, ReviewAdminOrOwnerHandeler>();
 builder.Services.AddSingleton<IAuthorizationHandler, ReviewOwnerHandeler>();
 
-var dataSourceBuilder = new NpgsqlDataSourceBuilder(builder.Configuration.GetConnectionString("Store"));
+var dataSourceBuilder = new NpgsqlDataSourceBuilder(builder.Configuration.GetConnectionString("Ilh"));
 dataSourceBuilder.MapEnum<Role>();
 dataSourceBuilder.MapEnum<OrderStatus>();
 var dataSource = dataSourceBuilder.Build();
