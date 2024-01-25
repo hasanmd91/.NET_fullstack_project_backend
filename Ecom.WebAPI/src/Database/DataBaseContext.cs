@@ -1,4 +1,5 @@
 using Ecom.Core.src.Entity;
+using Ecom.Core.src.Enum;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Npgsql;
@@ -38,9 +39,12 @@ namespace Ecom.WebAPI.src.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasPostgresEnum<Role>();
+            modelBuilder.HasPostgresEnum<OrderStatus>();
+            modelBuilder.Entity<User>(entity => entity.Property(e => e.Role).HasColumnType("role"));
+            modelBuilder.Entity<Order>(entity => entity.Property(e => e.OrderStatus).HasColumnType("order_status"));
             modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
             modelBuilder.Entity<Category>().HasIndex(c => c.Name).IsUnique();
-
             modelBuilder.Entity<User>().HasMany(p => p.Orders).WithOne(u => u.User).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<User>().HasMany(r => r.Reviews).WithOne(u => u.User).OnDelete(DeleteBehavior.Cascade);
 

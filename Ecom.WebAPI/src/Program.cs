@@ -57,15 +57,13 @@ builder.Services.AddSingleton<IAuthorizationHandler, OrderOwnerHandler>();
 builder.Services.AddSingleton<IAuthorizationHandler, ReviewAdminOrOwnerHandeler>();
 builder.Services.AddSingleton<IAuthorizationHandler, ReviewOwnerHandeler>();
 
-
-var dataSourceBuilder = new NpgsqlDataSourceBuilder(builder.Configuration.GetConnectionString("Store"));
+var dataSourceBuilder = new NpgsqlDataSourceBuilder(builder.Configuration.GetConnectionString("Ilh"));
 dataSourceBuilder.MapEnum<Role>();
 dataSourceBuilder.MapEnum<OrderStatus>();
 var dataSource = dataSourceBuilder.Build();
 
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 builder.Services.AddDbContext<DataBaseContext>(options => options.UseNpgsql(dataSource));
-
 
 // Add JWT authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
@@ -84,7 +82,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         };
     });
 
-
 builder.Services.AddAuthorization(policy =>
 {
     policy.AddPolicy("OrderAdminOrOwnerPolicy", policy => policy.Requirements.Add(new AdminOrOwnerRequirement()));
@@ -94,11 +91,9 @@ builder.Services.AddAuthorization(policy =>
 
 });
 
-
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionHandeler>();
-
 app.UseCors(options =>
 {
     options
@@ -106,7 +101,6 @@ app.UseCors(options =>
       .AllowAnyMethod()
       .AllowAnyHeader();
 });
-
 
 app.UseSwagger();
 app.UseSwaggerUI(c =>
@@ -121,9 +115,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-
-
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();

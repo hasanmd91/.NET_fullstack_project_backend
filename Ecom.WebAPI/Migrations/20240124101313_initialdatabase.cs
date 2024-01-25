@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Ecom.WebAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class createdatabase : Migration
+    public partial class initialdatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
